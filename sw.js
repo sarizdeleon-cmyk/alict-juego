@@ -1,6 +1,6 @@
 // Guarda el juego en el celular para que abra rápido y funcione sin internet.
 // Si cambias el juego, sube los archivos nuevos: se actualiza solo la siguiente vez que se abra con internet.
-const CACHE = 'alict-v3';
+const CACHE = 'alict-v4';
 const ARCHIVOS = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {

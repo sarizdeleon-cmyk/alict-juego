@@ -87,12 +87,13 @@ button.cara:active{transform:scale(.94)}
 .mode{min-height:0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:10px 6px 12px;border-radius:30px;color:#fff;text-align:center;
   box-shadow:0 8px 0 rgba(0,0,0,.28),0 14px 24px rgba(0,0,0,.25);animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
 .mode:active{transform:translateY(6px);box-shadow:0 2px 0 rgba(0,0,0,.28)}
-.mode:nth-child(1){background:linear-gradient(135deg,#ff7aa8,#e63e83);animation-delay:.05s}
-.mode:nth-child(2){background:linear-gradient(135deg,#5bb6ff,#2a76e0);animation-delay:.15s}
-.mode:nth-child(3){background:linear-gradient(135deg,#ffb347,#f2711c);animation-delay:.25s}
-.mode:nth-child(4){background:linear-gradient(135deg,#3ee0c4,#12a58f);animation-delay:.35s}
-.mode:nth-child(5){background:linear-gradient(135deg,#b28dff,#6c3fd1);animation-delay:.45s}
-.mode:nth-child(6){background:linear-gradient(135deg,#8ee06a,#3a9d23);animation-delay:.55s}
+.mode:nth-child(6n+1){background:linear-gradient(135deg,#ff7aa8,#e63e83);animation-delay:.05s}
+.mode:nth-child(6n+2){background:linear-gradient(135deg,#5bb6ff,#2a76e0);animation-delay:.15s}
+.mode:nth-child(6n+3){background:linear-gradient(135deg,#ffb347,#f2711c);animation-delay:.25s}
+.mode:nth-child(6n+4){background:linear-gradient(135deg,#3ee0c4,#12a58f);animation-delay:.35s}
+.mode:nth-child(6n+5){background:linear-gradient(135deg,#b28dff,#6c3fd1);animation-delay:.45s}
+.mode:nth-child(6n+6){background:linear-gradient(135deg,#8ee06a,#3a9d23);animation-delay:.55s}
+.mode:nth-child(n+7){animation-delay:.1s}
 .mode svg{flex:1 1 0;min-height:0;width:100%;animation:bob 2s ease-in-out infinite}
 .mode:nth-child(2n) svg{animation-delay:.4s}.mode:nth-child(3n) svg{animation-delay:.8s}
 .mode b{display:block;font-size:clamp(20px,5.8vw,34px);text-shadow:0 3px 0 rgba(0,0,0,.25);line-height:1}
@@ -184,6 +185,10 @@ button.cara:active{transform:scale(.94)}
   .icon{width:46px;height:46px}
   #game{gap:8px}
 }
+/* ---------- barra de progreso ---------- */
+.barra{position:relative;width:min(100%,380px);height:24px;border-radius:999px;background:rgba(255,255,255,.25);overflow:hidden}
+.barra i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(#5be37d,#2fbf56);border-radius:999px;transition:width .5s;display:block;width:0;height:auto;transform:none}
+.barra b{position:relative;display:block;text-align:center;font-size:15px;line-height:24px;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.35)}
 /* ---------- pestañas del menú ---------- */
 .tabs{display:flex;gap:10px;justify-content:center;width:100%;max-width:1000px}
 .tab{flex:1;max-width:360px;padding:.4em .6em;border-radius:999px;background:rgba(255,255,255,.2);color:#fff;font-size:clamp(17px,4.8vw,28px);
@@ -229,6 +234,10 @@ button.cara:active{transform:scale(.94)}
 /* --- globos, burbujas y estrellas --- */
 .stage.globos[data-tema=globos]{background:linear-gradient(#4fb3ff,#c7ecff)}
 .stage.globos[data-tema=burbujas]{background:linear-gradient(#1fc0d8,#0b6aa0)}
+.stage.globos[data-tema=corazones]{background:linear-gradient(#ffc2dd,#ff8fb8)}
+.stage.globos[data-tema=frutas]{background:linear-gradient(#e6ffb8,#8fe388)}
+.stage.globos[data-tema=soles]{background:linear-gradient(#55c1ff,#ffe7a1)}
+.glo .fr{position:absolute;inset:20%;pointer-events:none}.glo .fr svg{width:100%;height:100%}
 .stage.globos[data-tema=estrellas]{background:radial-gradient(circle at 20% 15%,#6f3fd1 0,transparent 55%),linear-gradient(#150f5c,#4a2391)}
 .glo{position:absolute;left:0;top:0;cursor:pointer;animation:sube linear forwards;z-index:2}
 @keyframes sube{from{transform:translate(0,0)}to{transform:translate(var(--dx,0px),calc(var(--h) * -1))}}
@@ -243,6 +252,9 @@ button.cara:active{transform:scale(.94)}
 /* --- corre --- */
 .stage.corre[data-tema=parque]{background:linear-gradient(#a6e68a,#5fc24a)}
 .stage.corre[data-tema=espacio]{background:radial-gradient(circle at 80% 20%,#7b3fe4 0,transparent 50%),linear-gradient(#150f5c,#3b1f8c)}
+.stage.corre[data-tema=playa]{background:linear-gradient(#ffeeb0,#f7cf72)}
+.stage.corre[data-tema=granja]{background:linear-gradient(#c4e88a,#8cc455)}
+.stage.corre[data-tema=dulces]{background:linear-gradient(#ffb3d9,#c59bff)}
 .stage.corre[data-tema=fiesta]{background:linear-gradient(#ff9ec7,#ffd36b)}
 .lienzo{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
 
@@ -290,6 +302,122 @@ button.cara:active{transform:scale(.94)}
   #juego .card.ok #jtext{font-size:clamp(15px,5vh,24px)}
   #juego .hud{gap:8px}
 }
+
+/* ---------- menú de juegos con más fichas: se desplaza ---------- */
+#juegos{--c:2;grid-template-columns:repeat(var(--c),1fr);grid-template-rows:none;grid-auto-rows:clamp(136px,19vh,200px);align-content:start;
+  overflow-y:auto;overflow-x:hidden;padding:2px 4px 16px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:none}
+#juegos::-webkit-scrollbar{display:none}
+#juegos .mode{min-height:0}
+@media (orientation:landscape){#juegos{--c:3;grid-auto-rows:clamp(100px,34vh,190px)}}
+@media (orientation:landscape) and (min-width:900px){#juegos{--c:4;grid-auto-rows:clamp(100px,21vh,190px)}}
+@media (orientation:portrait) and (min-width:700px){#juegos{--c:3;grid-auto-rows:clamp(150px,17vh,230px)}}
+
+/* --- memoria --- */
+.stage.memoria{display:flex;align-items:center;justify-content:center;background:linear-gradient(#ffe9a8,#ffc9de)}
+.memg{display:grid;justify-content:center;align-content:center}
+.mem{perspective:700px;padding:0;background:none;min-width:0;min-height:0}
+.mem .in{position:relative;display:block;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.mem.abre .in{transform:rotateY(180deg)}
+.mem .bk,.mem .fr{position:absolute;inset:0;border-radius:20px;display:grid;place-items:center;overflow:hidden;
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;border:4px solid #fff;box-shadow:0 5px 0 rgba(0,0,0,.25)}
+.mem .bk{background:linear-gradient(135deg,#b28dff,#6c3fd1)}
+.mem .bk svg{width:52%;height:52%}
+.mem .fr{background:#fff;transform:rotateY(180deg)}
+.mem .fr img{width:100%;height:100%;object-fit:cover}
+.mem .fr svg{width:80%;height:80%}
+.mem.ok .fr{box-shadow:0 0 0 5px #5be37d,0 5px 0 rgba(0,0,0,.25)}
+.mem.ok .in{animation:memok .5s ease .5s}
+@keyframes memok{0%,100%{scale:1}40%{scale:1.1}}
+
+/* --- piñata --- */
+.stage.pinata{background:linear-gradient(#ffd7a3 0,#ffb6d5 55%,#ffe29a 100%)}
+.stage .suelo{position:absolute;left:0;right:0;bottom:0;height:12%;background:linear-gradient(#f5b36b,#e2924a);border-top:5px solid rgba(255,255,255,.55)}
+.pend{position:absolute;transform-origin:50% 0;animation:colgar 3.2s ease-in-out infinite;z-index:2}
+@keyframes colgar{0%,100%{transform:rotate(-2.5deg)}50%{transform:rotate(2.5deg)}}
+.gp{position:relative;transform-origin:50% 0}
+.gp.golpe{animation:golpe .55s ease-out}
+@keyframes golpe{0%{transform:rotate(0)}22%{transform:rotate(-17deg)}55%{transform:rotate(11deg)}80%{transform:rotate(-4deg)}100%{transform:rotate(0)}}
+.cuerda{position:absolute;left:50%;top:0;width:6px;margin-left:-3px;background:repeating-linear-gradient(#8d5524 0 8px,#c18a50 8px 14px);border-radius:3px}
+.pi{position:absolute;left:0}
+.pi svg{width:100%;height:100%;overflow:visible}
+.pcara{position:absolute;border-radius:50%;object-fit:cover;border:5px solid #fff;box-shadow:0 4px 0 rgba(0,0,0,.25);background:#fff}
+.gri{opacity:0;transition:opacity .15s}.gri.ver{opacity:1}
+.pi.rompe{animation:rompe .5s ease-in forwards}
+@keyframes rompe{0%{transform:scale(1) rotate(0)}30%{transform:scale(1.25) rotate(-6deg)}100%{transform:scale(1.7) rotate(14deg);opacity:0}}
+.zona-golpe{position:absolute;inset:0;z-index:4;touch-action:none}
+.dulce{position:absolute;z-index:3;pointer-events:none;opacity:0;animation:cae cubic-bezier(.45,.05,.85,.55) forwards}
+.dulce svg{width:100%;height:100%}
+@keyframes cae{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:1}}
+
+/* --- música --- */
+.stage.musica{background:linear-gradient(#bfe9ff,#fff1c9)}
+.stage.musica .cuenta{left:auto;right:12px}
+.xilo{position:absolute;left:18px;right:18px;bottom:12px;top:80px;display:flex;align-items:flex-end;gap:clamp(3px,1.2vw,10px)}
+.bx{flex:1;min-width:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;border-radius:16px;background:var(--c);
+  border:4px solid rgba(255,255,255,.85);box-shadow:0 6px 0 rgba(0,0,0,.28),inset 0 -8px 0 rgba(0,0,0,.12);transition:filter .15s}
+.bx b{font-size:clamp(10px,3.2vw,22px);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.35);pointer-events:none}
+.bx.toca{animation:toca .22s ease-out}
+@keyframes toca{0%{transform:translateY(0)}40%{transform:translateY(7px)}100%{transform:translateY(0)}}
+.bx.sig{animation:brilla .85s ease-in-out infinite;z-index:2}
+@keyframes brilla{0%,100%{filter:brightness(1);box-shadow:0 6px 0 rgba(0,0,0,.28),inset 0 -8px 0 rgba(0,0,0,.12)}50%{filter:brightness(1.3);box-shadow:0 0 0 6px #fff,0 0 26px 8px rgba(255,255,255,.95),inset 0 -8px 0 rgba(0,0,0,.12)}}
+.cara.flota.musc{transition:left .3s ease,top .3s ease;z-index:4}
+@keyframes salta{0%,100%{margin-top:0}50%{margin-top:-14px}}
+.cara.flota.salta{animation:salta .55s ease-in-out infinite}
+
+/* --- une los puntos --- */
+.stage.puntos{background:linear-gradient(#fff8e7,#ffe9c2)}
+.psvg{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);touch-action:none;overflow:visible}
+.psvg .rell,.psvg .deco2,.psvg .cf2{opacity:0;transition:opacity .6s}
+.psvg.listo .rell,.psvg.listo .deco2,.psvg.listo .cf2{opacity:1}
+.psvg.listo .pts,.psvg.listo .lins{opacity:0;transition:opacity .5s .3s}
+.psvg .lin{stroke:#6c3fd1;stroke-width:2.6;stroke-linecap:round}
+.psvg .hit{fill:transparent;cursor:pointer}
+.psvg .dot{fill:#fff;stroke:#2b1b4d;stroke-width:1.8}
+.psvg .pt.hecho .dot{fill:#9be58a}
+.psvg .pt.sig .dot{fill:#ffd43b;animation:latepunto .8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes latepunto{0%,100%{transform:scale(1)}50%{transform:scale(1.28)}}
+.psvg .pt text{pointer-events:none;user-select:none}
+.psvg .pt.mal{animation:shakep .45s}
+@keyframes shakep{0%,100%{transform:translateX(0)}20%{transform:translateX(-2.4px)}40%{transform:translateX(2.4px)}60%{transform:translateX(-1.6px)}80%{transform:translateX(1.6px)}}
+
+/* --- dale de comer --- */
+.stage.comer{background:linear-gradient(#ffe6a3,#ffc2a0)}
+.comcara{position:absolute;transition:transform .15s}
+.comcara.abre{transform:scale(1.1)}
+.comcara.nam{animation:nam .45s ease-out}
+@keyframes nam{0%{transform:scale(1)}30%{transform:scale(1.16,.86)}60%{transform:scale(.94,1.1)}100%{transform:scale(1)}}
+.com{position:absolute;z-index:3;touch-action:none;cursor:grab;filter:drop-shadow(0 4px 2px rgba(0,0,0,.25))}
+.com svg{width:100%;height:100%;pointer-events:none}
+.com.arrastra{z-index:6;scale:1.18;cursor:grabbing}
+.com.vuelve{transition:left .3s ease,top .3s ease,scale .3s,opacity .3s}
+.com.come{scale:.25;opacity:.2;z-index:5}
+.namtxt{position:absolute;z-index:7;transform:translateX(-50%);font-size:clamp(26px,7vw,44px);color:#fff;text-shadow:0 3px 0 #e63e83,0 0 12px rgba(255,255,255,.8);
+  animation:sube2 .8s ease-out forwards;pointer-events:none;white-space:nowrap}
+@keyframes sube2{0%{opacity:0;margin-top:10px}20%{opacity:1}100%{opacity:0;margin-top:-40px}}
+
+/* --- sombras --- */
+.stage.sombras{background:linear-gradient(#e8defc,#c9e8ff)}
+.somb{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding:12px;gap:10px}
+.som-obj{flex:none;height:min(38%,260px);aspect-ratio:1;background:#fff;border-radius:50%;box-shadow:0 6px 0 rgba(0,0,0,.22);display:grid;place-items:center}
+.som-obj svg{width:76%;height:76%}
+.som-ops{display:grid;gap:clamp(8px,2vw,16px);width:min(100%,560px);justify-content:center}
+.som-ops.n3{grid-template-columns:repeat(3,1fr)}
+.som-ops.n4{grid-template-columns:repeat(2,1fr)}
+.som{aspect-ratio:1.15;max-height:min(24vh,170px);min-height:0;border-radius:24px;background:#fff;box-shadow:0 6px 0 rgba(0,0,0,.25);display:grid;place-items:center;transition:opacity .3s}
+.som svg{width:74%;height:74%;filter:brightness(0);opacity:.78;transition:filter .3s,opacity .3s}
+.som:active{transform:translateY(4px)}
+.som.bien{box-shadow:0 0 0 6px #5be37d,0 6px 0 rgba(0,0,0,.25)}
+.som.bien svg{filter:none;opacity:1}
+.som.mal{animation:shake .45s;opacity:.35;pointer-events:none}
+.som.apaga{opacity:.35}
+@media (orientation:landscape){
+  .somb{flex-direction:row;justify-content:space-evenly}
+  .som-obj{height:min(70%,260px)}
+  .som-ops{width:55%}
+  .som-ops.n4{grid-template-columns:repeat(2,1fr)}
+  .som{max-height:min(34vh,150px)}
+}
+
 
 @media (prefers-reduced-motion:reduce){.tile svg,.trio svg,.mode svg,.big-btn{animation:none}}
 </style>
@@ -401,7 +529,7 @@ const LOGO  = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUEBAQEAw
 const BRAVOS = ['¡BRAVO!', '¡GENIAL!', '¡SÍ!', '¡WOW!', '¡MUY BIEN!'];
 
 const VOCALES = ['A','E','I','O','U'];
-const NUM_PAL = ['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez'];
+const NUM_PAL = ['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce'];
 const COLORES = [
   {n:'rojo',     h:'#e53935'},
   {n:'azul',     h:'#1e88e5'},
@@ -776,11 +904,22 @@ function opciones(correcta, pool) {
   return shuffle([correcta, ...otras]);
 }
 const rotarVariantes = () => shuffle([0, 1, 2, 3, 4, 5, 6, 7]);
+// Alarga una lista hasta n elementos: la recorre barajada varias veces sin repetir el mismo dos veces seguidas
+function alargar(lista, n) {
+  let r = [];
+  while (r.length < n) {
+    const b = shuffle(lista);
+    if (r.length && b[0] === r[r.length - 1]) b.push(b.shift());
+    r = r.concat(b);
+  }
+  return r.slice(0, n);
+}
+const LARGO = { vocales: 10, numeros: 20, colores: 16, frutas: 16, verduras: 16, cuerpo: 16 };
 
 const MODOS = {
   vocales: {
     construir() {
-      return shuffle(VOCALES).map(L => {
+      return alargar(VOCALES, LARGO.vocales).map(L => {
         const keys = opciones(L, VOCALES), cols = shuffle(PALETA), vs = rotarVariantes();
         return { texto: `¿Cuál es la letra ${L}?`, habla: `¿Cuál es la letra ${L.toLowerCase()}?`, correcta: L,
                  opciones: keys.map((k, i) => ({ key: k, html: musiquito(cols[i], vs[i], bellyText(k, k.toLowerCase(), 30)) })) };
@@ -790,7 +929,7 @@ const MODOS = {
   numeros: {
     construir() {
       const pool = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      return shuffle(pool).map(n => {
+      return alargar(pool, LARGO.numeros).map(n => {
         const keys = opciones(n, pool), cols = shuffle(PALETA), vs = rotarVariantes();
         return { texto: `¿Cuál es el número ${n}?`, habla: `¿Cuál es el número ${NUM_PAL[n]}?`, correcta: n,
                  opciones: keys.map((k, i) => ({ key: k, html: musiquito(cols[i], vs[i], bellyText(String(k), '', String(k).length > 1 ? 24 : 30)) })) };
@@ -800,7 +939,7 @@ const MODOS = {
   colores: {
     construir() {
       const nombres = COLORES.map(c => c.n);
-      return shuffle(nombres).map(n => {
+      return alargar(nombres, LARGO.colores).map(n => {
         const keys = opciones(n, nombres);
         return { texto: `Toca al musiquito ${n}`, habla: `Toca al musiquito ${n}`, correcta: n,
                  opciones: keys.map(k => { const i = nombres.indexOf(k); return { key: k, html: musiquito(COLORES[i].h, i, bellyPlain()) }; }) };
@@ -813,7 +952,7 @@ const MODOS = {
 const modoDibujos = (lista) => ({
   construir() {
     const nombres = lista.map(x => x.n);
-    return shuffle(nombres).map(n => {
+    return alargar(nombres, LARGO.frutas).map(n => {
       const texto = 'Toca ' + lista.find(x => x.n === n).a;
       return { texto, habla: texto, correcta: n, opciones: opciones(n, nombres).map(k => ({ key: k, html: DIBUJO[k]() })) };
     });
@@ -824,7 +963,7 @@ MODOS.verduras = modoDibujos(VERDURAS);
 // partes del cuerpo: se toca la parte en el personaje
 MODOS.cuerpo = {
   construir() {
-    return shuffle(PARTES).slice(0, 8).map(p => ({ tipo: 'cuerpo', texto: p.t, habla: p.t, correcta: p.k, validas: p.v || [p.k] }));
+    return alargar(PARTES, LARGO.cuerpo).map(p => ({ tipo: 'cuerpo', texto: p.t, habla: p.t, correcta: p.k, validas: p.v || [p.k] }));
   },
 };
 
@@ -856,10 +995,12 @@ $('#modes').innerHTML = menuDefs.map(m =>
 const G = { modo: null, qs: [], i: 0, score: 0, errores: 0, bloqueo: false, timer: 0, hablaT: 0 };
 const card = $('#card'), qtext = $('#qtext'), optsEl = $('#options');
 
+const barra = (i, n) => `<div class="barra"><i style="width:${Math.round(i / n * 100)}%"></i><b>${Math.min(i + 1, n)} / ${n}</b></div>`;
 function hud() {
   $('#score').textContent = G.score;
   $('#errors').textContent = G.errores;
-  $('#dots').innerHTML = G.qs.map((_, k) => `<i class="${k < G.i ? 'done' : k === G.i ? 'now' : ''}"></i>`).join('');
+  $('#dots').innerHTML = G.qs.length > 10 ? barra(G.i, G.qs.length)
+    : G.qs.map((_, k) => `<i class="${k < G.i ? 'done' : k === G.i ? 'now' : ''}"></i>`).join('');
 }
 function bump(el) { el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
 
@@ -984,7 +1125,7 @@ function ganar(marcar) {
   sfxOk(); celebrar(4, 14);
   clearTimeout(G.hablaT);
   G.hablaT = setTimeout(() => say(frase), 350);
-  G.timer = setTimeout(() => { G.i++; G.i >= G.qs.length ? final() : pregunta(); }, 4600);
+  G.timer = setTimeout(() => { G.i++; G.i >= G.qs.length ? final() : pregunta(); }, 4000);
 }
 
 function final(juego) {
@@ -1036,7 +1177,7 @@ const ES_JUEGO = k => k === 'sorpresa' || k in JUEGOS;
 
 function hudJ() {
   $('#scoreJ').textContent = J.puntos;
-  $('#dotsJ').innerHTML = J.total > 1
+  $('#dotsJ').innerHTML = J.total > 10 ? barra(J.ronda, J.total) : J.total > 1
     ? Array.from({ length: J.total }, (_, k) => `<i class="${k < J.ronda ? 'done' : k === J.ronda ? 'now' : ''}"></i>`).join('') : '';
 }
 function pararJuego() {
@@ -1069,15 +1210,15 @@ function rondaJuego() {
   hudJ();
   J.hablaT = setTimeout(() => say(out.habla), 500);
 }
-function exitoJuego(extra) {
+function exitoJuego(extra, forzar) {
   if (J.bloqueo) return;
   J.bloqueo = true; J.puntos++; hudJ(); bump($('#pScoreJ'));
   cardJ.className = 'card ok';
-  const frase = (extra && Math.random() < .55) ? extra : frOk();
+  const frase = (extra && (forzar || Math.random() < .55)) ? extra : frOk();
   jtext.innerHTML = enPantalla(frase);
   sfxOk(); celebrar(4, 14);
   clearTimeout(J.hablaT); J.hablaT = setTimeout(() => say(frase), 350);
-  J.timer = setTimeout(() => { J.ronda++; J.ronda >= J.total ? finJuego() : rondaJuego(); }, 4600);
+  J.timer = setTimeout(() => { J.ronda++; J.ronda >= J.total ? finJuego() : rondaJuego(); }, 4300);
 }
 function finJuego() {
   const resumen = J.def.resumen ? J.def.resumen() : `${J.puntos} de ${J.total}`;
@@ -1159,6 +1300,23 @@ const DESTINOS = [
     <path d="M44 78 Q50 94 56 78 Z" fill="#ff7b9c" ${ln(2.5)}/>
     <ellipse cx="50" cy="63" rx="8" ry="6" fill="${INK}"/>
     <path d="M50 69 V77 Q44 82 38 77 M50 77 Q56 82 62 77" ${ln(3)} fill="none"/>`) },
+  { n: 'playa', frase: 'a la playa', ok: `¡Qué bonita playa, ${NOMBRE}!`, dib: () => S(`
+    <path d="M50 24 V92" stroke="#8d5524" stroke-width="5" stroke-linecap="round"/>
+    <path d="M8 52 Q50 -10 92 52 Z" fill="#ff6b6b" ${ln()}/><path d="M36 52 Q40 14 50 8 Q60 14 64 52 Z" fill="#ffd43b" ${ln(3)}/>
+    <path d="M0 92 Q25 80 50 90 T100 90 V100 H0 Z" fill="#ffe29a" ${ln(3)}/><circle cx="84" cy="80" r="6" fill="#ff8fb1" ${ln(2.5)}/>`) },
+  { n: 'cama', frase: 'a su cama', ok: `¡A dormir, ${NOMBRE}! ¡Dulces sueños!`, dib: () => S(`
+    <rect x="8" y="30" width="12" height="62" rx="4" fill="#8d5524" ${ln()}/><rect x="80" y="46" width="12" height="46" rx="4" fill="#8d5524" ${ln()}/>
+    <rect x="16" y="58" width="68" height="22" rx="6" fill="#4dabf7" ${ln()}/><rect x="16" y="50" width="68" height="14" rx="6" fill="#fff" ${ln()}/>
+    <rect x="20" y="44" width="26" height="14" rx="7" fill="#ffd166" ${ln(3.5)}/><path d="M60 58 q8 -8 16 0" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>`) },
+  { n: 'tren', frase: 'al tren', ok: `¡Chu, chu! ¡Subiste al tren, ${NOMBRE}!`, dib: () => S(`
+    <rect x="12" y="38" width="46" height="38" rx="5" fill="#e53935" ${ln()}/><rect x="56" y="52" width="32" height="24" rx="4" fill="#1e88e5" ${ln()}/>
+    <rect x="64" y="26" width="14" height="24" rx="3" fill="#37474f" ${ln(3.5)}/><rect x="20" y="46" width="20" height="14" rx="2" fill="#aee3ff" ${ln(3)}/>
+    <circle cx="26" cy="80" r="10" fill="#37474f" ${ln()}/><circle cx="50" cy="80" r="10" fill="#37474f" ${ln()}/><circle cx="76" cy="80" r="10" fill="#37474f" ${ln()}/>
+    <circle cx="70" cy="14" r="5" fill="#fff" ${ln(2.5)}/><circle cx="80" cy="6" r="3.5" fill="#fff" ${ln(2.5)}/>`) },
+  { n: 'avion', frase: 'al avión', ok: `¡A volar, ${NOMBRE}! ¡Subiste al avión!`, dib: () => S(`
+    <path d="M10 56 Q10 40 40 40 L84 40 Q96 44 96 52 Q96 62 84 64 L30 64 Q10 64 10 56 Z" fill="#fff" ${ln()}/>
+    <path d="M44 42 L30 12 L52 12 L66 42 Z" fill="#4dabf7" ${ln()}/><path d="M44 62 L30 90 L52 90 L66 62 Z" fill="#4dabf7" ${ln()}/><path d="M10 50 L2 30 L22 40 Z" fill="#e53935" ${ln(3)}/>
+    <circle cx="30" cy="52" r="4.5" fill="#aee3ff" ${ln(2.5)}/><circle cx="46" cy="52" r="4.5" fill="#aee3ff" ${ln(2.5)}/><circle cx="62" cy="52" r="4.5" fill="#aee3ff" ${ln(2.5)}/>`) },
 ];
 const DECOR = [
   () => S(`<ellipse cx="50" cy="62" rx="38" ry="18" fill="#fff"/><circle cx="32" cy="54" r="17" fill="#fff"/><circle cx="58" cy="46" r="21" fill="#fff"/>`),
@@ -1169,7 +1327,7 @@ const DECOR = [
 const DEDO = S(`<g transform="rotate(-18 50 52)"><rect x="40" y="6" width="20" height="50" rx="10" fill="#ffdcb5" ${ln(3.5)}/><rect x="28" y="44" width="46" height="42" rx="16" fill="#ffdcb5" ${ln(3.5)}/></g>`);
 
 JUEGOS.linea = {
-  rondas: 5,
+  rondas: 12,
   preparar: () => ({ orden: shuffle(DESTINOS) }),
   ronda(stg, a) {
     const { w, h } = a, base = Math.min(w, h), dest = J.est.orden[a.n % J.est.orden.length];
@@ -1275,6 +1433,9 @@ const TEMAS_GLOBOS = [
   { id: 'globos',    texto: '¡Revienta los globos!',    habla: `¡Revienta los globos, ${NOMBRE}!`,     ok: `¡Reventaste todos los globos, ${NOMBRE}!` },
   { id: 'burbujas',  texto: '¡Revienta las burbujas!',  habla: `¡Revienta las burbujas, ${NOMBRE}!`,   ok: `¡Cuántas burbujas, ${NOMBRE}! ¡Pop, pop, pop!` },
   { id: 'estrellas', texto: '¡Atrapa las estrellas!',   habla: `¡Atrapa las estrellas, ${NOMBRE}!`,    ok: `¡Atrapaste las estrellas, ${NOMBRE}!` },
+  { id: 'corazones', texto: '¡Revienta los corazones!', habla: `¡Revienta los corazones, ${NOMBRE}!`,  ok: `¡Cuánto amor, ${NOMBRE}! ¡Reventaste los corazones!` },
+  { id: 'frutas',    texto: '¡Revienta las burbujas de frutas!', habla: `¡Revienta las burbujas con frutas, ${NOMBRE}!`, ok: `¡Qué ricas frutas, ${NOMBRE}!` },
+  { id: 'soles',     texto: '¡Atrapa los solecitos!',   habla: `¡Atrapa los solecitos, ${NOMBRE}!`,    ok: `¡Qué día tan bonito, ${NOMBRE}! ¡Atrapaste los soles!` },
 ];
 const svgGlobo = c => S(`<path d="M50 6 C22 6 12 30 14 50 C16 70 34 82 50 84 C66 82 84 70 86 50 C88 30 78 6 50 6 Z" fill="${c}" ${ln(3.5)}/>
   <path d="M46 85 L50 93 L54 85 Z" fill="${c}" ${ln(3)}/><path d="M50 93 Q44 104 50 112 Q56 120 50 128" fill="none" stroke="#fff" stroke-width="2.5" opacity=".85"/>${brillo(32, 30, 6, 12, 25)}`, '0 0 100 130');
@@ -1282,15 +1443,21 @@ const svgBurbuja = () => S(`<circle cx="50" cy="50" r="44" fill="rgba(255,255,25
   <path d="M22 42 A30 30 0 0 1 44 20" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/><circle cx="72" cy="70" r="5" fill="#fff" opacity=".7"/>`);
 const svgEstrella = c => S(`<path d="M50 5 L62 36 L95 38 L69 58 L78 91 L50 73 L22 91 L31 58 L5 38 L38 36 Z" fill="${c}" ${ln(3.5)}/>
   <circle cx="42" cy="50" r="4" fill="${INK}"/><circle cx="58" cy="50" r="4" fill="${INK}"/><path d="M42 60 Q50 68 58 60" fill="none" ${ln(3)}/>${brillo(36, 30, 3.5, 7, 30)}`);
+const svgCorazon = c => S(`<path d="M50 90 C8 60 2 28 26 16 C40 9 50 20 50 28 C50 20 60 9 74 16 C98 28 92 60 50 90 Z" fill="${c}" ${ln(3.5)}/>${brillo(28, 34, 5, 9, 35)}`);
+const svgSol = () => S(`${Array.from({ length: 10 }, (_, i) => `<path d="M50 4 L56 22 L44 22 Z" fill="#ffb300" ${ln(2.5)} transform="rotate(${i * 36} 50 50)"/>`).join('')}
+  <circle cx="50" cy="50" r="28" fill="#ffd43b" ${ln(3.5)}/><circle cx="41" cy="46" r="3.6" fill="${INK}"/><circle cx="59" cy="46" r="3.6" fill="${INK}"/><path d="M40 58 Q50 68 60 58" fill="none" ${ln(3)}/>`);
+const FR_BURBUJA = ['manzana', 'plátano', 'fresa', 'naranja', 'uvas', 'pera', 'sandía', 'piña'];
 
 JUEGOS.globos = {
-  rondas: 3,
+  rondas: 6,
+  preparar: () => ({ temas: shuffle(TEMAS_GLOBOS.slice(1)).reduce((r, t) => r.concat(t), [TEMAS_GLOBOS[0]]) }),
   ronda(stg, a) {
-    const tema = TEMAS_GLOBOS[a.n % TEMAS_GLOBOS.length], meta = 10, { w, h } = a;
+    const tema = J.est.temas[a.n % J.est.temas.length], meta = 14, { w, h } = a;
     stg.dataset.tema = tema.id;
     const cuenta = crearCuenta(stg, meta), base = Math.min(150, Math.max(Math.min(92, h * .36), Math.min(w, h) * .27));
     const maxEn = Math.round(Math.max(5, Math.min(10, w * h / 60000)));
     let n = 0, vivo = true, timer = 0, k = 0;
+    const conAlto = tema.id === 'globos';
 
     function romper(g, cuenta_ = true) {
       if (g.classList.contains('pop')) return;
@@ -1307,15 +1474,24 @@ JUEGOS.globos = {
       }
     }
     function crear(inicio = false) {
-      const conCara = (k++ % 4) === 1, col = rnd(PALETA), ancho = Math.round(base * rango(.88, 1.14));
-      const alto = tema.id === 'globos' ? Math.round(ancho * 1.3) : ancho;
+      const conCara = tema.id !== 'frutas' && (k++ % 4) === 1, col = rnd(PALETA), ancho = Math.round(base * rango(.88, 1.14));
+      const alto = conAlto ? Math.round(ancho * 1.3) : ancho;
       const dur = rango(7, 10.5), g = el('div', 'glo');
-      g.dataset.c = tema.id === 'burbujas' ? '#bff3ff' : col;
+      g.dataset.c = tema.id === 'burbujas' || tema.id === 'frutas' ? '#bff3ff' : tema.id === 'soles' ? '#ffd43b' : col;
       g.style.cssText = `left:${rango(0, w - ancho)}px;top:${h + 10}px;width:${ancho}px;height:${alto}px;` +
         `--h:${h + alto + 40}px;--dx:${Math.round(rango(-34, 34))}px;animation-duration:${dur}s;animation-delay:${inicio ? -rango(.5, dur * .55) : 0}s`;
-      const dib = tema.id === 'globos' ? svgGlobo(col) : tema.id === 'burbujas' ? svgBurbuja() : svgEstrella(rnd(['#ffd43b', '#ffb347', '#ff8fb1', '#8ee06a', '#7fd4ff']));
-      const cf = conCara ? `<img class="cf" src="${rnd(CARAS)}" alt="" style="width:${Math.round(ancho * (tema.id === 'globos' ? .58 : .62))}px;height:${Math.round(ancho * (tema.id === 'globos' ? .58 : .62))}px;` +
-        `left:${Math.round(ancho * (tema.id === 'globos' ? .21 : .19))}px;top:${Math.round(alto * (tema.id === 'globos' ? .1 : .19))}px">` : '';
+      let dib;
+      switch (tema.id) {
+        case 'globos': dib = svgGlobo(col); break;
+        case 'burbujas': dib = svgBurbuja(); break;
+        case 'estrellas': dib = svgEstrella(rnd(['#ffd43b', '#ffb347', '#ff8fb1', '#8ee06a', '#7fd4ff'])); break;
+        case 'corazones': dib = svgCorazon(rnd(['#ff5c8a', '#ff8fb1', '#e63e83', '#ff7aa8', '#c2185b'])); break;
+        case 'soles': dib = svgSol(); break;
+        default: dib = svgBurbuja() + `<div class="fr">${DIBUJO[rnd(FR_BURBUJA)]()}</div>`;
+      }
+      const cs = Math.round(ancho * (conAlto ? .58 : tema.id === 'corazones' ? .5 : .56));
+      const cf = conCara ? `<img class="cf" src="${rnd(CARAS)}" alt="" style="width:${cs}px;height:${cs}px;` +
+        `left:${Math.round((ancho - cs) / 2)}px;top:${Math.round(alto * (conAlto ? .1 : tema.id === 'corazones' ? .18 : .2))}px">` : '';
       g.innerHTML = `<div class="in">${dib}${cf}</div>`;
       g.addEventListener('pointerdown', e => { e.preventDefault(); audio(); romper(g); });
       g.addEventListener('animationend', ev => { if (ev.target === g && !g.classList.contains('pop')) g.remove(); });
@@ -1338,6 +1514,9 @@ const TEMAS_CORRE = [
   { id: 'parque',  texto: '¡Corre y atrapa las frutas!',        habla: `¡Corre, ${NOMBRE}! Atrapa las frutas.`,          items: ['manzana', 'plátano', 'fresa', 'naranja', 'uvas', 'pera'], ok: `¡Qué rico, ${NOMBRE}! ¡Atrapaste todas las frutas!` },
   { id: 'espacio', texto: '¡Corre por el espacio y atrapa las estrellas!', habla: `¡Corre por el espacio, ${NOMBRE}! Atrapa las estrellas.`, items: ['estrella', 'estrella', 'planeta'], ok: `¡Eres un astronauta, ${NOMBRE}! ¡Atrapaste las estrellas!` },
   { id: 'fiesta',  texto: '¡Atrapa los globos y los regalos!',  habla: `¡Corre, ${NOMBRE}! Atrapa los globos y los regalos.`, items: ['globo', 'globo', 'regalo'], ok: `¡Qué fiesta, ${NOMBRE}! ¡Atrapaste todos los regalos!` },
+  { id: 'playa',   texto: '¡Corre por la playa y atrapa tesoros!', habla: `¡Corre por la playa, ${NOMBRE}! Atrapa los tesoros.`, items: ['sandía', 'piña', 'concha', 'estrellamar'], ok: `¡Qué tesoros, ${NOMBRE}! ¡Eres un gran explorador!` },
+  { id: 'granja',  texto: '¡Corre por la granja y atrapa las verduras!', habla: `¡Corre por la granja, ${NOMBRE}! Atrapa las verduras.`, items: ['zanahoria', 'jitomate', 'elote', 'brócoli', 'cebolla', 'pepino'], ok: `¡Qué sano eres, ${NOMBRE}! ¡Atrapaste las verduras!` },
+  { id: 'dulces',  texto: '¡Atrapa los dulces!',                habla: `¡Corre, ${NOMBRE}! Atrapa los dulces.`,          items: ['caramelo', 'paleta', 'caramelo'], ok: `¡Qué dulce eres, ${NOMBRE}! ¡Atrapaste los dulces!` },
 ];
 const imgFruta = (() => {
   const cache = {};
@@ -1369,6 +1548,21 @@ function dibujarItem(c, it, t) {
     c.fillStyle = it.c; rr(c, -r * .8, -r * .65, r * 1.6, r * 1.4, r * .15); c.fill(); c.stroke();
     c.fillStyle = '#fff'; c.fillRect(-r * .11, -r * .65, r * .22, r * 1.4); c.fillRect(-r * .8, -r * .06, r * 1.6, r * .22);
     c.beginPath(); c.ellipse(-r * .22, -r * .8, r * .24, r * .16, -.5, 0, 7); c.ellipse(r * .22, -r * .8, r * .24, r * .16, .5, 0, 7); c.fill(); c.stroke();
+  } else if (it.tipo === 'concha') {
+    c.fillStyle = '#ffb3c7'; c.beginPath(); c.moveTo(0, r * .8); c.bezierCurveTo(-r * 1.1, r * .3, -r * .9, -r * .8, 0, -r * .8); c.bezierCurveTo(r * .9, -r * .8, r * 1.1, r * .3, 0, r * .8); c.fill(); c.stroke();
+    c.beginPath(); for (let i = -2; i <= 2; i++) { c.moveTo(0, r * .8); c.lineTo(i * r * .3, -r * .7); } c.stroke();
+  } else if (it.tipo === 'estrellamar') {
+    c.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr_ = i % 2 ? r * .4 : r; c.lineTo(Math.cos(a) * rr_, Math.sin(a) * rr_); }
+    c.closePath(); c.fillStyle = '#ff8a50'; c.fill(); c.stroke();
+    c.fillStyle = '#ffd1b0'; for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + i * 1.2566; c.beginPath(); c.arc(Math.cos(a) * r * .5, Math.sin(a) * r * .5, r * .07, 0, 7); c.fill(); }
+  } else if (it.tipo === 'caramelo') {
+    c.fillStyle = it.c; c.beginPath(); c.arc(0, 0, r * .5, 0, 7); c.fill(); c.stroke();
+    c.beginPath(); c.moveTo(-r * .45, 0); c.lineTo(-r, -r * .45); c.lineTo(-r, r * .45); c.closePath(); c.moveTo(r * .45, 0); c.lineTo(r, -r * .45); c.lineTo(r, r * .45); c.closePath(); c.fill(); c.stroke();
+    c.strokeStyle = '#fff'; c.beginPath(); c.arc(0, 0, r * .3, .6, 2.4); c.stroke();
+  } else if (it.tipo === 'paleta') {
+    c.beginPath(); c.moveTo(0, r * .2); c.lineTo(0, r * 1.1); c.lineWidth = Math.max(3, r * .14); c.stroke(); c.lineWidth = Math.max(2, r * .09);
+    c.fillStyle = it.c; c.beginPath(); c.arc(0, -r * .3, r * .72, 0, 7); c.fill(); c.stroke();
+    c.strokeStyle = '#fff'; c.lineWidth = Math.max(3, r * .12); c.beginPath(); c.arc(0, -r * .3, r * .4, 0, 5); c.stroke();
   } else { const im = imgFruta(it.tipo); if (im.complete && im.naturalWidth) c.drawImage(im, -r, -r, r * 2, r * 2); }
   c.restore();
 }
@@ -1390,9 +1584,10 @@ function dibujarCorredor(c, x, y, R, t, img, col) {
 }
 
 JUEGOS.corre = {
-  rondas: 3,
+  rondas: 6,
+  preparar: () => ({ temas: shuffle(TEMAS_CORRE.slice(1)).reduce((r, t) => r.concat(t), [TEMAS_CORRE[0]]) }),
   ronda(stg, a) {
-    const tema = TEMAS_CORRE[a.n % TEMAS_CORRE.length], meta = 10, { w: W, h: H } = a;
+    const tema = J.est.temas[a.n % J.est.temas.length], meta = 12, { w: W, h: H } = a;
     stg.dataset.tema = tema.id;
     const [cv, c] = lienzo('lienzo', W, H); stg.appendChild(cv);
     const cuenta = crearCuenta(stg, meta), horiz = W > H * 1.15;
@@ -1433,6 +1628,11 @@ JUEGOS.corre = {
           c.fillStyle = '#ffd43b'; c.beginPath(); c.arc(e.x, e.y, 3.6 * e.s, 0, 7); c.fill();
         } else if (tema.id === 'espacio') {
           c.fillStyle = `rgba(255,255,255,${.45 + .4 * Math.sin(t * 3 + e.f)})`; c.beginPath(); c.arc(e.x, e.y, 2.2 * e.s, 0, 7); c.fill();
+        } else if (tema.id === 'playa') {
+          c.fillStyle = e.c; c.globalAlpha = .55; c.beginPath(); c.ellipse(e.x, e.y, 6 * e.s, 3.5 * e.s, e.f, 0, 7); c.fill(); c.globalAlpha = 1;
+        } else if (tema.id === 'granja') {
+          c.strokeStyle = '#4e8f2b'; c.lineWidth = 2.2 * e.s; c.lineCap = 'round'; c.beginPath();
+          c.moveTo(e.x - 5 * e.s, e.y + 5 * e.s); c.lineTo(e.x - 6 * e.s, e.y - 5 * e.s); c.moveTo(e.x, e.y + 5 * e.s); c.lineTo(e.x, e.y - 8 * e.s); c.moveTo(e.x + 5 * e.s, e.y + 5 * e.s); c.lineTo(e.x + 6 * e.s, e.y - 5 * e.s); c.stroke();
         } else {
           c.save(); c.translate(e.x, e.y); c.rotate(e.f + t * 2); c.fillStyle = e.c; c.fillRect(-5 * e.s, -2.5 * e.s, 10 * e.s, 5 * e.s); c.restore();
         }
@@ -1517,10 +1717,28 @@ const LAMINAS = [
     ${Z('<path d="M36 68 Q46 84 58 68 Z"/>')}
     <circle cx="30" cy="48" r="4.5" fill="#fff" ${ln(2.5)}/><circle cx="30" cy="48" r="1.8" fill="${INK}"/>
     <circle cx="14" cy="20" r="4" fill="#fff" opacity=".7"/><circle cx="24" cy="10" r="2.6" fill="#fff" opacity=".7"/>` }),
+  src => ({ vb: '0 0 100 112', svg: `
+    ${Z('<rect x="46" y="58" width="8" height="48" rx="3"/>')}
+    ${Z('<path d="M50 90 Q26 94 18 78 Q40 72 50 90 Z"/>')}
+    ${Z('<path d="M50 80 Q74 84 82 68 Q60 62 50 80 Z"/>')}
+    ${Z('<ellipse cx="50" cy="14" rx="11" ry="14"/>')}
+    ${Z('<ellipse cx="82" cy="36" rx="14" ry="11" transform="rotate(25 82 36)"/>')}
+    ${Z('<ellipse cx="68" cy="62" rx="11" ry="14" transform="rotate(-35 68 62)"/>')}
+    ${Z('<ellipse cx="32" cy="62" rx="11" ry="14" transform="rotate(35 32 62)"/>')}
+    ${Z('<ellipse cx="18" cy="36" rx="14" ry="11" transform="rotate(-25 18 36)"/>')}
+    ${cara_svg(src, 50, 38, 19)}` }),
+  src => ({ vb: '0 0 100 100', svg: `
+    ${Z('<path d="M50 48 Q18 4 8 28 Q4 48 50 52 Z"/>')}
+    ${Z('<path d="M50 48 Q82 4 92 28 Q96 48 50 52 Z"/>')}
+    ${Z('<path d="M50 54 Q16 54 20 78 Q26 96 50 58 Z"/>')}
+    ${Z('<path d="M50 54 Q84 54 80 78 Q74 96 50 58 Z"/>')}
+    ${Z('<rect x="45" y="30" width="10" height="56" rx="5"/>')}
+    ${cara_svg(src, 50, 24, 13)}
+    <path d="M44 12 Q38 2 32 4 M56 12 Q62 2 68 4" fill="none" ${ln(3)}/>` }),
 ];
 
 JUEGOS.pintar = {
-  rondas: 4, fijo: true,
+  rondas: 8, fijo: true,
   preparar: () => ({ orden: shuffle(LAMINAS.map((_, i) => i)) }),
   ronda(stg, a) {
     _zi = 0;
@@ -1613,6 +1831,337 @@ JUEGOS.dibujar = {
   },
 };
 
+
+/* =============== Minijuegos nuevos: memoria, piñata, música, puntos, comer, sombras =============== */
+const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+const NOMBRES_COMIDA = FRUTAS.map(f => f.n).concat(VERDURAS.map(v => v.n));
+const ART = {}; FRUTAS.concat(VERDURAS).forEach(f => { ART[f.n] = f.a; });
+const ES_VERDURA = n => VERDURAS.some(v => v.n === n);
+const de = art => art.startsWith('el ') ? 'del ' + art.slice(3) : 'de ' + art;
+const anida = (svg, x, y, w, h = w) => svg.replace('<svg ', `<svg x="${x}" y="${y}" width="${w}" height="${h}" `);
+const caraImg = (src, cls = '') => `<img class="${cls}" src="${src}" alt="">`;
+
+/* ================================================================
+   6) MEMORIA: encuentra las parejas (cartas con su cara, frutas y verduras)
+   ================================================================ */
+const FR_PAREJA = bolsa([`¡Pareja, ${NOMBRE}!`, `¡Muy bien, ${NOMBRE}! ¡Las encontraste!`, `¡Eso es, ${NOMBRE}! ¡Son iguales!`,
+  `¡Qué buena memoria, ${NOMBRE}!`, `¡Bravo, ${NOMBRE}! ¡Otra pareja!`, `¡Lo lograste, ${NOMBRE}! ¡Son iguales!`]);
+const FR_CASI = bolsa([`¡Casi, ${NOMBRE}! Busca otra.`, `¡Inténtalo otra vez, ${NOMBRE}!`, `¡Tú puedes, ${NOMBRE}!`, `¡Sigue buscando, ${NOMBRE}!`]);
+const MEM_PARES = [2, 3, 4, 5, 6, 8], MEM_MAZOS = ['caras', 'frutas', 'verduras', 'mezcla', 'caras', 'frutas'];
+function mejorRejilla(n, w, h, gap) {
+  let m = null;
+  for (let c = 1; c <= n; c++) {
+    const r = Math.ceil(n / c), t = Math.min((w - gap * (c - 1)) / c, (h - gap * (r - 1)) / r);
+    if (!m || t > m.t + 0.5) m = { c, r, t };
+  }
+  return m;
+}
+JUEGOS.memoria = {
+  rondas: 6,
+  ronda(stg, a) {
+    const pares = MEM_PARES[a.n % 6], mazo = MEM_MAZOS[a.n % 6];
+    const caras = CARAS.map((src, i) => ({ id: 'c' + i, html: caraImg(src) }));
+    const frut = FRUTAS.map(f => ({ id: f.n, html: DIBUJO[f.n](), nombre: f.a }));
+    const verd = VERDURAS.map(f => ({ id: f.n, html: DIBUJO[f.n](), nombre: f.a }));
+    const pool = mazo === 'caras' ? caras : mazo === 'frutas' ? frut : mazo === 'verduras' ? verd : caras.slice(0, 3).concat(frut.slice(0, 4), verd.slice(0, 3));
+    const sel = shuffle(pool).slice(0, pares), cartas = shuffle(sel.concat(sel));
+    const gap = 10, pad = 12, { c, t } = mejorRejilla(cartas.length, a.w - pad * 2, a.h - pad * 2, gap), size = Math.floor(Math.min(t, 240));
+    stg.innerHTML = `<div class="memg" style="grid-template-columns:repeat(${c},${size}px);grid-auto-rows:${size}px;gap:${gap}px">` +
+      cartas.map((k, i) => `<button class="mem" data-i="${i}" aria-label="carta"><span class="in"><span class="bk">${ESTRELLA_SVG}</span><span class="fr">${k.html}</span></span></button>`).join('') + '</div>';
+    const g = stg.querySelector('.memg'), btns = [...g.querySelectorAll('.mem')];
+    let abiertas = [], bloqueo = true, hechas = 0, vivo = true; const timers = [];
+    const T = (f, ms) => { const id = setTimeout(f, ms); timers.push(id); return id; };
+    btns.forEach(b => b.classList.add('abre'));
+    T(() => { btns.forEach(b => b.classList.remove('abre')); bloqueo = false; jtext.textContent = `Encuentra las parejas, ${NOMBRE}`; }, 2300 + pares * 260);
+    g.addEventListener('pointerdown', e => {
+      const b = e.target.closest('.mem'); if (!b || bloqueo || !vivo || J.bloqueo) return;
+      if (b.classList.contains('abre') || b.classList.contains('ok')) return;
+      audio(); const i = +b.dataset.i; b.classList.add('abre'); sfxDing(i); abiertas.push(i);
+      if (abiertas.length < 2) return;
+      bloqueo = true; const [p, q] = abiertas; abiertas = [];
+      if (cartas[p].id === cartas[q].id) {
+        T(() => {
+          [p, q].forEach(k => btns[k].classList.add('ok'));
+          const r = btns[q].getBoundingClientRect(); chispas(r.left + r.width / 2, r.top + r.height / 2, null, 22);
+          hechas++; sfxOk();
+          if (hechas >= pares) { T(() => vivo && a.exito(`¡Encontraste todas las parejas, ${NOMBRE}!`, true), 500); return; }
+          const nom = cartas[p].nombre; say(nom ? `${cap(nom)}. ¡Muy bien, ${NOMBRE}!` : FR_PAREJA());
+          bloqueo = false;
+        }, 550);
+      } else {
+        tone(300, .25, .18, 'sine', .15);
+        if (Math.random() < .5) T(() => say(FR_CASI()), 500);
+        T(() => { btns[p].classList.remove('abre'); btns[q].classList.remove('abre'); bloqueo = false; }, 1100);
+      }
+    });
+    return { texto: `¡Mira bien, ${NOMBRE}!`, habla: `Mira bien las cartas, ${NOMBRE}. Luego encuentra las parejas.`, cerrar() { vivo = false; timers.forEach(clearTimeout); } };
+  },
+};
+
+/* ================================================================
+   7) PIÑATA: golpéala hasta que se rompa y caigan los dulces
+   ================================================================ */
+const CARAMELOS = ['#ff5c8a', '#ffd43b', '#4dabf7', '#51cf66', '#ff922b', '#cc5de8', '#22b8cf'];
+const svgDulce = c => `<svg viewBox="0 0 44 28"><path d="M2 3 L14 14 L2 25 Z" fill="${c}" stroke="${INK}" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M42 3 L30 14 L42 25 Z" fill="${c}" stroke="${INK}" stroke-width="2.4" stroke-linejoin="round"/>
+  <ellipse cx="22" cy="14" rx="12" ry="10" fill="${c}" stroke="${INK}" stroke-width="2.4"/><path d="M16 10 Q22 6 28 10" stroke="#fff" fill="none" stroke-width="2.4" stroke-linecap="round" opacity=".7"/></svg>`;
+const estrellaPts = (cx, cy, R, r, n) => Array.from({ length: n * 2 }, (_, i) => {
+  const a = -Math.PI / 2 + i * Math.PI / n, d = i % 2 ? r : R; return `${(cx + Math.cos(a) * d).toFixed(1)},${(cy + Math.sin(a) * d).toFixed(1)}`;
+}).join(' ');
+const FORMAS_PINATA = [
+  at => `<polygon points="${estrellaPts(50, 54, 48, 22, 5)}" ${at}/>`,
+  at => `<path d="M50 92 C6 62 0 28 26 15 C40 8 50 20 50 28 C50 20 60 8 74 15 C100 28 94 62 50 92 Z" ${at}/>`,
+  at => `<polygon points="${estrellaPts(50, 50, 47, 36, 8)}" ${at}/>`,
+  at => `<polygon points="50,5 92,42 50,95 8,42" ${at}/>`,
+];
+const COL_PINATA = [['#ffd43b', '#ff7aa8'], ['#ff5c8a', '#ffd43b'], ['#4dabf7', '#ffd43b'], ['#51cf66', '#ff922b'], ['#cc5de8', '#ffd43b'], ['#ff922b', '#4dabf7']];
+const FR_PINATA = [`¡Rompiste la piñata, ${NOMBRE}!`, `¡Cuántos dulces, ${NOMBRE}!`, `¡Qué fuerte eres, ${NOMBRE}! ¡Piñata rota!`, `¡Lluvia de dulces, ${NOMBRE}!`];
+const GRIETAS = ['M50 18 L45 31 L55 40 L48 52', 'M16 54 L30 58 L35 69 L48 68', 'M84 52 L70 58 L67 70 L54 71', 'M50 90 L55 78 L46 70'];
+JUEGOS.pinata = {
+  rondas: 6,
+  ronda(stg, a) {
+    const meta = [6, 7, 8, 8, 9, 10][a.n % 6], forma = FORMAS_PINATA[a.n % FORMAS_PINATA.length], [c0, c1] = COL_PINATA[a.n % COL_PINATA.length];
+    const cuerda = Math.round(a.h * .1), S = Math.round(Math.min(a.w * .66, (a.h - cuerda) * .84, 330)), cs = Math.round(S * .4);
+    stg.innerHTML = `<div class="suelo"></div><div class="pend"><div class="gp" style="width:${S}px;height:${cuerda + S}px">
+      <i class="cuerda" style="height:${cuerda}px"></i>
+      <div class="pi" style="top:${cuerda}px;width:${S}px;height:${S}px">
+        <svg viewBox="0 0 100 100">${forma(`fill="${c0}" ${ln(3.5)}`)}
+          <g transform="translate(50 52) scale(.8) translate(-50 -52)">${forma(`fill="none" stroke="#fff" stroke-width="3.6" stroke-dasharray="6 6" opacity=".85"`)}</g>
+          <g transform="translate(50 52) scale(.6) translate(-50 -52)">${forma(`fill="none" stroke="${c1}" stroke-width="4.2" stroke-dasharray="7 6"`)}</g>
+          ${GRIETAS.map(d => `<path class="gri" d="${d}" fill="none" stroke="${INK}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`).join('')}</svg>
+        <img class="pcara" src="${a.cara}" alt="" style="width:${cs}px;height:${cs}px;left:${Math.round((S - cs) / 2)}px;top:${Math.round(S * .5 - cs / 2)}px">
+      </div></div></div>`;
+    const pend = stg.querySelector('.pend'), gp = stg.querySelector('.gp'), pi = stg.querySelector('.pi'), gri = [...stg.querySelectorAll('.gri')];
+    pend.style.cssText = `left:${Math.round((a.w - S) / 2)}px;top:0;width:${S}px;height:${cuerda + S}px`;
+    const cuenta = crearCuenta(stg, meta), zona = el('div', 'zona-golpe'); stg.appendChild(zona);
+    let hits = 0, rota = false, vivo = true;
+    function romper() {
+      rota = true;
+      const r = pi.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      pi.classList.add('rompe'); sfxOk();
+      [0, 120, 260].forEach(ms => setTimeout(() => chispas(cx + rango(-S * .2, S * .2), cy + rango(-S * .2, S * .2), rnd(CARAMELOS), 26), ms));
+      const sr = stg.getBoundingClientRect(), x0 = cx - sr.left, y0 = cy - sr.top;
+      for (let i = 0; i < 28; i++) {
+        const d = el('div', 'dulce'), w = Math.round(rango(30, 44)), fy = a.h - 20 - rango(0, a.h * .13) - w * .6;
+        d.innerHTML = svgDulce(rnd(CARAMELOS));
+        d.style.cssText = `left:${x0 - w / 2}px;top:${y0 - w * .32}px;width:${w}px;height:${Math.round(w * .64)}px;--dx:${Math.round(rango(-a.w * .46, a.w * .46))}px;--dy:${Math.round(fy - y0)}px;--r:${Math.round(rango(-540, 540))}deg;animation-delay:${(i * 25 + 50)}ms;animation-duration:${rango(.8, 1.3).toFixed(2)}s`;
+        stg.appendChild(d);
+      }
+      setTimeout(() => vivo && a.exito(rnd(FR_PINATA), true), 900);
+    }
+    zona.addEventListener('pointerdown', e => {
+      e.preventDefault(); if (!vivo || rota) return; audio(); hits++; cuenta(hits);
+      gp.classList.remove('golpe'); void gp.offsetWidth; gp.classList.add('golpe');
+      const r = pi.getBoundingClientRect(); chispas(r.left + r.width / 2 + rango(-S * .22, S * .22), r.top + r.height / 2 + rango(-S * .2, S * .2), rnd(CARAMELOS), 9);
+      tone(150 + rango(0, 30), 0, .2, 'triangle', .35); tone(760 + hits * 40, .03, .08, 'square', .06);
+      const k = Math.floor(hits / meta * 5); gri.forEach((g, i) => g.classList.toggle('ver', i < k));
+      if (hits === Math.round(meta / 2)) say(`¡Sigue así, ${NOMBRE}!`);
+      if (hits >= meta) romper();
+    });
+    return { texto: `¡Rompe la piñata, ${NOMBRE}!`, habla: `Toca la piñata para romperla, ${NOMBRE}. ¡Dale, dale, dale!`, cerrar() { vivo = false; } };
+  },
+};
+
+/* ================================================================
+   8) MÚSICA: xilófono, sigue la barra que brilla y toca una canción
+   ================================================================ */
+const NOTAS = [
+  { n: 'DO', f: 261.63, c: '#e53935' }, { n: 'RE', f: 293.66, c: '#fb8c00' }, { n: 'MI', f: 329.63, c: '#fdd835' }, { n: 'FA', f: 349.23, c: '#43a047' },
+  { n: 'SOL', f: 392, c: '#14b8a6' },   { n: 'LA', f: 440, c: '#1e88e5' },    { n: 'SI', f: 493.88, c: '#8e24aa' }, { n: 'DO', f: 523.25, c: '#f06292' },
+];
+const CANCIONES = [
+  { t: 'Cumpleaños feliz', m: [0, 0, 1, 0, 3, 2, 0, 0, 1, 0, 4, 3] },
+  { t: 'Estrellita', m: [0, 0, 4, 4, 5, 5, 4, 3, 3, 2, 2, 1, 1, 0] },
+  { t: 'Hermano Juan', m: [0, 1, 2, 0, 0, 1, 2, 0, 2, 3, 4, 2, 3, 4] },
+  { t: 'Los pollitos', m: [4, 2, 2, 3, 1, 1, 0, 1, 2, 3, 4, 4, 4] },
+  { t: 'Oda a la alegría', m: [2, 2, 3, 4, 4, 3, 2, 1, 0, 0, 1, 2, 2, 1, 1] },
+  { t: 'La escalera', m: [0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0] },
+];
+const sonar = i => { const f = NOTAS[i].f; tone(f, 0, .9, 'triangle', .34); tone(f * 2, 0, .35, 'sine', .1); tone(f * 3, 0, .12, 'sine', .05); };
+JUEGOS.musica = {
+  rondas: 6,
+  ronda(stg, a) {
+    const song = CANCIONES[a.n % CANCIONES.length], sec = song.m, fs = Math.round(Math.max(40, Math.min(96, a.w / 8 * 1.5, a.h * .2)));
+    stg.innerHTML = `<div class="xilo">${NOTAS.map((n, i) => `<button class="bx" data-i="${i}" style="--c:${n.c};height:${100 - i * 5.5}%"><b>${n.n}</b></button>`).join('')}</div>` + carita(a.cara, fs, 'left:0;top:0');
+    const xilo = stg.querySelector('.xilo'); xilo.style.top = (fs + 22) + 'px';
+    const bars = [...stg.querySelectorAll('.bx')], face = stg.querySelector('.cara.flota'), cuenta = crearCuenta(stg, sec.length);
+    face.classList.add('musc', 'salta');
+    let pos = 0, vivo = true;
+    function irA(i) {
+      bars.forEach(b => b.classList.remove('sig')); bars[i].classList.add('sig');
+      const r = bars[i].getBoundingClientRect(), s = stg.getBoundingClientRect();
+      face.style.left = Math.round(Math.max(4, Math.min(s.width - fs - 4, r.left - s.left + r.width / 2 - fs / 2))) + 'px'; face.style.top = Math.max(2, Math.round(r.top - s.top - fs - 2)) + 'px';
+    }
+    requestAnimationFrame(() => irA(sec[0]));
+    stg.querySelector('.xilo').addEventListener('pointerdown', e => {
+      const b = e.target.closest('.bx'); if (!b) return; e.preventDefault(); audio();
+      const i = +b.dataset.i; sonar(i); b.classList.remove('toca'); void b.offsetWidth; b.classList.add('toca');
+      if (!vivo) return;
+      if (i === sec[pos]) {
+        pos++; cuenta(pos); const r = b.getBoundingClientRect(); chispas(r.left + r.width / 2, r.top + 10, NOTAS[i].c, 10);
+        if (pos >= sec.length) { vivo = false; bars.forEach(x => x.classList.remove('sig')); face.classList.remove('salta'); setTimeout(() => a.exito(`¡Tocaste ${song.t}, ${NOMBRE}! ¡Qué música tan bonita!`, true), 700); }
+        else irA(sec[pos]);
+      }
+    });
+    return { texto: `Toca "${song.t}", ${NOMBRE}`, habla: `Toca las barras que brillan, ${NOMBRE}. Vamos a tocar ${song.t}.`, cerrar() { vivo = false; } };
+  },
+};
+
+/* ================================================================
+   9) UNE LOS PUNTOS: toca los números en orden y aparece el dibujo
+   ================================================================ */
+const circ = (cx, cy, R, n, ang0 = -90) => Array.from({ length: n }, (_, k) => { const a = (ang0 + k * 360 / n) * Math.PI / 180; return [+(cx + R * Math.cos(a)).toFixed(1), +(cy + R * Math.sin(a)).toFixed(1)]; });
+const PUNTOS = [
+  { n: 'una cometa', c: '#ff6b6b', p: [[50, 10], [84, 44], [50, 90], [16, 44]], cara: [50, 46, 15],
+    deco: `<path d="M50 10 V90 M16 44 H84" stroke="#fff" stroke-width="2.4" opacity=".6" fill="none"/>` },
+  { n: 'una casa', c: '#ffd166', p: [[50, 10], [90, 46], [80, 90], [20, 90], [10, 46]], cara: [50, 62, 16],
+    deco: `<path d="M10 46 L50 10 L90 46 Z" fill="#e53935" ${ln(3)}/><rect x="70" y="26" width="9" height="16" fill="#8d5524" ${ln(2.5)}/>` },
+  { n: 'un diamante', c: '#6fd3ff', p: [[50, 8], [88, 28], [88, 72], [50, 92], [12, 72], [12, 28]], cara: [50, 50, 17],
+    deco: `<path d="M12 28 H88 M12 28 L50 8 L88 28" stroke="#fff" stroke-width="2.4" fill="none" opacity=".7"/><path d="M82 14 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#fff"/>` },
+  { n: 'una corona', c: '#ffd43b', p: [[12, 80], [10, 28], [32, 52], [50, 16], [68, 52], [90, 28], [88, 80]], cara: [50, 62, 14],
+    deco: `<circle cx="10" cy="28" r="5" fill="#e53935" ${ln(2.5)}/><circle cx="50" cy="16" r="5" fill="#1e88e5" ${ln(2.5)}/><circle cx="90" cy="28" r="5" fill="#43a047" ${ln(2.5)}/>` },
+  { n: 'un sol', c: '#ffd43b', p: circ(50, 50, 31, 8), cara: [50, 50, 22],
+    deco: Array.from({ length: 8 }, (_, k) => { const a = (k * 45 - 67.5) * Math.PI / 180, x1 = 50 + 38 * Math.cos(a), y1 = 50 + 38 * Math.sin(a), x2 = 50 + 48 * Math.cos(a), y2 = 50 + 48 * Math.sin(a); return `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}" stroke="#ff9f1c" stroke-width="4" stroke-linecap="round"/>`; }).join('') },
+  { n: 'la luna', c: '#fff3a8', d: 'M75.9 16.9 A42 42 0 1 0 75.9 83.1 A34 34 0 1 1 75.9 16.9 Z',
+    p: [[75.9, 16.9], [40.4, 9.1], [12.1, 31.9], [12.1, 68.1], [40.4, 90.9], [75.9, 83.1], [47, 76.7], [34, 50], [47, 23.3]], cara: [21, 50, 9],
+    deco: `<path d="M86 30 l2.2 5.4 5.4 2.2 -5.4 2.2 -2.2 5.4 -2.2 -5.4 -5.4 -2.2 5.4 -2.2z" fill="#ffd43b"/><circle cx="90" cy="62" r="2.6" fill="#ffd43b"/><circle cx="82" cy="78" r="3" fill="#ffd43b"/>` },
+  { n: 'un pez', c: '#4dabf7', p: [[8, 50], [24, 32], [48, 22], [70, 32], [88, 20], [80, 50], [88, 80], [70, 68], [48, 78], [24, 68]], cara: [46, 50, 14],
+    deco: `<circle cx="22" cy="46" r="3" fill="#fff" ${ln(2)}/><path d="M64 38 Q70 50 64 62" stroke="#1971c2" stroke-width="3" fill="none" stroke-linecap="round"/>` },
+  { n: 'un cohete', c: '#e9ecef', p: [[50, 5], [66, 24], [66, 54], [88, 74], [66, 69], [58, 84], [42, 84], [34, 69], [12, 74], [34, 54], [34, 24]], cara: [50, 38, 12],
+    deco: `<path d="M42 84 L58 84 L50 98 Z" fill="#ff922b" ${ln(2.5)}/><path d="M34 24 Q50 -2 66 24 Z" fill="#e53935" ${ln(2.5)}/><path d="M66 54 L88 74 L66 69 Z M34 54 L12 74 L34 69 Z" fill="#e53935" ${ln(2.5)}/>` },
+  { n: 'un corazón', c: '#ff5c8a', p: [[50, 30], [38, 16], [20, 18], [10, 34], [14, 54], [30, 72], [50, 90], [70, 72], [86, 54], [90, 34], [80, 18], [62, 16]], cara: [50, 48, 17],
+    deco: `<path d="M24 28 Q30 22 38 24" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" opacity=".7"/>` },
+];
+const SVGNS = 'http://www.w3.org/2000/svg';
+JUEGOS.puntos = {
+  rondas: 9, fijo: true,
+  ronda(stg, a) {
+    const pic = PUNTOS[a.n % PUNTOS.length], pts = pic.p, n = pts.length, [fx, fy, fr] = pic.cara;
+    stg.innerHTML = `<svg class="psvg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+      ${pic.d ? `<path class="rell" d="${pic.d}"` : `<polygon class="rell" points="${pts.map(q => q.join(',')).join(' ')}"`} fill="${pic.c}" ${ln(3)}/>
+      <g class="deco2">${pic.deco}</g><g class="lins"></g><g class="cf2">${cara_svg(a.cara, fx, fy, fr)}</g>
+      <g class="pts">${pts.map((q, k) => `<g class="pt${k === 0 ? ' sig' : ''}" data-k="${k}"><circle class="hit" cx="${q[0]}" cy="${q[1]}" r="7.4"/><circle class="dot" cx="${q[0]}" cy="${q[1]}" r="5.8"/>` +
+        `<text x="${q[0]}" y="${q[1] + (k > 8 ? 1.7 : 2)}" text-anchor="middle" font-size="${k > 8 ? 4.8 : 6}" font-weight="900" fill="${INK}">${k + 1}</text></g>`).join('')}</g></svg>`;
+    const svg = stg.querySelector('svg'), lins = svg.querySelector('.lins'), gs = [...svg.querySelectorAll('.pt')];
+    let sig = 0, vivo = true;
+    const linea = (p, q) => { const l = document.createElementNS(SVGNS, 'line'); l.setAttribute('x1', p[0]); l.setAttribute('y1', p[1]); l.setAttribute('x2', q[0]); l.setAttribute('y2', q[1]); l.setAttribute('class', 'lin'); lins.appendChild(l); };
+    svg.addEventListener('pointerdown', e => {
+      const g = e.target.closest('.pt'); if (!g || !vivo) return; e.preventDefault(); audio();
+      const k = +g.dataset.k;
+      if (k < sig) return;
+      if (k > sig) {
+        g.classList.remove('mal'); void g.getBoundingClientRect(); g.classList.add('mal'); tone(260, 0, .15, 'sine', .15);
+        say(`Busca el número ${NUM_PAL[sig + 1]}, ${NOMBRE}`); return;
+      }
+      g.classList.remove('sig'); g.classList.add('hecho'); sfxDing(k); say(NUM_PAL[k + 1]);
+      if (k > 0) linea(pts[k - 1], pts[k]);
+      sig++;
+      if (sig < n) { gs[sig].classList.add('sig'); return; }
+      vivo = false; linea(pts[n - 1], pts[0]);
+      setTimeout(() => {
+        svg.classList.add('listo'); sfxOk();
+        const r = svg.getBoundingClientRect(); chispas(r.left + r.width / 2, r.top + r.height / 2, null, 40);
+      }, 450);
+      setTimeout(() => a.exito(`¡Mira, es ${pic.n}, ${NOMBRE}!`, true), 1300);
+    });
+    return { texto: `Une los puntos del 1 al ${n}, ${NOMBRE}`, habla: `Une los puntos, ${NOMBRE}. Toca los números en orden. ¡Empieza en el uno!`, cerrar() { vivo = false; } };
+  },
+};
+
+/* ================================================================
+   10) DALE DE COMER A ALICT: arrastra (o toca) la comida hasta su cara
+   ================================================================ */
+const FR_COMER = [
+  (art, v) => `¡Ñam ñam, ${NOMBRE}! ¡${cap(art)}!`, (art, v) => `¡Mmm, ${art}! ¡Qué delicia, ${NOMBRE}!`, (art, v) => `¡Qué bien comes, ${NOMBRE}! ¡${cap(art)}!`,
+  (art, v) => `¡${cap(art)}! ¡Ñam, ñam, ñam!`, (art, v) => v ? `¡Muy sano, ${NOMBRE}! ¡${cap(art)}!` : `¡Qué rico, ${NOMBRE}! ¡${cap(art)}!`,
+];
+const frComer = bolsa(FR_COMER.map((_, i) => i));
+const COMER_N = [5, 5, 6, 6, 7, 8], COMER_MAZOS = ['frutas', 'verduras', 'mezcla', 'frutas', 'verduras', 'mezcla'];
+JUEGOS.comer = {
+  rondas: 6,
+  ronda(stg, a) {
+    const total = COMER_N[a.n % 6], mazo = COMER_MAZOS[a.n % 6], { w, h } = a;
+    const nf = FRUTAS.map(f => f.n), nv = VERDURAS.map(f => f.n);
+    const nombres = mazo === 'frutas' ? shuffle(nf).slice(0, total) : mazo === 'verduras' ? shuffle(nv).slice(0, total)
+      : shuffle(shuffle(nf).slice(0, Math.ceil(total / 2)).concat(shuffle(nv).slice(0, Math.floor(total / 2))));
+    const hor = w > h * 1.3;
+    const area = hor ? { x: w * .5, y: 10, w: w * .5 - 10, h: h - 20 } : { x: 10, y: 0, w: w - 20, h: h * .4 };
+    let t = 48, cols = 1, rows = total;
+    for (let tt = 112; tt >= 48; tt -= 2) {
+      const pp = tt * 1.14, cc = Math.floor(area.w / pp);
+      if (cc >= 1 && Math.ceil(total / cc) * pp <= area.h) { t = tt; cols = cc; rows = Math.ceil(total / cc); break; }
+    }
+    const paso = t * 1.14, ox = area.x + (area.w - Math.min(cols, total) * paso) / 2 + (paso - t) / 2;
+    let oy, F, fcx, fcy;
+    if (hor) { oy = area.y + (area.h - rows * paso) / 2 + (paso - t) / 2; F = Math.round(Math.min(w * .42, h * .82)); fcx = w * .25; fcy = h / 2; }
+    else { const topT = h - rows * paso - 14; oy = topT + (paso - t) / 2 + 4; F = Math.round(Math.min(w * .6, topT * .86, 250)); fcx = w / 2; fcy = Math.max(F / 2 + 6, topT / 2); }
+    stg.innerHTML = `<div class="comcara" style="left:${fcx - F / 2}px;top:${fcy - F / 2}px;width:${F}px;height:${F}px">${carita(a.cara, F, 'left:0;top:0')}</div>`;
+    const wrap = stg.querySelector('.comcara'), cuenta = crearCuenta(stg, total), items = [];
+    nombres.forEach((nom, i) => {
+      const d = el('div', 'com'), hx = Math.round(ox + (i % cols) * paso), hy = Math.round(oy + Math.floor(i / cols) * paso);
+      d.style.cssText = `left:${hx}px;top:${hy}px;width:${t}px;height:${t}px`; d.innerHTML = DIBUJO[nom]();
+      const it = { d, nom, hx, hy, comido: false }; items.push(it); stg.appendChild(d);
+      let drag = null;
+      d.addEventListener('pointerdown', e => {
+        if (it.comido || !vivo) return; e.preventDefault(); audio();
+        const p = posEn(stg, e); drag = { ox: p.x, oy: p.y, mov: 0 }; d.setPointerCapture(e.pointerId); d.classList.add('arrastra'); d.classList.remove('vuelve');
+        d.style.left = (p.x - t / 2) + 'px'; d.style.top = (p.y - t / 2) + 'px';
+      });
+      d.addEventListener('pointermove', e => {
+        if (!drag) return; const p = posEn(stg, e); drag.mov = Math.max(drag.mov, Math.hypot(p.x - drag.ox, p.y - drag.oy));
+        d.style.left = (p.x - t / 2) + 'px'; d.style.top = (p.y - t / 2) + 'px'; wrap.classList.toggle('abre', cerca(p));
+      });
+      const suelta = e => {
+        if (!drag) return; const p = posEn(stg, e), fue = drag; drag = null; d.classList.remove('arrastra'); wrap.classList.remove('abre');
+        if (cerca(p) || fue.mov < 10) comer(it); else { d.classList.add('vuelve'); d.style.left = it.hx + 'px'; d.style.top = it.hy + 'px'; }
+      };
+      d.addEventListener('pointerup', suelta); d.addEventListener('pointercancel', suelta);
+    });
+    let vivo = true, n = 0; const timers = [];
+    const cerca = p => Math.hypot(p.x - fcx, p.y - fcy) < F * .55 + t * .2;
+    function comer(it) {
+      if (it.comido) return; it.comido = true; n++; cuenta(n);
+      it.d.classList.add('vuelve', 'come'); it.d.style.left = (fcx - t / 2) + 'px'; it.d.style.top = (fcy - t / 2) + 'px';
+      timers.push(setTimeout(() => {
+        it.d.remove(); wrap.classList.remove('nam'); void wrap.offsetWidth; wrap.classList.add('nam');
+        const sr = stg.getBoundingClientRect(); chispas(sr.left + fcx, sr.top + fcy + F * .15, null, 16); tone(330, 0, .08, 'square', .1); tone(440, .08, .1, 'square', .1);
+        const tx = el('div', 'namtxt', `left:${fcx}px;top:${fcy - F * .45}px`); tx.textContent = '¡ÑAM!'; stg.appendChild(tx); setTimeout(() => tx.remove(), 800);
+        if (n >= total) { if (vivo) timers.push(setTimeout(() => vivo && a.exito(`¡Qué rico comiste, ${NOMBRE}! ¡Estás llenito!`, true), 400)); }
+        else say(FR_COMER[frComer()](ART[it.nom], ES_VERDURA(it.nom)));
+      }, 300));
+    }
+    const que = mazo === 'frutas' ? 'frutas' : mazo === 'verduras' ? 'verduras' : 'frutas y verduras';
+    return { texto: `Dale ${que} a ${NOMBRE}`, habla: `Dale de comer a ${NOMBRE}. Arrastra la comida hasta su boca, o tócala.`, cerrar() { vivo = false; timers.forEach(clearTimeout); } };
+  },
+};
+
+/* ================================================================
+   11) SOMBRAS: ¿cuál es la sombra de esta fruta o verdura?
+   ================================================================ */
+const FR_SOMBRA = bolsa([`¡Casi, ${NOMBRE}! Mira bien la forma.`, `¡Ups, ${NOMBRE}! Intenta con otra.`, `¡Tú puedes, ${NOMBRE}! Busca otra sombra.`, `¡Sigue intentando, ${NOMBRE}!`]);
+JUEGOS.sombras = {
+  rondas: 10, fijo: true,
+  preparar: () => ({ orden: shuffle(NOMBRES_COMIDA).slice(0, 10) }),
+  ronda(stg, a) {
+    const nom = J.est.orden[a.n % J.est.orden.length], nOp = a.n < 3 ? 3 : 4, art = ART[nom];
+    const ops = shuffle([nom].concat(shuffle(NOMBRES_COMIDA.filter(x => x !== nom)).slice(0, nOp - 1)));
+    stg.innerHTML = `<div class="somb"><div class="som-obj">${DIBUJO[nom]()}</div>
+      <div class="som-ops n${nOp}">${ops.map(o => `<button class="som" data-n="${o}" aria-label="sombra">${DIBUJO[o]()}</button>`).join('')}</div></div>`;
+    let vivo = true;
+    stg.querySelector('.som-ops').addEventListener('pointerdown', e => {
+      const b = e.target.closest('.som'); if (!b || !vivo || b.classList.contains('mal')) return; e.preventDefault(); audio();
+      if (b.dataset.n === nom) {
+        vivo = false; b.classList.add('bien'); stg.querySelectorAll('.som').forEach(x => { if (x !== b) x.classList.add('apaga'); });
+        const r = b.getBoundingClientRect(); chispas(r.left + r.width / 2, r.top + r.height / 2, null, 24);
+        a.exito(`¡Esa es la sombra ${de(art)}, ${NOMBRE}!`);
+      } else {
+        b.classList.add('mal'); tone(240, 0, .18, 'triangle', .18); say(FR_SOMBRA());
+      }
+    });
+    return { texto: `¿Cuál es la sombra ${de(art)}?`, habla: `¿Cuál es la sombra ${de(art)}, ${NOMBRE}?`, cerrar() { vivo = false; } };
+  },
+};
+
 /* ================================================================
    Menú: pestañas Aprender / Jugar
    ================================================================ */
@@ -1639,6 +2188,26 @@ const juegosDefs = [
       <path d="M30 72 Q34 88 28 98 M70 72 Q66 88 72 98" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>
       <ellipse cx="26" cy="46" rx="18" ry="23" fill="#ff6b6b" ${ln(3.5)}/><ellipse cx="74" cy="42" rx="18" ry="23" fill="#4dabf7" ${ln(3.5)}/>
       <ellipse cx="50" cy="32" rx="20" ry="25" fill="#ffd43b" ${ln(3.5)}/>${faceIcon('fi-globos', CARAS[0] || LOGO, 50, 32, 13)}`) },
+  { modo: 'memoria', t: 'MEMORIA', s: 'Busca parejas', html: S(`
+      <g transform="rotate(-8 30 52)"><rect x="8" y="22" width="44" height="60" rx="9" fill="#8b5cf6" ${ln(3.5)}/><path d="M30 38 l4 9 10 1 -8 6 3 10 -9 -6 -9 6 3 -10 -8 -6 10 -1z" fill="#ffd43b" ${ln(2)}/></g>
+      <g transform="rotate(9 70 50)"><rect x="48" y="18" width="46" height="62" rx="9" fill="#fff" ${ln(3.5)}/>${faceIcon('fi-mem', CARAS[4] || LOGO, 71, 49, 17)}</g>`) },
+  { modo: 'pinata', t: 'PIÑATA', s: '¡Rómpela!', html: S(`
+      <path d="M50 2 V22" stroke="#8d5524" stroke-width="4"/>
+      <polygon points="${estrellaPts(50, 54, 40, 19, 5)}" fill="#ffd43b" ${ln(3.5)}/><polygon points="${estrellaPts(50, 54, 28, 13, 5)}" fill="none" stroke="#ff7aa8" stroke-width="3.5" stroke-dasharray="5 4"/>
+      ${faceIcon('fi-pina', CARAS[5] || LOGO, 50, 54, 13)}
+      <rect x="10" y="84" width="14" height="9" rx="4" fill="#ff5c8a" ${ln(2.5)}/><rect x="76" y="86" width="14" height="9" rx="4" fill="#4dabf7" ${ln(2.5)}/><rect x="40" y="90" width="14" height="8" rx="4" fill="#51cf66" ${ln(2.5)}/>`) },
+  { modo: 'musica', t: 'MÚSICA', s: 'Toca canciones', html: S(`
+      ${NOTAS.slice(0, 6).map((n, i) => `<rect x="${6 + i * 15}" y="${14 + i * 7}" width="13" height="${76 - i * 7}" rx="4" fill="${n.c}" ${ln(3)}/>`).join('')}
+      <circle cx="82" cy="18" r="6" fill="#fff" ${ln(2.5)}/><path d="M88 18 V4 L98 8" fill="none" ${ln(3)}/>`) },
+  { modo: 'puntos', t: 'PUNTOS', s: 'Une del 1 al 12', html: S(`
+      <path d="M22 76 L50 22 L80 72" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 9"/><path d="M22 76 L50 22" stroke="#ff6b6b" stroke-width="5" stroke-linecap="round"/>
+      ${[[22, 76, 1], [50, 22, 2], [80, 72, 3]].map(([x, y, k]) => `<circle cx="${x}" cy="${y}" r="13" fill="#fff" ${ln(3.5)}/><text x="${x}" y="${y + 6}" text-anchor="middle" font-size="18" font-weight="900" fill="${INK}">${k}</text>`).join('')}`) },
+  { modo: 'comer', t: 'COMER', s: 'Dale de comer', html: S(`
+      ${faceIcon('fi-comer', CARAS[2] || LOGO, 38, 50, 30)}
+${anida(DIBUJO['manzana'](), 60, 52, 38)}${anida(DIBUJO['zanahoria'](), 62, 8, 34)}`) },
+  { modo: 'sombras', t: 'SOMBRAS', s: '¿Cuál es?', html: S(`
+      ${anida(DIBUJO['pera'](), 4, 18, 44)}<g opacity=".8">${anida(DIBUJO['pera']().replace(/fill="(?!none)[^"]*"/g, 'fill="#2b1b4d"').replace(/stroke="[^"]*"/g, 'stroke="#2b1b4d"'), 52, 18, 44)}</g>
+      <text x="50" y="14" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">?</text>`) },
   { modo: 'sorpresa', t: 'SORPRESA', s: '¡Uno al azar!', html: S(`
       <rect x="18" y="46" width="64" height="44" rx="6" fill="#ff7aa8" ${ln()}/><rect x="12" y="34" width="76" height="18" rx="5" fill="#ffd43b" ${ln()}/>
       <rect x="44" y="34" width="12" height="56" fill="#fff" ${ln(3)}/><path d="M50 34 Q30 6 24 20 Q22 32 50 34 Q78 32 76 20 Q70 6 50 34Z" fill="#fff" ${ln(3.5)}/>
@@ -1657,6 +2226,7 @@ function verPestana(p, hablar) {
 $('#tabs').addEventListener('click', e => { const b = e.target.closest('.tab'); if (b) { audio(); verPestana(b.dataset.tab, true); } });
 $('#caraJ').addEventListener('click', () => { audio(); if (J.habla) say(J.habla); });
 $('#homeJ').addEventListener('click', () => aMenu());
+
 
 
 /* =============== Eventos =============== */
