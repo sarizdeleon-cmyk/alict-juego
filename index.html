@@ -61,7 +61,7 @@ body.habla .screen.active .cara .ondas i:nth-child(3){animation-delay:.72s}
 .cara .alt svg{width:18px;height:18px}
 button.cara:active{transform:scale(.94)}
 .burbuja{position:relative;background:#fff;color:#2b1b4d;border-radius:30px;padding:.5em .9em;box-shadow:0 8px 0 rgba(0,0,0,.25);
-  font-size:clamp(26px,7.4vw,56px);line-height:1.12;text-align:center;max-width:900px}
+  font-size:clamp(26px,7.4vw,56px);line-height:1.12;text-align:center;text-wrap:balance;max-width:900px}
 .burbuja em{font-style:normal;color:#e63e83}
 .burbuja::before{content:"";position:absolute;left:50%;top:-12px;width:28px;height:28px;background:#fff;transform:translateX(-50%) rotate(45deg);border-radius:6px 0 0 0}
 .menu-head{display:flex;align-items:center;gap:20px;width:100%;max-width:1000px;margin-top:1vh}
@@ -229,7 +229,7 @@ button.cara:active{transform:scale(.94)}
   <!-- Final -->
   <section id="end" class="screen">
     <div class="cara grande" id="caraEnd"><span class="ondas"><i></i><i></i><i></i></span><img class="foto" alt=""></div>
-    <div class="burbuja">¡LO LOGRASTE,<br><em>ALICT</em>!</div>
+    <div class="burbuja" id="endTitle">¡LO LOGRASTE, <em>ALICT</em>!</div>
     <div class="stats">
       <div class="stat"><svg viewBox="0 0 24 24"><path fill="#ffd43b" stroke="#b8860b" stroke-width="1.2" stroke-linejoin="round" d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg><span id="endScore"></span></div>
       <div class="stat"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ff5c5c"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg><span id="endErr"></span></div>
@@ -272,12 +272,56 @@ const COLORES = [
 ];
 const PALETA = ['#ff6b6b','#4dabf7','#ffd43b','#51cf66','#ff922b','#cc5de8','#f783ac','#22b8cf'];
 
-const FRASES_OK  = ['¡Es correcto Alict, eres muy inteligente!'];
-const FRASES_MAL = ['¡Ups! Inténtalo otra vez.', 'Casi. Busca otra vez.', 'Mmm, prueba con otra.'];
+// Frases: todas dicen el nombre. Se sacan "de una bolsa" para que no se repitan hasta haber salido todas.
+const FRASES_OK = [
+  `¡Es correcto, ${NOMBRE}! ¡Eres muy inteligente!`,
+  `¡Muy bien, ${NOMBRE}! ¡Lo hiciste excelente!`,
+  `¡Wow, ${NOMBRE}! ¡Qué listo eres!`,
+  `¡Bravo, ${NOMBRE}! ¡Eres un campeón!`,
+  `¡Eso es, ${NOMBRE}! ¡Lo lograste!`,
+  `¡Increíble, ${NOMBRE}! ¡Eres un genio!`,
+  `¡Perfecto, ${NOMBRE}! ¡Sigue así!`,
+  `¡Así se hace, ${NOMBRE}! ¡Eres súper inteligente!`,
+  `¡Felicidades, ${NOMBRE}! ¡Respuesta correcta!`,
+  `¡Eres una estrella, ${NOMBRE}! ¡Muy bien!`,
+  `¡Qué bien lo haces, ${NOMBRE}! ¡Excelente!`,
+  `¡Correcto, ${NOMBRE}! ¡Eres el mejor!`,
+  `¡Guau, ${NOMBRE}! ¡Qué inteligente eres!`,
+  `¡Lo sabías, ${NOMBRE}! ¡Eres fantástico!`,
+  `¡Sí, ${NOMBRE}! ¡Esa es la respuesta correcta!`,
+  `¡Excelente, ${NOMBRE}! ¡Eres un súper campeón!`,
+];
+const FRASES_MAL = [
+  `¡Ups, ${NOMBRE}! Inténtalo otra vez.`,
+  `Casi, ${NOMBRE}. Busca otra vez.`,
+  `Mmm, ${NOMBRE}, prueba con otra.`,
+  `No te preocupes, ${NOMBRE}. ¡Tú puedes!`,
+  `Tú puedes, ${NOMBRE}. Intenta de nuevo.`,
+  `Casi lo logras, ${NOMBRE}. Prueba otra.`,
+];
+// La primera frase (hasta el primer "!") es la que se muestra en la pantalla final
+const FRASES_FIN = [
+  `¡Lo lograste, ${NOMBRE}! ¡Eres increíble!`,
+  `¡Terminaste, ${NOMBRE}! ¡Eres un campeón!`,
+  `¡Felicidades, ${NOMBRE}! ¡Lo hiciste muy bien!`,
+  `¡Qué orgullo, ${NOMBRE}! ¡Eres súper inteligente!`,
+  `¡Ganaste, ${NOMBRE}! ¡Eres una estrella!`,
+  `¡Excelente trabajo, ${NOMBRE}! ¡Eres un genio!`,
+];
 
 const $ = s => document.querySelector(s);
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const rnd = a => a[Math.floor(Math.random() * a.length)];
+const bolsa = lista => {
+  let cola = [], ultima = null;
+  return () => {
+    if (!cola.length) { cola = shuffle(lista); if (cola.length > 1 && cola[cola.length - 1] === ultima) cola.unshift(cola.pop()); }
+    return (ultima = cola.pop());
+  };
+};
+const frOk = bolsa(FRASES_OK), frMal = bolsa(FRASES_MAL), frFin = bolsa(FRASES_FIN);
+// Para mostrar en pantalla: mayúsculas y el nombre resaltado
+const enPantalla = f => f.toUpperCase().replace(NOMBRE.toUpperCase(), `<em>${NOMBRE.toUpperCase()}</em>`);
 
 /* =============== Personajes =============== */
 const ACC = [
@@ -742,17 +786,18 @@ function elegirParte(g, ev) {
 function fallo() {
   G.errores++; hud(); bump($('#pErr'));
   card.classList.remove('bad'); void card.offsetWidth; card.classList.add('bad');
-  sfxBad(); say(rnd(FRASES_MAL));
+  sfxBad(); say(frMal());
 }
 
 function ganar(marcar) {
   G.bloqueo = true; G.score++; hud(); bump($('#pScore'));
   marcar();
   card.className = 'card ok';
-  qtext.innerHTML = '¡ES CORRECTO <em>ALICT</em>,<br>ERES MUY INTELIGENTE!';
+  const frase = frOk();
+  qtext.innerHTML = enPantalla(frase);
   sfxOk(); celebrar(4, 14);
   clearTimeout(G.hablaT);
-  G.hablaT = setTimeout(() => say(rnd(FRASES_OK)), 350);
+  G.hablaT = setTimeout(() => say(frase), 350);
   G.timer = setTimeout(() => { G.i++; G.i >= G.qs.length ? final() : pregunta(); }, 4600);
 }
 
@@ -762,8 +807,10 @@ function final() {
   $('#endErr').textContent = G.errores === 1 ? '1 error' : `${G.errores} errores`;
   ponerCara('#caraEnd', rnd(CARAS));
   ver('end');
+  const frase = frFin();
+  $('#endTitle').innerHTML = enPantalla(frase.slice(0, frase.indexOf('!', 1) + 1));
   sfxOk(); celebrar(7, 24); caritas(3);
-  setTimeout(() => say(`¡Lo lograste, ${NOMBRE}! ¡Eres increíble!`), 500);
+  setTimeout(() => say(frase), 500);
 }
 
 function aMenu() {
@@ -772,15 +819,28 @@ function aMenu() {
 }
 
 /* =============== Eventos =============== */
-let saludado = false;
-function saludar(extra) {
-  say(`Hola ${NOMBRE}, ¿cómo estás hoy?`, { onstart: () => { saludado = true; }, ...extra });
+let saludado = false;     // el saludo ya empezó a sonar
+let saludando = false;    // está sonando ahora mismo
+let despuesSaludo = null; // qué hacer cuando termine de sonar
+let saludoId = 0;
+function saludar() {
+  const mio = ++saludoId;
+  const fin = () => {
+    if (mio !== saludoId) return;          // lo cortó un saludo más nuevo
+    saludando = false;
+    const f = despuesSaludo; despuesSaludo = null; f && f();
+  };
+  say(`Hola ${NOMBRE}, ¿cómo estás hoy?`, {
+    onstart: () => { if (mio === saludoId) { saludado = true; saludando = true; } },
+    onend: fin, onerror: fin,
+  });
 }
 $('#start').addEventListener('click', () => {
   audio();
   const irMenu = () => { ver('menu'); setTimeout(() => say('¿Qué quieres aprender hoy?'), 250); };
-  if (saludado) irMenu();
-  else { let ya = false; const ir = () => { if (!ya) { ya = true; saludado = true; irMenu(); } }; saludar({ onend: ir, onerror: ir }); }
+  if (saludando) despuesSaludo = irMenu;                       // dejar que termine de saludar
+  else if (saludado) irMenu();
+  else { despuesSaludo = () => { saludado = true; irMenu(); }; saludar(); }
 });
 $('#modes').addEventListener('click', e => { const b = e.target.closest('.mode'); if (b) { audio(); empezar(b.dataset.modo); } });
 $('#home').addEventListener('click', aMenu);
@@ -788,8 +848,18 @@ $('#toMenu').addEventListener('click', aMenu);
 $('#again').addEventListener('click', () => { audio(); empezar(G.modo); });
 $('#caraQ').addEventListener('click', () => { audio(); const q = G.qs[G.i]; if (q) say(q.habla); });
 
-// Al abrir: intentar saludar de inmediato (si el navegador lo bloquea, se saluda al tocar el botón)
-addEventListener('load', () => setTimeout(() => { if (!saludado) saludar(); }, 500));
+// Al abrir: saludar de inmediato. Muchos navegadores no dejan hablar hasta que se toca la pantalla,
+// así que si se bloquea, se saluda en el primer toque (en cualquier lado, menos en el botón, que ya saluda solo).
+addEventListener('load', () => setTimeout(() => { if (!saludado) saludar(); }, 400));
+const TOQUES = ['pointerup', 'touchend', 'mouseup', 'click', 'keydown'];
+function primerToque(e) {
+  if (saludado) { TOQUES.forEach(t => removeEventListener(t, primerToque, true)); return; }
+  if (e.target.closest && e.target.closest('#start')) return;
+  if (!$('#hello').classList.contains('active')) return;
+  TOQUES.forEach(t => removeEventListener(t, primerToque, true));
+  saludar();
+}
+TOQUES.forEach(t => addEventListener(t, primerToque, true));
 document.addEventListener('visibilitychange', () => { if (document.hidden) callar(); });
 
 // Versión en línea: se puede instalar como app y funciona sin internet
