@@ -1,0 +1,17 @@
+{
+  "name": "Alict vs Zombis",
+  "short_name": "Alict vs Zombis",
+  "description": "Alict huye o pelea con sus tíos zombis en una noche de Halloween",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#14062b",
+  "theme_color": "#14062b",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

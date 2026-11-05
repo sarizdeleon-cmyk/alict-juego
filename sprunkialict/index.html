@@ -60,6 +60,8 @@ body.habla #hello .portada{animation:talk .34s ease-in-out infinite,glow .68s ea
 .btn-c.casa{background:linear-gradient(#5be37d,#2fbf56);text-decoration:none}
 body.m1 .titulo{font-size:clamp(14px,4.2vw,44px)}
 body.m1 .btn-c{width:clamp(40px,11vw,62px)}
+.irHello{position:absolute;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top))}
+.btn-c.casa[hidden]{display:none}
 .btn-c:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
 .btn-c.azar{background:linear-gradient(#ffe066,#ffc21a)}
 
@@ -158,6 +160,7 @@ body.m1 .btn-c{width:clamp(40px,11vw,62px)}
 <canvas id="fx"></canvas>
 
 <section id="hello" class="pantalla activa">
+  <a class="btn-c casa irMenu irHello" href="../" aria-label="Volver al menú de juegos"><svg viewBox="0 0 100 100"><path d="M14 52 L50 18 L86 52" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 48 V84 H42 V62 H58 V84 H76 V48 L50 26 Z" fill="#fff" stroke="#2b1b4d" stroke-width="5" stroke-linejoin="round"/></svg></a>
   <div class="portada"><img id="fotoHello" alt="Alict"></div>
   <div class="hola-txt">
     <div class="logo-txt">SPRUNKI<em>ALICT</em></div>
@@ -175,7 +178,7 @@ body.m1 .btn-c{width:clamp(40px,11vw,62px)}
     <div class="titulo">SPRUNKI<em>ALICT</em></div>
     <button class="btn-c azar" id="bAzar" aria-label="Mezcla sorpresa"></button>
     <button class="btn-c" id="bBorrar" aria-label="Borrar todo"></button>
-    <a class="btn-c casa" id="bCasa" href="../didacticos/" aria-label="Volver a Didácticos Alict" hidden><svg viewBox="0 0 100 100"><path d="M14 52 L50 18 L86 52" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 48 V84 H42 V62 H58 V84 H76 V48 L50 26 Z" fill="#fff" stroke="#2b1b4d" stroke-width="5" stroke-linejoin="round"/></svg></a>
+    <a class="btn-c casa irMenu" id="bCasa" href="../" aria-label="Volver al menú de juegos"><svg viewBox="0 0 100 100"><path d="M14 52 L50 18 L86 52" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 48 V84 H42 V62 H58 V84 H76 V48 L50 26 Z" fill="#fff" stroke="#2b1b4d" stroke-width="5" stroke-linejoin="round"/></svg></a>
   </div>
   <div class="escenario b0 vacio" id="escenario">
     <div class="pulso" id="pulso"></div>
@@ -678,7 +681,7 @@ addEventListener('load', () => setTimeout(() => { if (!saludado) saludar(); }, 4
 const TOQUES = ['pointerup', 'touchend', 'mouseup', 'click', 'keydown'];
 function primerToque(e) {
   if (saludado) { TOQUES.forEach(t => removeEventListener(t, primerToque, true)); return; }
-  if (e.target.closest && e.target.closest('#start')) return;
+  if (e.target.closest && e.target.closest('#start,.irMenu')) return;
   if (!$('#hello').classList.contains('activa')) return;
   TOQUES.forEach(t => removeEventListener(t, primerToque, true)); saludar();
 }
@@ -688,11 +691,13 @@ document.addEventListener('visibilitychange', () => {
   else if (MOT.ctx && MOT.corriendo) { MOT.ctx.resume(); MOT.t = Math.max(MOT.t, MOT.ctx.currentTime + .05); }
 });
 pintarPaleta(); ajustarTam();
-/* Si viene del menú de Didácticos Alict (?m=1): directo a la música, sin pantalla de saludo, con botón para volver */
+/* Botón de casa: vuelve al menú de juegos. Si viene del menú de Didácticos Alict (?m=1): directo a la música, sin saludo, y la casa lo regresa a Didácticos */
+document.body.classList.add('m1');
+if (!/^https?:/.test(location.protocol)) document.querySelectorAll('.irMenu').forEach(e => e.hidden = true);
+document.querySelectorAll('.irMenu').forEach(a => a.addEventListener('click', () => { callar(); parar(); }));
 if (/[?&]m=1/.test(location.search)) {
-  document.body.classList.add('m1'); $('#bCasa').hidden = false; saludado = true;
+  $('#bCasa').href = '../didacticos/'; $('#bCasa').setAttribute('aria-label', 'Volver a Didácticos Alict'); saludado = true;
   ver('juego'); requestAnimationFrame(ajustarTam);
-  $('#bCasa').addEventListener('click', () => { callar(); parar(); });
 }
 
 if ('serviceWorker' in navigator && /^https?:/.test(location.protocol) && document.querySelector('link[rel=manifest]'))

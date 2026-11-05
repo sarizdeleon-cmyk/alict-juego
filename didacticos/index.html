@@ -104,6 +104,10 @@ button.cara:active{transform:scale(.94)}
 .hud{width:100%;max-width:1000px;display:flex;align-items:center;gap:10px}
 .icon{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;flex:none}
 .icon svg{width:28px;height:28px}
+a.icon{text-decoration:none}
+.irMenu[hidden]{display:none!important}
+.icon.casa{background:linear-gradient(#5be37d,#2fbf56);box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.irHello{position:absolute;left:calc(14px + env(safe-area-inset-left));top:calc(14px + env(safe-area-inset-top))}
 .dots{flex:1;display:flex;justify-content:center;gap:7px;flex-wrap:wrap}
 .dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.28);transition:.3s}
 .dots i.done{background:#5be37d;transform:scale(1.1)}
@@ -429,6 +433,7 @@ button.cara:active{transform:scale(.94)}
 
   <!-- Saludo -->
   <section id="hello" class="screen active">
+    <a class="icon casa irMenu irHello" href="../" aria-label="Volver al menú de juegos"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="#fff"/></svg></a>
     <div class="cara grande logo" id="caraHello"><span class="ondas"><i></i><i></i><i></i></span><img class="foto" alt="Logo"></div>
     <div class="burbuja">HOLA <em>ALICT</em>,<br>¿CÓMO ESTÁS HOY?</div>
     <button id="start" class="big-btn">
@@ -440,6 +445,7 @@ button.cara:active{transform:scale(.94)}
   <!-- Menú -->
   <section id="menu" class="screen">
     <div class="menu-head">
+      <a class="icon casa irMenu" href="../" aria-label="Volver al menú de juegos"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="#fff"/></svg></a>
       <div class="cara mini" id="caraMenu"><img class="foto" alt=""></div>
       <div class="burbuja lado" id="menuTxt">¿QUÉ QUIERES<br>APRENDER HOY?</div>
     </div>
@@ -2275,13 +2281,16 @@ addEventListener('load', () => setTimeout(() => { if (!saludado) saludar(); }, 4
 const TOQUES = ['pointerup', 'touchend', 'mouseup', 'click', 'keydown'];
 function primerToque(e) {
   if (saludado) { TOQUES.forEach(t => removeEventListener(t, primerToque, true)); return; }
-  if (e.target.closest && e.target.closest('#start')) return;
+  if (e.target.closest && e.target.closest('#start,.irMenu')) return;
   if (!$('#hello').classList.contains('active')) return;
   TOQUES.forEach(t => removeEventListener(t, primerToque, true));
   saludar();
 }
 TOQUES.forEach(t => addEventListener(t, primerToque, true));
 document.addEventListener('visibilitychange', () => { if (document.hidden) callar(); });
+// Botón de casa: vuelve al menú de juegos (solo en la versión de internet)
+if (!/^https?:/.test(location.protocol)) document.querySelectorAll('.irMenu').forEach(e => e.hidden = true);
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('.irMenu')) callar(); });
 
 // Versión en línea: se puede instalar como app y funciona sin internet
 if ('serviceWorker' in navigator && /^https?:/.test(location.protocol) && !window.Capacitor && document.querySelector('link[rel=manifest]'))
