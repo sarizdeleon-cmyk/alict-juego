@@ -1,9 +1,9 @@
 // Guarda el menú de Alict en la tablet para que abra rápido y funcione sin internet.
-// Cada juego (zombis/, didacticos/, sprunkialict/) tiene su propio service worker y su propia caché:
+// Cada juego (zombis/, didacticos/, sprunkialict/, tragones/) tiene su propio service worker y su propia caché:
 // este solo cuida el menú y deja pasar todo lo que sea de un juego.
 // Si cambias el menú, sube los archivos nuevos: se actualiza solo la siguiente vez que se abra con internet.
-const CACHE = 'launcher-v1';
-const JUEGOS = ['/zombis/', '/didacticos/', '/sprunkialict/'];
+const CACHE = 'launcher-v2';
+const JUEGOS = ['/zombis/', '/didacticos/', '/sprunkialict/', '/tragones/'];
 const ARCHIVOS = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
