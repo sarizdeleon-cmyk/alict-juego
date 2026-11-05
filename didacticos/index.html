@@ -417,6 +417,7 @@ button.cara:active{transform:scale(.94)}
   .som-ops.n4{grid-template-columns:repeat(2,1fr)}
   .som{max-height:min(34vh,150px)}
 }
+.mode[data-modo=sprunkialict] b{font-size:clamp(15px,4.3vw,26px);letter-spacing:-.3px}
 
 
 @media (prefers-reduced-motion:reduce){.tile svg,.trio svg,.mode svg,.big-btn{animation:none}}
@@ -2208,6 +2209,11 @@ ${anida(DIBUJO['manzana'](), 60, 52, 38)}${anida(DIBUJO['zanahoria'](), 62, 8, 3
   { modo: 'sombras', t: 'SOMBRAS', s: '¿Cuál es?', html: S(`
       ${anida(DIBUJO['pera'](), 4, 18, 44)}<g opacity=".8">${anida(DIBUJO['pera']().replace(/fill="(?!none)[^"]*"/g, 'fill="#2b1b4d"').replace(/stroke="[^"]*"/g, 'stroke="#2b1b4d"'), 52, 18, 44)}</g>
       <text x="50" y="14" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">?</text>`) },
+  { modo: 'sprunkialict', t: 'SPRUNKIALICT', s: 'Haz música', html: S(`
+      <rect x="6" y="54" width="26" height="40" rx="12" fill="#ef4444" ${ln(3)}/>${faceIcon('fi-sp1', CARAS[0] || LOGO, 19, 40, 15)}
+      <rect x="37" y="48" width="26" height="46" rx="12" fill="#22c55e" ${ln(3)}/>${faceIcon('fi-sp2', CARAS[1] || LOGO, 50, 33, 17)}
+      <rect x="68" y="54" width="26" height="40" rx="12" fill="#0ea5e9" ${ln(3)}/>${faceIcon('fi-sp3', CARAS[3] || LOGO, 81, 40, 15)}
+      <path d="M46 14 V4 L60 8" fill="none" ${ln(3)}/><circle cx="42" cy="15" r="4.500" fill="${INK}"/>`) },
   { modo: 'sorpresa', t: 'SORPRESA', s: '¡Uno al azar!', html: S(`
       <rect x="18" y="46" width="64" height="44" rx="6" fill="#ff7aa8" ${ln()}/><rect x="12" y="34" width="76" height="18" rx="5" fill="#ffd43b" ${ln()}/>
       <rect x="44" y="34" width="12" height="56" fill="#fff" ${ln(3)}/><path d="M50 34 Q30 6 24 20 Q22 32 50 34 Q78 32 76 20 Q70 6 50 34Z" fill="#fff" ${ln(3.5)}/>
@@ -2215,7 +2221,11 @@ ${anida(DIBUJO['manzana'](), 60, 52, 38)}${anida(DIBUJO['zanahoria'](), 62, 8, 3
 ];
 $('#juegos').innerHTML = juegosDefs.map(m =>
   `<button class="mode" data-modo="${m.modo}">${m.html}<span><b>${m.t}</b><small>${m.s}</small></span></button>`).join('');
-$('#juegos').addEventListener('click', e => { const b = e.target.closest('.mode'); if (b) { audio(); empezar(b.dataset.modo); } });
+$('#juegos').addEventListener('click', e => {
+  const b = e.target.closest('.mode'); if (!b) return;
+  if (b.dataset.modo === 'sprunkialict') { callar(); location.href = '../sprunkialict/?m=1'; return; }   // Sprunkialict vive junto a este juego
+  audio(); empezar(b.dataset.modo);
+});
 
 function verPestana(p, hablar) {
   $('#modes').hidden = p !== 'aprender'; $('#juegos').hidden = p !== 'jugar';
