@@ -1,6 +1,6 @@
 // Guarda el juego en la tablet/celular para que abra rápido y funcione sin internet.
 // Si cambias el juego, sube los archivos nuevos: se actualiza solo la siguiente vez que se abra con internet.
-const CACHE = 'zombis-v1';
+const CACHE = 'zombis-v2';
 const ARCHIVOS = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 // cachés de los juegos que antes vivían en esta misma dirección (ya no se usan aquí)
 const VIEJOS = ['alict-v4', 'sprunkialict-v1'];
