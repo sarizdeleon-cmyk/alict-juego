@@ -1,0 +1,17 @@
+{
+  "name": "Corre Sprunki",
+  "short_name": "Corre Sprunki",
+  "description": "Alict corre con los Sprunkis: salta los obstáculos, junta estrellas y llega a la meta. Si se atora, el Sprunki salta solo.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#1d2b64",
+  "theme_color": "#4dd2ff",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
