@@ -1,0 +1,17 @@
+{
+  "name": "Súper Peleas Alict",
+  "short_name": "Súper Peleas",
+  "description": "Peleas entre todos los personajes y la familia: golpes, poderes, especiales MAX y modo de 2 jugadores (azul contra rojo).",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#12163a",
+  "theme_color": "#1b2a6b",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
