@@ -4,6 +4,7 @@ App de Android TV (también sirve en tablet) con el menú de Alict —bienvenida
 
 - **Menú**: flechas del control para moverse, **OK** para entrar. **Atrás** sale de la galería, vuelve de un juego al menú, o cierra la app.
 - **Dentro de un juego**: las flechas mueven una estrella (cursor) y **OK** «toca» la pantalla (mantener OK = mantener el dedo). Sirve para cualquier juego. También funciona con un control de videojuegos (palanca + botón A).
+- **Mis apps**: botón arriba a la derecha (flecha hacia arriba desde los juegos) con todas las demás apps instaladas en la tele; OK abre la app. Además la app se declara como pantalla de inicio: si la tele deja cambiar el inicio, al apretar el botón Inicio la ofrece (si se elige, Inicio siempre vuelve a este menú).
 - Sin permiso de internet: no puede abrir nada de afuera.
 
 ## Cómo se compila

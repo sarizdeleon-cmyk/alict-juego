@@ -1,18 +1,25 @@
 package mx.alict.juegos;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.util.Base64;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -26,8 +33,16 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Menú de juegos de Alict para Android TV.
@@ -47,6 +62,8 @@ public class MainActivity extends Activity {
     private WebView web;
     private CursorView cursor;
     private boolean enJuego = false;
+    private boolean esInicio = false;                       // la app está funcionando como pantalla de inicio de la tele
+    private final Map<String, String> dibujos = new HashMap<String, String>();
 
     private float cx, cy;                       // posición del cursor
     private boolean izq, der, arr, aba;         // flechas apretadas
@@ -87,6 +104,8 @@ public class MainActivity extends Activity {
         web.setHorizontalScrollBarEnabled(false);
         web.setLongClickable(false);
 
+        web.addJavascriptInterface(new PuenteApps(), "AlictApps");
+        esInicio = getIntent() != null && getIntent().hasCategory(Intent.CATEGORY_HOME);
         web.setWebChromeClient(new WebChromeClient());
         web.setWebViewClient(new WebViewClient() {
             @Override
@@ -203,9 +222,108 @@ public class MainActivity extends Activity {
         // en el menú: si hay una galería abierta se cierra; si no, sale de la app
         web.evaluateJavascript("(function(){return window.__tvAtras?window.__tvAtras():false})()", new ValueCallback<String>() {
             @Override public void onReceiveValue(String v) {
-                if (!"true".equals(v)) finish();
+                if (!"true".equals(v) && !esInicio) finish();      // como pantalla de inicio no se cierra
             }
         });
+    }
+
+    /* ---------- apps instaladas en la tele ---------- */
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        esInicio = intent != null && intent.hasCategory(Intent.CATEGORY_HOME);
+        if (esInicio) web.loadUrl(ORIGEN + "/");              // al apretar Inicio vuelve siempre al menú
+    }
+
+    /** Lo que la página puede pedirle a la app: la lista de apps instaladas, sus dibujos, y abrir una. */
+    private class PuenteApps {
+        @JavascriptInterface
+        public String lista() {
+            try { return listarApps(); } catch (Exception e) { return "[]"; }
+        }
+
+        @JavascriptInterface
+        public String icono(String pkg) {
+            String d = dibujos.get(pkg);
+            return d == null ? "" : d;
+        }
+
+        @JavascriptInterface
+        public void abrir(final String pkg) {
+            runOnUiThread(new Runnable() {
+                @Override public void run() { abrirApp(pkg); }
+            });
+        }
+    }
+
+    private String listarApps() throws Exception {
+        final PackageManager pm = getPackageManager();
+        Map<String, ResolveInfo> por = new LinkedHashMap<String, ResolveInfo>();
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory("android.intent.category.LEANBACK_LAUNCHER");
+        for (ResolveInfo r : pm.queryIntentActivities(a, 0)) por.put(r.activityInfo.packageName, r);
+        Intent b = new Intent(Intent.ACTION_MAIN);
+        b.addCategory(Intent.CATEGORY_LAUNCHER);
+        for (ResolveInfo r : pm.queryIntentActivities(b, 0)) {
+            if (!por.containsKey(r.activityInfo.packageName)) por.put(r.activityInfo.packageName, r);
+        }
+        por.remove(getPackageName());                           // esta misma app no se lista
+        List<JSONObject> lista = new ArrayList<JSONObject>();
+        for (Map.Entry<String, ResolveInfo> en : por.entrySet()) {
+            String pkg = en.getKey();
+            ResolveInfo r = en.getValue();
+            JSONObject o = new JSONObject();
+            o.put("p", pkg);
+            o.put("n", String.valueOf(r.loadLabel(pm)));
+            lista.add(o);
+            if (!dibujos.containsKey(pkg)) dibujos.put(pkg, dibujoDe(r, pm));
+        }
+        Collections.sort(lista, new Comparator<JSONObject>() {
+            @Override public int compare(JSONObject x, JSONObject y) {
+                return x.optString("n").toLowerCase().compareTo(y.optString("n").toLowerCase());
+            }
+        });
+        JSONArray arr = new JSONArray();
+        for (JSONObject o : lista) arr.put(o);
+        return arr.toString();
+    }
+
+    /** Imagen de la app (el banner de TV si lo tiene, si no el icono) como PNG en base64. */
+    private String dibujoDe(ResolveInfo r, PackageManager pm) {
+        try {
+            Drawable d = null;
+            try { d = r.activityInfo.loadBanner(pm); } catch (Exception e) { d = null; }
+            if (d == null) { try { d = r.activityInfo.applicationInfo.loadBanner(pm); } catch (Exception e) { d = null; } }
+            boolean banner = d != null;
+            if (d == null) d = r.loadIcon(pm);
+            int w = banner ? 224 : 128, h = banner ? 126 : 128;
+            Bitmap bm = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+            Canvas c = new Canvas(bm);
+            d.setBounds(0, 0, w, h);
+            d.draw(c);
+            ByteArrayOutputStream o = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.PNG, 100, o);
+            bm.recycle();
+            return "data:image/png;base64," + Base64.encodeToString(o.toByteArray(), Base64.NO_WRAP);
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private void abrirApp(String pkg) {
+        try {
+            PackageManager pm = getPackageManager();
+            Intent i = pm.getLeanbackLaunchIntentForPackage(pkg);
+            if (i == null) i = pm.getLaunchIntentForPackage(pkg);
+            if (i != null) {
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+            }
+        } catch (Exception e) {
+            // si no se puede abrir, no pasa nada
+        }
     }
 
     /* ---------- control remoto -> cursor ---------- */

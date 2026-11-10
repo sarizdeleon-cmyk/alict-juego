@@ -253,6 +253,14 @@ body.bajo #desfile,body.galeria #desfile{opacity:0}
 #galeria .ch.salta canvas{animation:salta-ch .6s ease-out}
 @keyframes salta-ch{0%{transform:translateY(0)}35%{transform:translateY(-38%) rotate(-6deg) scale(1.12)}70%{transform:translateY(0) rotate(4deg)}100%{transform:translateY(0)}}
 @media (max-height:800px){.tv .juegos.dosfilas .arte{height:clamp(78px,12vh,200px)}.tv .juegos.dosfilas{gap:clamp(8px,1.4vh,20px) clamp(10px,1.6vw,26px)}}
+/* botón y pantalla de "Mis apps" */
+.tv #bApps{width:auto;aspect-ratio:auto;height:clamp(44px,7vh,60px);right:calc(clamp(44px,7vh,60px) + 14px);padding:0 1.1em;gap:.5em;border-radius:99px;font:inherit;font-weight:900;font-size:clamp(14px,2.6vh,24px);letter-spacing:.5px;color:#fff;display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.tv #bApps svg{width:1.3em;height:1.3em}
+#galeria .rejilla.apps{grid-template-columns:repeat(auto-fill,minmax(clamp(150px,24vh,300px),1fr))}
+#galeria .rejilla.apps .ch{min-height:clamp(110px,22vh,230px);justify-content:center}
+#galeria .ch img{width:100%;height:clamp(70px,13vh,150px);object-fit:contain;border-radius:10px}
+#galeria .ch.ap span{font-size:clamp(13px,2.4vh,22px)}
+.tv .cabecera{width:min(1500px,96%)}
 
 </style>
 </head>
@@ -520,6 +528,11 @@ const TV = !!window.__TV || location.hash === '#tv';
 const SP = { ok: false, ATL: null, CAT: null, IM: [] };
 if (TV) {
   document.body.classList.add('tv');
+  if (window.AlictApps) {
+    const b = document.createElement('button'); b.className = 'redondo'; b.id = 'bApps'; b.setAttribute('aria-label', 'Mis apps');
+    b.innerHTML = '<svg viewBox="0 0 24 24" fill="#fff"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg><span>MIS APPS</span>';
+    $('#bSonido').before(b);
+  }
   JUEGOS.push({ id: 'amigos', nombre: 'MIS AMIGOS', sub: 'Todos los personajes', url: '#amigos', arte: 'amigos' });
   ARTE.amigos = () => `<div class="arte amigos" id="arteAmigos"><i class="rayos"></i><span class="est" style="left:8%;top:8%">★</span><span class="est" style="right:8%;top:12%;animation-delay:-1s">★</span></div>`;
 }
@@ -559,7 +572,7 @@ const FLECHAS = { ArrowUp: 1, ArrowDown: 1, ArrowLeft: 1, ArrowRight: 1 };
 
 /* ---- menú principal ---- */
 let focoEl = null;
-function itemsMenu() { return [...document.querySelectorAll('.juego'), $('#bSonido')]; }
+function itemsMenu() { return [...document.querySelectorAll('.juego'), $('#bApps'), $('#bSonido')].filter(Boolean); }
 function enfocar(el) {
   if (!el) return; if (focoEl) focoEl.classList.remove('sel'); focoEl = el; el.classList.add('sel');
   el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
@@ -572,7 +585,7 @@ function teclaMenu(e) {
     if (v) enfocar(v); else if (e.key === 'ArrowDown') scrollBy({ top: innerHeight * .5, behavior: 'smooth' }); else if (e.key === 'ArrowUp' && scrollY > 0) scrollBy({ top: -innerHeight * .5, behavior: 'smooth' });
   } else if (e.key === 'Enter' || e.key === ' ' || e.keyCode === 13 || e.keyCode === 23) {
     e.preventDefault(); if (!focoEl) { enfocar(itemsMenu()[0]); return; }
-    if (focoEl.dataset.id === 'amigos') { click(); abrirGaleria(); } else focoEl.click();
+    if (focoEl.id === 'bApps') { click(); abrirApps(); } else if (focoEl.dataset.id === 'amigos') { click(); abrirGaleria(); } else focoEl.click();
   }
 }
 
@@ -584,15 +597,20 @@ function enfocarGal(el) {
   const cu = galeriaEl.querySelector('.cuerpo'), r = el.getBoundingClientRect(), cr = cu.getBoundingClientRect(), m = r.height * .6;
   if (r.top < cr.top + m) cu.scrollBy({ top: r.top - cr.top - m, behavior: 'smooth' }); else if (r.bottom > cr.bottom - m) cu.scrollBy({ top: r.bottom - cr.bottom + m, behavior: 'smooth' });
 }
+function crearOverlay(titulo, ayuda, clase) {                 // pantalla completa con rejilla (la usan "Mis amigos" y "Mis apps")
+  const el = galeriaEl = document.createElement('div'); el.id = 'galeria';
+  el.innerHTML = '<header><h2></h2><span class="ayuda"></span></header><div class="cuerpo"><div class="rejilla"></div></div>';
+  el.querySelector('h2').textContent = titulo; el.querySelector('.ayuda').textContent = ayuda;
+  const rej = el.querySelector('.rejilla'); if (clase) rej.classList.add(clase);
+  document.body.append(el); document.body.classList.add('galeria'); return rej;
+}
 function abrirGaleria() {
   if (!SP.ok || galeriaEl) return;
   const grupos = new Map();
   for (const f of SP.CAT.luchadores) { if (!grupos.has(f.grupo)) grupos.set(f.grupo, []); grupos.get(f.grupo).push(f); }
   const orden = ['Héroes', 'Sega', 'Nintendo', 'Pokémon', 'Videojuegos', 'Minecraft', 'Luchadores', 'Dibujos', 'Sprunki', 'Familia'];
   const nombres = { Familia: 'Mi familia', Sprunki: 'Los Sprunkis', Sega: 'Sonic y sus amigos', Nintendo: 'Mario y sus amigos', 'Héroes': 'Superhéroes' };
-  const el = galeriaEl = document.createElement('div'); el.id = 'galeria';
-  el.innerHTML = `<header><h2>¡Estos son mis amigos, ${NOMBRE}!</h2><span class="ayuda">Mueve con las flechas · OK para saludar · Atrás para volver</span></header><div class="cuerpo"><div class="rejilla"></div></div>`;
-  const rej = el.querySelector('.rejilla');
+  const rej = crearOverlay(`¡Estos son mis amigos, ${NOMBRE}!`, 'Mueve con las flechas · OK para saludar · Atrás para volver', '');
   const celda = (cv, nom) => { const d = document.createElement('div'); d.className = 'ch'; d.dataset.nom = nom || ''; d.append(cv); const s = document.createElement('span'); s.textContent = nom || ''; d.append(s); rej.append(d); return d; };
   for (const g of [...orden, ...[...grupos.keys()].filter(k => !orden.includes(k))]) {
     const L = grupos.get(g); if (!L) continue;
@@ -601,16 +619,31 @@ function abrirGaleria() {
   }
   const h = document.createElement('h3'); h.textContent = 'Comida'; rej.append(h);
   for (const k of SP.CAT.comida) celda(retratoSprite(k, true, 96, 96), '');
-  document.body.append(el); document.body.classList.add('galeria');
-  enfocarGal(celdasGaleria()[0]); el.querySelector('.cuerpo').scrollTop = 0;
+  enfocarGal(celdasGaleria()[0]); galeriaEl.querySelector('.cuerpo').scrollTop = 0;
 }
 function cerrarGaleria() { if (!galeriaEl) return; galeriaEl.remove(); galeriaEl = null; galFoco = null; document.body.classList.remove('galeria'); enfocar(focoEl); }
 function teclaGaleria(e) {
   if (FLECHAS[e.key]) { e.preventDefault(); const v = vecino(celdasGaleria(), galFoco, e.key); if (v) enfocarGal(v); }
   else if (e.key === 'Enter' || e.key === ' ' || e.keyCode === 13 || e.keyCode === 23) {
-    e.preventDefault(); const c = galFoco; if (!c) return; click(); c.classList.remove('salta'); void c.offsetWidth; c.classList.add('salta');
+    e.preventDefault(); const c = galFoco; if (!c) return; click();
+    if (c.dataset.pkg) { try { window.AlictApps.abrir(c.dataset.pkg); } catch (x) {} return; }
+    c.classList.remove('salta'); void c.offsetWidth; c.classList.add('salta');
     if (c.dataset.nom) decir(c.dataset.nom);
   } else if (e.key === 'Escape' || e.key === 'Backspace' || e.key === 'GoBack') { e.preventDefault(); cerrarGaleria(); }
+}
+/* ---- Mis apps (las apps instaladas en la tele; solo dentro de la app de Android) ---- */
+function abrirApps() {
+  if (galeriaEl || !window.AlictApps) return;
+  let lista = []; try { lista = JSON.parse(window.AlictApps.lista()); } catch (e) {}
+  const rej = crearOverlay('Mis apps', 'Flechas para elegir · OK para abrir · Atrás para volver', 'apps');
+  if (!lista.length) { const h = document.createElement('h3'); h.textContent = 'No encontré apps'; rej.append(h); return; }
+  lista.forEach((a, i) => {
+    const d = document.createElement('div'); d.className = 'ch ap'; d.dataset.pkg = a.p; d.dataset.nom = '';
+    const im = document.createElement('img'); im.alt = ''; d.append(im);
+    const t = document.createElement('span'); t.textContent = a.n; d.append(t); rej.append(d);
+    setTimeout(() => { try { if (galeriaEl) im.src = window.AlictApps.icono(a.p); } catch (e) {} }, 25 * i);   // los dibujos se cargan de a poco
+  });
+  enfocarGal(celdasGaleria()[0]);
 }
 window.__tvAtras = () => { if (galeriaEl) { cerrarGaleria(); return true; } return false; };   // la app llama esto con el botón Atrás
 
