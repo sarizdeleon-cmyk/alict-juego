@@ -1,0 +1,35 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'mx.alict.juegos'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'mx.alict.juegos.tv'
+        minSdk 21
+        targetSdk 34
+        // cada build en GitHub sube el número, para poder instalar encima de la versión anterior
+        versionCode (project.findProperty('vCode') ?: '1').toInteger()
+        versionName (project.findProperty('vName') ?: '1.0')
+    }
+
+    // llave fija: así cada versión nueva se instala encima de la anterior sin borrar el avance de Alict
+    signingConfigs {
+        alict {
+            storeFile file('../alict.keystore')
+            storePassword 'alictalict'
+            keyAlias 'alict'
+            keyPassword 'alictalict'
+        }
+    }
+    buildTypes {
+        debug { signingConfig signingConfigs.alict }
+        release { signingConfig signingConfigs.alict; minifyEnabled false }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
