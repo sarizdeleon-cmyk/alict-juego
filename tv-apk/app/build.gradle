@@ -11,8 +11,8 @@ android {
         minSdk 21
         targetSdk 34
         // cada build en GitHub sube el número, para poder instalar encima de la versión anterior
-        versionCode (project.findProperty('vCode') ?: '1').toInteger()
-        versionName (project.findProperty('vName') ?: '1.0')
+        versionCode Integer.parseInt((project.findProperty('vCode') ?: '1').toString())
+        versionName (project.findProperty('vName') ?: '1.0').toString()
     }
 
     // llave fija: así cada versión nueva se instala encima de la anterior sin borrar el avance de Alict
