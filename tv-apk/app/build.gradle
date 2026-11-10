@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
 }
 
+def vCodeNum = Integer.parseInt((project.findProperty('vCode') ?: '1').toString())
+def vNameStr = (project.findProperty('vName') ?: '1.0').toString()
+
 android {
     namespace 'mx.alict.juegos'
     compileSdk 34
@@ -11,8 +14,8 @@ android {
         minSdk 21
         targetSdk 34
         // cada build en GitHub sube el número, para poder instalar encima de la versión anterior
-        versionCode Integer.parseInt((project.findProperty('vCode') ?: '1').toString())
-        versionName (project.findProperty('vName') ?: '1.0').toString()
+        versionCode vCodeNum
+        versionName vNameStr
     }
 
     // llave fija: así cada versión nueva se instala encima de la anterior sin borrar el avance de Alict
