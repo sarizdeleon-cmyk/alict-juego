@@ -41,7 +41,8 @@ public class MainActivity extends Activity {
     static final String HOST = "juegos.alict";
     static final String ORIGEN = "https://" + HOST;
     // se inserta en cada página: avisa que es la tele y apaga el service worker (aquí no hace falta)
-    static final String INYECTAR = "<script>window.__TV=true;try{Object.defineProperty(navigator,'serviceWorker',{get:function(){return undefined}})}catch(e){}</script>";
+    static final String INYECTAR = "<script>window.__TV=true;try{delete Navigator.prototype.serviceWorker}catch(e){}"
+            + "try{if('serviceWorker' in navigator)Object.defineProperty(navigator,'serviceWorker',{get:function(){return undefined}})}catch(e){}</script>";
 
     private WebView web;
     private CursorView cursor;
@@ -125,12 +126,14 @@ public class MainActivity extends Activity {
             String tipo = tipoDe(p);
             if (tipo.equals("text/html")) {
                 String t = new String(leer(in), "UTF-8");
-                int i = t.indexOf("<head>");
-                t = i >= 0 ? t.substring(0, i + 6) + INYECTAR + t.substring(i + 6) : INYECTAR + t;
+                int i = t.indexOf("<head");
+                int j = i >= 0 ? t.indexOf('>', i) : -1;
+                if (j >= 0) t = t.substring(0, j + 1) + INYECTAR + t.substring(j + 1);
+                else t = t + INYECTAR;                          // sin <head>: al final, para no romper el doctype
                 return respuesta(tipo, new ByteArrayInputStream(t.getBytes("UTF-8")));
             }
             return respuesta(tipo, in);
-        } catch (IOException e) {
+        } catch (IOException | RuntimeException e) {
             return respuesta404();
         }
     }
