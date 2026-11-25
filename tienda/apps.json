@@ -224,6 +224,66 @@
       "actualizado": "2026-11-25",
       "sha256": "be4175128efb1a3da552228669259ac79efbe39e66395c2469d45899df0cb873",
       "bytes": 5442919
+    },
+    {
+      "id": "cuantas-cajas",
+      "nombre": "Cuántas Cajas",
+      "categoria": "Herramientas",
+      "lema": "Calcula cuántas cajas caben en otra caja, una tarima o un tráiler.",
+      "color": "#ffc21a",
+      "fondo": "#fff3cc",
+      "fondo_osc": "#2b2410",
+      "oscuro": false,
+      "texto_boton": "#1b1500",
+      "icono": "img/cuantas-cajas/icono.webp",
+      "apk": "apk/Cuantas-Cajas.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/cuantas-cajas/1.webp",
+          "alt": "Resultado de 60 cajas en una tarima, con las medidas de la caja y de la tarima"
+        },
+        {
+          "src": "img/cuantas-cajas/2.webp",
+          "alt": "Dibujo en 3D de la tarima con cajas de pie y acostadas"
+        },
+        {
+          "src": "img/cuantas-cajas/3.webp",
+          "alt": "Vista desde arriba de cada capa de cajas"
+        },
+        {
+          "src": "img/cuantas-cajas/4.webp",
+          "alt": "Cajas en un tráiler de 53 pies y cuántos tráileres hacen falta para 10,000 cajas"
+        },
+        {
+          "src": "img/cuantas-cajas/5.webp",
+          "alt": "Más opciones: cómo acomodar, espacio entre cajas, margen y peso"
+        }
+      ],
+      "descripcion": [
+        "Escribe las medidas de tu caja y del espacio donde la vas a meter (otra caja, una tarima, un contenedor o un tráiler) y la app te dice cuántas caben y cómo acomodarlas.",
+        "El resultado cambia mientras escribes y lo ves en 3D o capa por capa. Si escribes cuántas cajas tienes, te dice cuántas tarimas o tráileres ocupas. Funciona sin internet."
+      ],
+      "funciones": [
+        "Medidas en centímetros, pulgadas o metros",
+        "Tarimas estándar, europea y americana; contenedores de 20 y 40 pies y tráileres",
+        "Cajas de pie, acostadas o sin girar",
+        "Espacio entre cajas, margen, alto de la tarima y límite de peso",
+        "Comparte el resultado por WhatsApp u otras apps"
+      ],
+      "permisos": [
+        [
+          "Ninguno",
+          "No pide permisos ni usa internet. Lo que escribes se guarda solo en tu teléfono."
+        ]
+      ],
+      "notas": [
+        "Es un estimado: no revisa si la carga es estable ni cuánto peso aguantan las cajas de abajo. Confirma con una prueba real antes de cargar.",
+        "Las medidas de contenedores y tráileres son aproximadas; cámbialas si conoces las exactas."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "3517381bc88666afa73d439c699f0ce3edd609014a9ffe1dd4d70009bbc934bb",
+      "bytes": 70072
     }
   ]
 }
