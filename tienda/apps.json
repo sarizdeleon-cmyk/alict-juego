@@ -1,4 +1,8 @@
 {
+  "calificaciones": {
+    "url": "https://ozbwnocqreyacfbpfklk.supabase.co",
+    "key": "sb_publishable_wbcWPnnUWtyE88lG_eTpNA_asO71zrk"
+  },
   "apps": [
     {
       "id": "zonas-a-evitar",
