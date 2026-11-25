@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>🎂 Un mensaje para ti</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:24px 18px;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#4a2c2a;background:linear-gradient(160deg,#ffd6e0,#ffe9c9 55%,#fff6ea)}
+main{width:100%;max-width:420px;text-align:center}
+.tarjeta{background:#fff;border-radius:28px;padding:30px 22px 28px;box-shadow:0 14px 40px rgba(229,82,122,.25)}
+.torta{font-size:76px;line-height:1;animation:rebota 1.6s ease-in-out infinite}
+@keyframes rebota{50%{transform:translateY(-8px) rotate(-3deg)}}
+h1{font-size:28px;margin:12px 0 6px;line-height:1.15;overflow-wrap:anywhere}
+p{margin:0 0 20px;color:#8a6f69;font-size:18px}
+button#play{width:150px;height:150px;border-radius:50%;border:0;background:#ff6f91;color:#fff;font-size:64px;box-shadow:0 8px 0 #e5527a,0 14px 24px rgba(229,82,122,.4);cursor:pointer}
+button#play:active{transform:translateY(5px);box-shadow:0 3px 0 #e5527a}
+button#play.suena{animation:late 1.1s ease-in-out infinite}
+@keyframes late{50%{transform:scale(1.06)}}
+.estado{margin:22px 0 0;font-size:17px;min-height:24px;color:#8a6f69}
+.err{color:#d6334f;font-weight:700}
+a{color:#e5527a;font-weight:700}
+</style></head>
+<body>
+<main><div class="tarjeta" id="t"><noscript>Activa JavaScript para escuchar el mensaje.</noscript></div></main>
+<script>
+(function(){
+  var HOSTS = ['files.catbox.moe', '0x0.st'];
+  var q = new URLSearchParams(location.search);
+  var nombre = (q.get('n') || '').slice(0, 60);
+  var u = null;
+  try { u = new URL(q.get('a')); } catch (e) {}
+  var t = document.getElementById('t');
+  function el(tag, props, txt) { var e = document.createElement(tag); if (props) for (var k in props) e[k] = props[k]; if (txt != null) e.textContent = txt; return e; }
+
+  if (!u || u.protocol !== 'https:' || HOSTS.indexOf(u.hostname) < 0) {
+    t.appendChild(el('div', { className: 'torta' }, '🎂'));
+    t.appendChild(el('h1', null, 'Este enlace no es válido'));
+    t.appendChild(el('p', null, 'Pídele a quien te lo dio que genere el QR otra vez.'));
+    return;
+  }
+
+  t.appendChild(el('div', { className: 'torta' }, '🎂'));
+  t.appendChild(el('h1', null, nombre ? '¡Feliz cumpleaños, ' + nombre + '!' : '¡Feliz cumpleaños!'));
+  t.appendChild(el('p', null, 'Tienes un mensaje de audio. Toca el botón para escucharlo.'));
+  var btn = el('button', { id: 'play', type: 'button' }, '▶');
+  btn.setAttribute('aria-label', 'Reproducir mensaje');
+  var est = el('div', { className: 'estado' }, '');
+  t.appendChild(btn); t.appendChild(est);
+
+  var audio = new Audio(); audio.preload = 'auto'; audio.src = u.href;
+  function fallo() {
+    btn.className = ''; btn.textContent = '▶'; est.className = 'estado err';
+    est.textContent = 'No se pudo reproducir aquí. ';
+    est.appendChild(el('a', { href: u.href }, 'Abrir el audio'));
+  }
+  btn.addEventListener('click', function () {
+    if (audio.paused) {
+      est.className = 'estado'; est.textContent = 'Cargando…';
+      var pr = audio.play(); if (pr && pr.catch) pr.catch(fallo);
+    } else { audio.pause(); }
+  });
+  audio.addEventListener('playing', function () { btn.className = 'suena'; btn.textContent = '⏸'; est.textContent = 'Reproduciendo…'; });
+  audio.addEventListener('pause', function () { if (!audio.ended) { btn.className = ''; btn.textContent = '▶'; est.textContent = ''; } });
+  audio.addEventListener('ended', function () { btn.className = ''; btn.textContent = '↻'; est.textContent = 'Toca para escucharlo otra vez'; audio.currentTime = 0; });
+  audio.addEventListener('error', fallo);
+})();
+</script>
+</body></html>

@@ -3,7 +3,7 @@
 // este solo cuida el menú y deja pasar todo lo que sea de un juego.
 // Si cambias el menú, sube los archivos nuevos: se actualiza solo la siguiente vez que se abra con internet.
 const CACHE = 'launcher-v5';
-const JUEGOS = ['/zombis/', '/didacticos/', '/sprunkialict/', '/tragones/', '/corre/', '/pelea/', '/sonicspidey/'];
+const JUEGOS = ['/zombis/', '/didacticos/', '/sprunkialict/', '/tragones/', '/corre/', '/pelea/', '/sonicspidey/', '/escucha/', '/descargas/'];
 const ARCHIVOS = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
