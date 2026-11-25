@@ -284,6 +284,71 @@
       "actualizado": "2026-11-25",
       "sha256": "3517381bc88666afa73d439c699f0ce3edd609014a9ffe1dd4d70009bbc934bb",
       "bytes": 70072
+    },
+    {
+      "id": "descargador-de-videos",
+      "nombre": "Descargador de videos",
+      "categoria": "Videos y audio",
+      "lema": "Pega el link de un video y guárdalo en tu teléfono, en video o solo el audio.",
+      "color": "#2563eb",
+      "fondo": "#e8efff",
+      "fondo_osc": "#111a33",
+      "oscuro": false,
+      "icono": "img/descargador-de-videos/icono.webp",
+      "apk": "apk/Descargador-de-videos.apk",
+      "android": "10",
+      "capturas": [
+        {
+          "src": "img/descargador-de-videos/1.webp",
+          "alt": "Pantalla principal: link pegado, botones Video y Solo audio, medidor de velocidad y lista de descargas"
+        },
+        {
+          "src": "img/descargador-de-videos/2.webp",
+          "alt": "Lista de descargas: una con error, dos terminadas, una en cola y una en curso con su porcentaje"
+        },
+        {
+          "src": "img/descargador-de-videos/3.webp",
+          "alt": "Medidor de velocidad de internet con bajada, subida y ping"
+        },
+        {
+          "src": "img/descargador-de-videos/4.webp",
+          "alt": "Modo oscuro con descarga de solo audio en curso"
+        }
+      ],
+      "descripcion": [
+        "Pega el link de un video de internet (YouTube, Facebook, TikTok, Instagram y muchos otros sitios), elige si lo quieres en video o solo el audio y la app lo guarda en la carpeta Descargas de tu teléfono.",
+        "Puedes pegar varios links a la vez y ver el avance de cada descarga con su velocidad. También trae un medidor para saber qué tan rápido va tu internet."
+      ],
+      "funciones": [
+        "Descarga en video (MP4) o solo el audio (MP3)",
+        "Varios links a la vez, con porcentaje, velocidad y tiempo restante",
+        "Botón Pegar para traer el link que copiaste",
+        "Medidor de velocidad de internet: bajada, subida y ping",
+        "Avisa en las notificaciones y sigue descargando con la pantalla apagada",
+        "Se actualiza sola para seguir funcionando cuando los sitios cambian"
+      ],
+      "permisos": [
+        [
+          "Internet",
+          "Para bajar los videos y medir la velocidad."
+        ],
+        [
+          "Notificaciones",
+          "Para avisarte del avance y cuando termina una descarga."
+        ],
+        [
+          "Servicio en primer plano y mantener activo",
+          "Para que la descarga no se corte si apagas la pantalla."
+        ]
+      ],
+      "notas": [
+        "Úsala solo con videos que tengas derecho a descargar (tuyos, con permiso o de uso libre) y respeta las reglas de cada sitio.",
+        "Primera versión. Necesita internet para funcionar y un teléfono de 64 bits (casi todos los de los últimos años). Si algún sitio no funciona, mándame el link por WhatsApp para corregirlo.",
+        "Es una app grande (unos 57 MB) porque trae adentro lo necesario para descargar y convertir videos."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "e8a9935a5f34d7a5bccef3b1ea16cd89485a416afc7f710ba33f19885a454c07",
+      "bytes": 60040626
     }
   ]
 }
