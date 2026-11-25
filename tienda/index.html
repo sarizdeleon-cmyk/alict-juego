@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tienda Alict · Apps gratis para Android</title>
+<meta name="description" content="Apps gratis para Android: descarga directa, sin cuentas, sin anuncios y sin pagar.">
+<meta name="theme-color" content="#c2185b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='40' fill='%23c2185b'/%3E%3Crect x='16' width='16' height='40' fill='%23fff'/%3E%3Crect x='48' width='16' height='40' fill='%23fff'/%3E%3Ccircle cx='8' cy='40' r='8' fill='%23c2185b'/%3E%3Ccircle cx='24' cy='40' r='8' fill='%23fff'/%3E%3Ccircle cx='40' cy='40' r='8' fill='%23c2185b'/%3E%3Ccircle cx='56' cy='40' r='8' fill='%23fff'/%3E%3C/svg%3E">
+<style>
+:root{
+  --tinta:#1c1b3a; --lienzo:#f3f1fa; --blanco:#fff;
+  --t:#1c1b3a; --s:#4b4a63; --linea:rgba(28,27,58,.16);
+  --titulo:"Avenir Next","Nunito","Trebuchet MS","Segoe UI",Roboto,system-ui,sans-serif;
+  --texto:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --ancho:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--lienzo);color:var(--t);font:400 1.0625rem/1.55 var(--texto)}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid #0a6cff;outline-offset:3px;border-radius:6px}
+.in{width:min(100% - 40px,var(--ancho));margin-inline:auto}
+
+/* ---------- toldo y letrero ---------- */
+.toldo{filter:drop-shadow(0 4px 0 rgba(28,27,58,.14))}
+.toldo-cuerpo{height:58px;background:#c2185b}
+.toldo-feston{height:20px;background-repeat:repeat-x}
+.letrero{padding:34px 0 8px}
+h1{margin:0;font:900 clamp(2.9rem,9.5vw,5.2rem)/.95 var(--titulo);letter-spacing:-.03em}
+.lead{max-width:34rem;margin:16px 0 0;font-size:1.2rem;color:var(--s)}
+.indice{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0;padding:0;list-style:none}
+.indice a{display:flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:999px;background:var(--blanco);color:var(--tinta);text-decoration:none;font-weight:700;box-shadow:0 0 0 2px var(--linea)}
+.indice a:hover{box-shadow:0 0 0 3px var(--tinta)}
+.indice img{width:40px;height:40px;border-radius:12px}
+
+/* ---------- puestos (una banda por app) ---------- */
+#apps{margin-top:34px}
+.puesto{--t:#1c1b3a;--s:#4b4a63;--linea:rgba(28,27,58,.2);background:var(--fondo);color:var(--t);padding:48px 0 52px;scroll-margin-top:0}
+.puesto.oscuro{--t:#ffffff;--s:#cfcde6;--linea:rgba(255,255,255,.28)}
+.puesto-in{display:grid;gap:26px 48px;grid-template-columns:minmax(0,1fr)}
+.ficha{display:grid;gap:6px;justify-items:start}
+.icono{width:92px;height:92px;border-radius:24px;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 6px 0 3px var(--acento)}
+.puesto h2{margin:22px 0 0;font:900 clamp(2rem,6vw,3rem)/1 var(--titulo);letter-spacing:-.02em}
+.categoria{margin:2px 0 0;color:var(--s);font-weight:600}
+.lema{margin:10px 0 0;font-size:1.25rem;line-height:1.35;max-width:26rem}
+.descarga{display:inline-flex;align-items:center;gap:12px;margin-top:22px;min-height:58px;padding:0 30px;border-radius:18px;background:var(--acento);color:var(--sobre-acento,#fff);font:800 1.2rem/1 var(--titulo);text-decoration:none;box-shadow:0 5px 0 rgba(0,0,0,.28)}
+.descarga:hover{filter:brightness(1.07)}
+.descarga:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.28)}
+.descarga svg{width:22px;height:22px;flex:none}
+.hechos{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:24px 0 0;padding:14px 0 0;border-top:2px solid var(--linea);width:100%;max-width:26rem}
+.hechos dt{color:var(--s)}
+.hechos dd{margin:0;font-weight:800}
+
+.galeria{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 14px;margin:0 -20px;--alto:400px;-webkit-overflow-scrolling:touch}
+.cap{flex:none;padding:0;border:0;background:none;scroll-snap-align:start;cursor:zoom-in;border-radius:24px}
+.cap img{height:var(--alto);width:auto;border-radius:24px;box-shadow:0 0 0 3px var(--linea),0 10px 24px rgba(0,0,0,.18)}
+
+.texto{max-width:34rem}
+.texto p{margin:0 0 12px}
+details{margin-top:18px;border-top:2px solid var(--linea)}
+summary{list-style:none;cursor:pointer;padding:14px 0;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";width:12px;height:12px;border-right:3px solid currentColor;border-bottom:3px solid currentColor;transform:rotate(45deg);transition:transform .15s;margin:-4px 4px 0 0}
+details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+details h3{margin:18px 0 6px;font-size:1.02rem}
+details ul{margin:0;padding-left:1.2rem}
+details li{margin:4px 0}
+.permisos{margin:0}
+.permisos dt{font-weight:700;margin-top:8px}
+.permisos dd{margin:0;color:var(--s)}
+.sha{display:block;margin-top:6px;font:.8rem/1.4 ui-monospace,Menlo,Consolas,monospace;word-break:break-all;color:var(--s);-webkit-user-select:all;user-select:all}
+
+@media (min-width:900px){
+  .puesto{padding:64px 0 68px}
+  .puesto-in{grid-template-columns:minmax(0,26rem) minmax(0,1fr);grid-template-areas:"ficha galeria" "texto galeria";align-items:start}
+  .ficha{grid-area:ficha}.texto{grid-area:texto}
+  .galeria{grid-area:galeria;--alto:540px;margin-right:calc((100vw - min(100vw - 40px,var(--ancho)))/-2);padding-right:40px;align-self:start}
+}
+
+/* ---------- instalar ---------- */
+.instalar{padding:60px 0 20px}
+.instalar h2{margin:0 0 6px;font:900 clamp(2rem,6vw,2.8rem)/1 var(--titulo);letter-spacing:-.02em}
+.pasos{display:grid;gap:18px;margin:28px 0 0;padding:0;list-style:none;counter-reset:p}
+.pasos li{counter-increment:p;display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:start}
+.pasos li::before{content:counter(p);display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#c2185b;color:#fff;font:900 1.5rem/1 var(--titulo)}
+.pasos b{display:block;font-size:1.1rem}
+.pasos span{color:var(--s)}
+.aviso{margin:30px 0 0;padding:16px 18px;border-radius:16px;background:#fff;box-shadow:0 0 0 2px var(--linea);max-width:46rem}
+.aviso p{margin:0 0 8px}.aviso p:last-child{margin:0}
+@media (min-width:900px){.pasos{grid-template-columns:repeat(4,1fr);gap:28px}.pasos li{grid-template-columns:1fr}}
+
+footer{padding:36px 0 56px;color:var(--s)}
+footer p{margin:0;max-width:40rem}
+
+#visor{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh;overflow:visible}
+#visor::backdrop{background:rgba(10,9,30,.82)}
+#visor img{max-height:84vh;max-width:94vw;border-radius:20px;margin:auto}
+#visor button{display:block;margin:14px auto 0;padding:12px 26px;border:0;border-radius:14px;background:#fff;color:var(--tinta);font:800 1rem var(--titulo);cursor:pointer}
+.error{padding:30px 0;font-weight:700}
+
+@media (prefers-color-scheme:dark){
+  :root{--lienzo:#12112a;--t:#f1f0ff;--s:#c3c1dd;--linea:rgba(255,255,255,.22)}
+  .puesto{--t:#f4f3ff;--s:#cfcde6;--linea:rgba(255,255,255,.26);background:var(--fondo-osc)}
+  .indice a{background:#23224a;color:#fff}
+  .aviso{background:#23224a}
+  .icono{box-shadow:0 0 0 3px rgba(255,255,255,.25),0 6px 0 3px var(--acento)}
+  .toldo{filter:drop-shadow(0 4px 0 rgba(0,0,0,.35))}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="toldo" aria-hidden="true"><div class="toldo-cuerpo" id="toldoCuerpo"></div><div class="toldo-feston" id="toldoFeston"></div></div>
+  <div class="in letrero">
+    <h1>Tienda Alict</h1>
+    <p class="lead">Apps gratis para Android, sin cuentas, sin anuncios y sin pagar. Elige una, mira cómo se ve y descárgala.</p>
+    <ul class="indice" id="indice"></ul>
+  </div>
+</header>
+
+<main id="apps">
+  <div class="in"><p class="error" id="cargando">Cargando las apps…</p></div>
+  <noscript><div class="in"><p class="error">Para ver las apps necesitas activar JavaScript en tu navegador.</p></div></noscript>
+</main>
+
+<section class="instalar" id="instalar">
+  <div class="in">
+    <h2>Cómo instalar una app</h2>
+    <ol class="pasos">
+      <li><div><b>Descarga</b><span>Toca el botón Descargar y espera a que termine.</span></div></li>
+      <li><div><b>Ábrela</b><span>Toca el aviso de descarga o busca el archivo en Descargas de tu teléfono.</span></div></li>
+      <li><div><b>Permite la instalación</b><span>Si Android lo pide, activa instalar apps desde tu navegador. Solo se hace una vez.</span></div></li>
+      <li><div><b>Instala y abre</b><span>Toca Instalar y luego Abrir. Para actualizar, instala la versión nueva encima: tus datos se conservan.</span></div></li>
+    </ol>
+    <div class="aviso">
+      <p><b>Si Android muestra un aviso de seguridad.</b> Es normal: estas apps no vienen de Play Store. Si confías en quien te compartió este enlace, elige Instalar de todos modos.</p>
+      <p>Cada app dice en sus detalles qué permisos usa y dónde guarda tus datos.</p>
+    </div>
+  </div>
+</section>
+
+<footer><div class="in"><p>Apps gratuitas hechas con Claude. Funcionan en teléfonos y tabletas Android; las de TV también en Android TV y cajas con control remoto.</p></div></footer>
+
+<dialog id="visor" aria-label="Captura ampliada"><img alt="" id="visorImg"><button type="button" id="visorCerrar">Cerrar</button></dialog>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s);};
+function h(tag,props){
+  var e=document.createElement(tag);
+  if(props)Object.keys(props).forEach(function(k){
+    var v=props[k];
+    if(v==null||v===false)return;
+    if(k==='class')e.className=v;else if(k==='text')e.textContent=v;
+    else if(k.slice(0,2)==='on')e.addEventListener(k.slice(2),v);else e.setAttribute(k,v);
+  });
+  for(var i=2;i<arguments.length;i++){var c=arguments[i];if(c==null||c===false)continue;e.append(c);}
+  return e;
+}
+function fmtTam(b){return b>=1048576?(b/1048576).toFixed(1).replace('.',',')+' MB':Math.max(1,Math.round(b/1024))+' KB';}
+function fmtFecha(iso){try{return new Date(iso+'T12:00:00').toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'});}catch(e){return iso;}}
+function androidTxt(v){return 'Android '+v+' o más nuevo';}
+
+/* El toldo se arma con los colores de las apps */
+function toldo(colores){
+  var w=40,r=20,lista=[];
+  colores.forEach(function(c){lista.push(c,'#ffffff');});
+  var n=lista.length,per=n*w,stops=lista.map(function(c,i){return c+' '+(i*w)+'px '+((i+1)*w)+'px';}).join(',');
+  var cuerpo=$('#toldoCuerpo'),feston=$('#toldoFeston');
+  cuerpo.style.background='linear-gradient(90deg,'+stops+')';cuerpo.style.backgroundSize=per+'px 100%';
+  var capas=lista.map(function(c,i){return 'radial-gradient(circle at '+(i*w+r)+'px 0,'+c+' '+(r-.5)+'px,transparent '+(r+.5)+'px)';}).join(',');
+  feston.style.backgroundImage=capas;feston.style.backgroundSize=per+'px '+r+'px';
+}
+
+var visor=$('#visor');
+function ampliar(src,alt){$('#visorImg').src=src;$('#visorImg').alt=alt||'';if(visor.showModal)visor.showModal();}
+$('#visorCerrar').addEventListener('click',function(){visor.close();});
+visor.addEventListener('click',function(e){if(e.target===visor)visor.close();});
+
+var FLECHA='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13M6 11l6 6 6-6M5 21h14"/></svg>';
+
+function puesto(a){
+  var estilos='--acento:'+a.color+';--fondo:'+a.fondo+';--fondo-osc:'+(a.fondo_osc||a.fondo)+';'+(a.texto_boton?'--sobre-acento:'+a.texto_boton+';':'');
+  var sec=h('section',{class:'puesto'+(a.oscuro?' oscuro':''),id:a.id,style:estilos,'aria-labelledby':a.id+'-t'});
+  var btn=h('a',{class:'descarga',href:a.apk,download:''});
+  btn.innerHTML=FLECHA;btn.append('Descargar');
+  btn.setAttribute('aria-label','Descargar '+a.nombre+' ('+fmtTam(a.bytes)+')');
+  var ficha=h('div',{class:'ficha'},
+    h('img',{class:'icono',src:a.icono,alt:'',width:'92',height:'92'}),
+    h('h2',{id:a.id+'-t',text:a.nombre}),
+    h('p',{class:'categoria',text:a.categoria}),
+    h('p',{class:'lema',text:a.lema}),
+    btn,
+    h('dl',{class:'hechos'},
+      h('dt',{text:'Tamaño'}),h('dd',{text:fmtTam(a.bytes)}),
+      h('dt',{text:'Requiere'}),h('dd',{text:androidTxt(a.android)}),
+      h('dt',{text:'Actualizada'}),h('dd',{text:fmtFecha(a.actualizado)})));
+  var gal=h('div',{class:'galeria',role:'group','aria-label':'Capturas de '+a.nombre,tabindex:'0'});
+  (a.capturas||[]).forEach(function(c){
+    gal.append(h('button',{class:'cap',type:'button','aria-label':'Ampliar captura: '+c.alt,onclick:function(){ampliar(c.src,c.alt);}},
+      h('img',{src:c.src,alt:c.alt,loading:'lazy'})));
+  });
+  var texto=h('div',{class:'texto'});
+  (a.descripcion||[]).forEach(function(p){texto.append(h('p',{text:p}));});
+  var det=h('details',null,h('summary',{text:'Qué hace, permisos y notas'}));
+  if(a.funciones&&a.funciones.length){det.append(h('h3',{text:'Qué puede hacer'}));var ul=h('ul');a.funciones.forEach(function(f){ul.append(h('li',{text:f}));});det.append(ul);}
+  if(a.permisos&&a.permisos.length){det.append(h('h3',{text:'Permisos que pide'}));var dl=h('dl',{class:'permisos'});a.permisos.forEach(function(p){dl.append(h('dt',{text:p[0]}),h('dd',{text:p[1]}));});det.append(dl);}
+  if(a.notas&&a.notas.length){det.append(h('h3',{text:'Ten en cuenta'}));var un=h('ul');a.notas.forEach(function(n){un.append(h('li',{text:n}));});det.append(un);}
+  if(a.sha256){det.append(h('h3',{text:'Verificar el archivo (SHA-256)'}),h('code',{class:'sha',text:a.sha256}));}
+  texto.append(det);
+  sec.append(h('div',{class:'in puesto-in'},ficha,gal,texto));
+  return sec;
+}
+
+function render(datos){
+  var apps=datos.apps||[],main=$('#apps'),idx=$('#indice');
+  main.textContent='';idx.textContent='';
+  toldo(apps.map(function(a){return a.color;}).concat(apps.length?[]:['#c2185b']));
+  apps.forEach(function(a){
+    idx.append(h('li',null,h('a',{href:'#'+a.id},h('img',{src:a.icono,alt:'',width:'40',height:'40'}),a.nombre)));
+    main.append(puesto(a));
+  });
+  if(location.hash){var t=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)setTimeout(function(){var de=document.documentElement;de.style.scrollBehavior='auto';t.scrollIntoView();de.style.scrollBehavior='';},60);}
+}
+
+fetch('apps.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('http');return r.json();}).then(render).catch(function(){
+  toldo(['#c2185b']);
+  var c=$('#cargando');if(c)c.textContent='No pudimos cargar las apps. Revisa tu conexión y recarga la página.';
+});
+})();
+</script>
+</body>
+</html>

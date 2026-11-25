@@ -1,0 +1,229 @@
+{
+  "apps": [
+    {
+      "id": "zonas-a-evitar",
+      "nombre": "Zonas a Evitar",
+      "categoria": "Seguridad y mapas",
+      "lema": "Un mapa hecho entre todos con las zonas que conviene evitar.",
+      "color": "#b3261e",
+      "fondo": "#fdeceb",
+      "fondo_osc": "#2b1716",
+      "oscuro": false,
+      "icono": "img/zonas-a-evitar/icono.webp",
+      "apk": "apk/Zonas-a-Evitar.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/zonas-a-evitar/1.webp",
+          "alt": "Mapa con zonas marcadas en círculos de colores y los filtros Ahora, Todas, Otra hora y Tipos"
+        },
+        {
+          "src": "img/zonas-a-evitar/2.webp",
+          "alt": "Detalle de una zona de robos: horario, comentario y botones para confirmar, descartar o reportar"
+        },
+        {
+          "src": "img/zonas-a-evitar/3.webp",
+          "alt": "Pantalla para marcar una zona nueva con el pin en el mapa y el control del radio"
+        },
+        {
+          "src": "img/zonas-a-evitar/4.webp",
+          "alt": "Formulario con el tipo de zona, días y horas, y un comentario"
+        }
+      ],
+      "descripcion": [
+        "Marca en el mapa los lugares que prefieres evitar, siempre o solo a ciertas horas y días: de noche, los viernes y sábados, en hora pico. También ves las zonas que marcaron otras personas y puedes filtrar por lo que está activo ahora o a la hora que elijas.",
+        "Si entras a una zona activa, la app te avisa mientras la tienes abierta."
+      ],
+      "funciones": [
+        "Zonas por tipo: robos, acoso, poca luz, tránsito peligroso, riñas y otros",
+        "Horario: siempre, de día, de noche, o los días y horas que elijas",
+        "Votos para confirmar que sigue pasando o que ya no aplica, y reportes de zonas falsas",
+        "No pide cuenta ni registro"
+      ],
+      "permisos": [
+        [
+          "Ubicación",
+          "Centra el mapa donde estás y te avisa si entras a una zona. Tu ubicación no se envía a ningún lado."
+        ],
+        [
+          "Internet",
+          "Carga el mapa de OpenStreetMap y comparte las zonas con los demás."
+        ]
+      ],
+      "notas": [
+        "Las zonas son opiniones de los usuarios, no información oficial ni verificada. En una emergencia llama al 911.",
+        "Las zonas que marcas las ven todos los usuarios. No escribas nombres, teléfonos ni enlaces."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "62b91a45c780f59bad19191839b81e42043f10a0bd7809a20a3d1a3a60551a2c",
+      "bytes": 123809
+    },
+    {
+      "id": "pedidos-pasteleria",
+      "nombre": "Pedidos Pastelería",
+      "categoria": "Negocios",
+      "lema": "Pedidos de pasteles con foto, audio de felicitación con QR y avisos de cumpleaños.",
+      "color": "#c2185b",
+      "fondo": "#ffe8ef",
+      "fondo_osc": "#2e1621",
+      "oscuro": false,
+      "icono": "img/pedidos-pasteleria/icono.webp",
+      "apk": "apk/Pedidos-Pasteleria.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/pedidos-pasteleria/1.webp",
+          "alt": "Lista de pedidos con la foto del pastel, el nombre del festejado, el precio y la fecha de cumpleaños"
+        },
+        {
+          "src": "img/pedidos-pasteleria/2.webp",
+          "alt": "Formulario de nuevo pedido con cliente, cumpleañero, teléfono, fecha de nacimiento y dirección"
+        },
+        {
+          "src": "img/pedidos-pasteleria/3.webp",
+          "alt": "Detalle de un pedido con foto, precio, teléfono y botones para llamar o escribir por WhatsApp"
+        },
+        {
+          "src": "img/pedidos-pasteleria/4.webp",
+          "alt": "Pestaña de cumpleaños próximos con aviso de cuántos días faltan"
+        }
+      ],
+      "descripcion": [
+        "Lleva los pedidos de tu pastelería en el teléfono: quién lo pide, para quién es, teléfono, fecha de nacimiento, dirección, precio y foto del pastel.",
+        "Graba un audio de felicitación y la app crea un código QR que lo reproduce al escanearlo. También te avisa 5 días antes de cada cumpleaños."
+      ],
+      "funciones": [
+        "Pedidos con foto del pastel y precio",
+        "Audio grabado desde la app y QR para compartir o imprimir",
+        "Pestaña de cumpleaños con llamada o WhatsApp en un toque",
+        "Buscador por nombre o teléfono"
+      ],
+      "permisos": [
+        [
+          "Micrófono",
+          "Para grabar el audio de felicitación."
+        ],
+        [
+          "Notificaciones",
+          "Para avisarte de los cumpleaños que vienen."
+        ],
+        [
+          "Internet",
+          "Para subir el audio y generar el enlace del QR."
+        ],
+        [
+          "Iniciar con el teléfono",
+          "Para que los avisos sigan funcionando después de reiniciarlo."
+        ]
+      ],
+      "notas": [
+        "Los pedidos se guardan solo en tu teléfono, sin respaldo en la nube: si lo pierdes o desinstalas la app, se pierden.",
+        "Para el QR, el audio se sube a un servicio gratuito y lo puede escuchar quien tenga el QR o el enlace."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "9512ad94109366c8294522d6f4bacac270845ae4177d5994e9ce98b69c7302fd",
+      "bytes": 290059
+    },
+    {
+      "id": "randy-chi",
+      "nombre": "Randy Chi",
+      "categoria": "TV y video",
+      "lema": "Reproductor de listas M3U para celular, tableta y Android TV.",
+      "color": "#ff5d73",
+      "fondo": "#1c1b3a",
+      "fondo_osc": "#1c1b3a",
+      "oscuro": true,
+      "texto_boton": "#1c1b3a",
+      "icono": "img/randy-chi/icono.webp",
+      "apk": "apk/Randy-Chi.apk",
+      "android": "5.0",
+      "capturas": [
+        {
+          "src": "img/randy-chi/1.webp",
+          "alt": "Lista de canales con logos y categorías a la izquierda, en un teléfono"
+        },
+        {
+          "src": "img/randy-chi/2.webp",
+          "alt": "Cuadrícula de canales en pantalla de televisión con categorías, guía y ajustes"
+        }
+      ],
+      "descripcion": [
+        "Agrega el enlace o el archivo de tu lista M3U y mira tus canales con categorías, logos, favoritos y recientes. Admite guías de programación y canales con DRM.",
+        "Se maneja con el control remoto en Android TV y en cajas de TV."
+      ],
+      "funciones": [
+        "Categorías y buscador de canales",
+        "Varias guías de programación (EPG) a la vez",
+        "Reproductor ExoPlayer: HLS, DASH y TS directo",
+        "Canales con DRM ClearKey, Widevine y PlayReady en aparatos compatibles",
+        "Favoritos y recientes"
+      ],
+      "permisos": [
+        [
+          "Internet",
+          "Para descargar tu lista y reproducir los canales."
+        ],
+        [
+          "Estado de la red",
+          "Para saber si hay conexión."
+        ]
+      ],
+      "notas": [
+        "No incluye canales ni listas: tú agregas la tuya. Úsala solo con contenido que tengas derecho a ver."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "61ca6a4624242af817b99cdba81fdf6e469e36dc15835f0a887157b0390923fd",
+      "bytes": 5444889
+    },
+    {
+      "id": "tv-facil",
+      "nombre": "TV Fácil",
+      "categoria": "TV y video",
+      "lema": "Lo mismo que Randy Chi, con letras grandes y botones fáciles de usar.",
+      "color": "#ffb000",
+      "fondo": "#fff2cc",
+      "fondo_osc": "#2c2410",
+      "oscuro": false,
+      "texto_boton": "#1c1b3a",
+      "icono": "img/tv-facil/icono.webp",
+      "apk": "apk/TV-Facil.apk",
+      "android": "5.0",
+      "capturas": [
+        {
+          "src": "img/tv-facil/1.webp",
+          "alt": "Lista de canales con letras y botones grandes, en un teléfono"
+        },
+        {
+          "src": "img/tv-facil/2.webp",
+          "alt": "Cuadrícula de canales con letras grandes en pantalla de televisión"
+        }
+      ],
+      "descripcion": [
+        "Versión pensada para adultos mayores: letras y botones grandes, ajuste del tamaño de la pantalla y la opción de abrir un canal en VLC o MX Player.",
+        "Funciona en celular, tableta, Android TV y cajas con control remoto."
+      ],
+      "funciones": [
+        "Letras grandes y botones fáciles de ver",
+        "Tamaños de pantalla para el video",
+        "Abre canales en VLC o MX Player si los tienes instalados",
+        "Todo lo de Randy Chi: listas M3U, guías, favoritos y recientes"
+      ],
+      "permisos": [
+        [
+          "Internet",
+          "Para descargar tu lista y reproducir los canales."
+        ],
+        [
+          "Estado de la red",
+          "Para saber si hay conexión."
+        ]
+      ],
+      "notas": [
+        "No incluye canales ni listas: tú agregas la tuya. Úsala solo con contenido que tengas derecho a ver."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "be4175128efb1a3da552228669259ac79efbe39e66395c2469d45899df0cb873",
+      "bytes": 5442919
+    }
+  ]
+}
