@@ -91,6 +91,26 @@ details li{margin:4px 0}
 .aviso p{margin:0 0 8px}.aviso p:last-child{margin:0}
 @media (min-width:900px){.pasos{grid-template-columns:repeat(4,1fr);gap:28px}.pasos li{grid-template-columns:1fr}}
 
+/* ---------- pedir una app ---------- */
+.pedir{background:var(--tinta);color:#fff;padding:56px 0 60px;scroll-margin-top:0}
+.pedir :focus-visible{outline-color:#fff}
+.pedir-in{display:grid;gap:30px 56px;grid-template-columns:minmax(0,1fr);align-items:start}
+.pedir h2{margin:0 0 12px;font:900 clamp(2rem,6vw,2.8rem)/1 var(--titulo);letter-spacing:-.02em}
+.pedir p{margin:0 0 14px;max-width:34rem;color:#dedcf5}
+.wa{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:58px;padding:0 30px;margin-top:6px;border-radius:18px;background:#25d366;color:#0d2417;font:800 1.2rem/1 var(--titulo);text-decoration:none;box-shadow:0 5px 0 rgba(0,0,0,.4)}
+.wa:hover{filter:brightness(1.06)}
+.wa:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.4)}
+.wa svg{width:24px;height:24px;flex:none}
+.numero{margin:22px 0 0;font-weight:700;letter-spacing:.01em;color:#fff}
+.cafe{display:grid;grid-template-columns:44px 1fr;gap:6px 16px;padding:22px;border-radius:22px;background:#ffe9a8;color:#1c1b3a}
+.cafe svg{width:44px;height:44px;grid-row:1 / span 2}
+.cafe h3{margin:0;font:900 1.35rem/1.15 var(--titulo)}
+.cafe p{margin:0;color:#3a3858;max-width:none}
+@media (min-width:900px){.pedir{padding:72px 0 76px}.pedir-in{grid-template-columns:minmax(0,1fr) minmax(0,26rem)}}
+@media (max-width:520px){.wa{display:flex;width:100%}}
+.pedir-corto{margin:18px 0 0;font-weight:700}
+.pedir-corto a{color:var(--tinta)}
+
 footer{padding:36px 0 56px;color:var(--s)}
 footer p{margin:0;max-width:40rem}
 
@@ -119,6 +139,7 @@ footer p{margin:0;max-width:40rem}
     <h1>Tienda Alict</h1>
     <p class="lead">Apps gratis para Android, sin cuentas, sin anuncios y sin pagar. Elige una, mira cómo se ve y descárgala.</p>
     <ul class="indice" id="indice"></ul>
+    <p class="pedir-corto"><a href="#pedir">¿Quieres otra app? Pídela por WhatsApp</a></p>
   </div>
 </header>
 
@@ -126,6 +147,25 @@ footer p{margin:0;max-width:40rem}
   <div class="in"><p class="error" id="cargando">Cargando las apps…</p></div>
   <noscript><div class="in"><p class="error">Para ver las apps necesitas activar JavaScript en tu navegador.</p></div></noscript>
 </main>
+
+<section class="pedir" id="pedir" aria-labelledby="pedir-t">
+  <div class="in pedir-in">
+    <div>
+      <h2 id="pedir-t">Pide tu app</h2>
+      <p>Recibimos solicitudes de apps por WhatsApp. Cuéntanos qué necesitas y te decimos cómo la hacemos.</p>
+      <a class="wa" id="wa" href="https://wa.me/529921083800?text=Hola%2C%20vi%20la%20Tienda%20Alict%20y%20quiero%20pedir%20una%20app%3A%20" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H11l-5 4v-4H4z"/><path d="M8 9.5h8M8 12.5h5"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <p class="numero">+52 992 108 3800</p>
+    </div>
+    <div class="cafe">
+      <svg viewBox="0 0 48 48" fill="none" stroke="#1c1b3a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 18h26v10a10 10 0 0 1-10 10h-6A10 10 0 0 1 8 28z"/><path d="M34 21h3a5 5 0 0 1 0 10h-4"/><path d="M15 8c-2 2 2 4 0 6M22 8c-2 2 2 4 0 6M29 8c-2 2 2 4 0 6"/></svg>
+      <h3>¿Quieres una app solo para ti?</h3>
+      <p>También se puede: una app totalmente personalizada, hecha a tu medida. Solo te pedimos que nos invites un café (en sentido figurado), como muestra de agradecimiento.</p>
+    </div>
+  </div>
+</section>
 
 <section class="instalar" id="instalar">
   <div class="in">
