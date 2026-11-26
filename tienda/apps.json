@@ -353,6 +353,65 @@
       "actualizado": "2026-11-25",
       "sha256": "e8a9935a5f34d7a5bccef3b1ea16cd89485a416afc7f710ba33f19885a454c07",
       "bytes": 60040626
+    },
+    {
+      "id": "rutina-gym",
+      "nombre": "Rutina Gym",
+      "categoria": "Salud y deporte",
+      "lema": "Tu rutina de gimnasio por día, con calendario de lo que hiciste y lo que saltaste.",
+      "color": "#2b59ff",
+      "fondo": "#e8eeff",
+      "fondo_osc": "#0f1b2d",
+      "oscuro": false,
+      "icono": "img/rutina-gym/icono.webp",
+      "apk": "apk/Rutina-Gym.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/rutina-gym/1.webp",
+          "alt": "Pantalla Hoy: racha de días seguidos y la lista de ejercicios con peso y casillas por marcar"
+        },
+        {
+          "src": "img/rutina-gym/2.webp",
+          "alt": "Calendario del mes: días hechos, parciales, saltados y extras, con el resumen de cumplimiento"
+        },
+        {
+          "src": "img/rutina-gym/3.webp",
+          "alt": "Rutina por día: nombre del día, ejercicios con series, repeticiones y peso meta"
+        },
+        {
+          "src": "img/rutina-gym/4.webp",
+          "alt": "Respaldo: compartir o copiar tus datos y restaurarlos pegando el texto"
+        }
+      ],
+      "descripcion": [
+        "Arma tu rutina de la semana, con los ejercicios de cada día, y cada vez que entrenes marca lo que hiciste. La app te muestra el avance del día, cuántos días seguidos llevas y qué peso usaste la última vez en cada ejercicio.",
+        "En el calendario del mes ves de un vistazo los días que cumpliste, los que hiciste a medias y los que saltaste. Si te olvidaste de marcar un día, lo puedes corregir después."
+      ],
+      "funciones": [
+        "Rutina por día de la semana: ejercicios, series, repeticiones y peso meta",
+        "Hoy: marca cada ejercicio, anota el peso y cierra el día con un toque",
+        "Racha de días seguidos y tu mejor racha",
+        "Calendario del mes: hecho, parcial, saltado y extra, con el porcentaje de cumplimiento",
+        "Corrige días pasados cuando se te olvide marcar",
+        "Cambiar la rutina no altera tu historial anterior",
+        "Respaldo para compartir o copiar y restaurar tus datos",
+        "Modo claro y oscuro"
+      ],
+      "permisos": [
+        [
+          "Ninguno",
+          "No usa internet ni pide permisos. Todo se guarda solo en tu teléfono."
+        ]
+      ],
+      "notas": [
+        "Tus datos viven solo en este teléfono: si lo cambias o desinstalas la app, se pierden. Haz un respaldo de vez en cuando (pestaña Rutina, sección Respaldo).",
+        "Es un registro para llevar tu constancia; no reemplaza a un entrenador ni a un médico.",
+        "Primera versión. Si le falta algo, pídelo por WhatsApp."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "83fcfee552d61966314bc828f7b1100c3ace385bc119752e73b3ccef89ff44d6",
+      "bytes": 44279
     }
   ]
 }
