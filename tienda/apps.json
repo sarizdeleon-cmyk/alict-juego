@@ -530,8 +530,71 @@
         "Las fotos se reducen de tamaño para no llenar tu teléfono."
       ],
       "actualizado": "2026-11-25",
-      "sha256": "145d452c544eec898b28047cf3e1646ae3e9086530955ff68521b555d6ccc97e",
-      "bytes": 58371
+      "sha256": "da5fb3e75e7a252cc74ebdeb1bc7abab171dd379b530c0637bc97e11d4238f59",
+      "bytes": 58419
+    },
+    {
+      "id": "cuotas-de-tarjeta",
+      "nombre": "Cuotas de Tarjeta",
+      "categoria": "Finanzas",
+      "lema": "Controla las compras a cuotas sin intereses: quién debe qué y cuándo vence cada cuota.",
+      "color": "#2346c8",
+      "fondo": "#e8edfb",
+      "fondo_osc": "#141a33",
+      "oscuro": false,
+      "icono": "img/cuotas-de-tarjeta/icono.webp",
+      "apk": "apk/Cuotas-de-Tarjeta.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/cuotas-de-tarjeta/1.webp",
+          "alt": "Pendientes: lo que falta por pagar, lo vencido, lo de este mes y cada compra con su próxima cuota"
+        },
+        {
+          "src": "img/cuotas-de-tarjeta/2.webp",
+          "alt": "Detalle de una compra: cuotas pagadas, pendientes y vencidas, con su fecha y monto"
+        },
+        {
+          "src": "img/cuotas-de-tarjeta/3.webp",
+          "alt": "Al marcar una cuota como pagada puedes guardar la foto del comprobante"
+        },
+        {
+          "src": "img/cuotas-de-tarjeta/4.webp",
+          "alt": "Personas: cuánto debe cada una, cuánto lleva pagado y la próxima cuota"
+        },
+        {
+          "src": "img/cuotas-de-tarjeta/5.webp",
+          "alt": "Meses: cuánto toca pagar cada mes y qué cuotas son"
+        }
+      ],
+      "descripcion": [
+        "Para cuando pasas compras por tu tarjeta a meses sin intereses y otras personas (tu pareja, tu hermano, tu sobrino…) te las van pagando. Registras la compra, el total y en cuántas cuotas, y la app arma todas las fechas y montos.",
+        "Cada cuota se marca como pagada con su fecha y, si quieres, con la foto del comprobante como evidencia. Ves lo que está vencido, lo que toca este mes y lo que falta por persona."
+      ],
+      "funciones": [
+        "Compras a cuotas iguales sin intereses: cada mes, cada 15 días o cada semana",
+        "Pendientes ordenados por fecha, con lo vencido en rojo y lo que vence hoy",
+        "Marca cada cuota como pagada y guarda la foto del comprobante (cámara o galería)",
+        "Personas: lo pendiente, lo vencido y lo pagado de cada una",
+        "Manda por WhatsApp el recordatorio de una cuota o el resumen de una persona",
+        "Meses: cuánto toca pagar cada mes",
+        "Si la compra ya empezó, indicas cuántas cuotas llevas pagadas",
+        "Respaldo con comprobantes o ligero, y exportar a Excel (CSV)"
+      ],
+      "permisos": [
+        [
+          "Ninguno",
+          "No usa internet ni pide permisos. La foto la toma la app de cámara de tu teléfono y todo se guarda solo en tu teléfono. WhatsApp se abre solo cuando tú tocas el botón de recordatorio."
+        ]
+      ],
+      "notas": [
+        "Viene vacía. Las capturas usan compras y personas de ejemplo inventadas.",
+        "No avisa con notificaciones: abre la app para ver qué vence. Las cuotas vencidas salen en rojo.",
+        "Tus datos y comprobantes viven solo en este teléfono: si lo cambias o desinstalas la app, se pierden. Haz un respaldo desde Meses y guárdalo (WhatsApp, correo o Drive)."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "67d7d0d8aa1679e39082eacb8c58d1318cf2f0092a9906ffa7632045aea12a8c",
+      "bytes": 59895
     }
   ]
 }
