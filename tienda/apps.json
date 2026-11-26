@@ -669,6 +669,89 @@
       "actualizado": "2026-11-25",
       "sha256": "902b997288f3ff6604c8e65f590092a8cf2abd49594572f416c384fa582467cb",
       "bytes": 95443
+    },
+    {
+      "id": "armar-palabras",
+      "nombre": "Armar Palabras",
+      "categoria": "Niños",
+      "lema": "Un juego tranquilo para armar palabras con sílabas, con voz y con las fotos de tu familia.",
+      "color": "#5b49c9",
+      "fondo": "#efecfb",
+      "fondo_osc": "#16142a",
+      "oscuro": false,
+      "icono": "img/armar-palabras/icono.webp",
+      "apk": "apk/Armar-Palabras.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/armar-palabras/1.webp",
+          "alt": "Se dice la palabra y el niño arma las sílabas: tocándolas o arrastrándolas a su lugar"
+        },
+        {
+          "src": "img/armar-palabras/2.webp",
+          "alt": "Si se equivoca no hay ruido ni regaño: la sílaba se sacude y, después de unos intentos, se resalta cuál sigue"
+        },
+        {
+          "src": "img/armar-palabras/3.webp",
+          "alt": "Al terminar se dice la palabra completa, caen estrellas y aparece Siguiente"
+        },
+        {
+          "src": "img/armar-palabras/4.webp",
+          "alt": "Para elegir temas (animales, comida, casa…) y dificultad: fácil, medio o difícil"
+        },
+        {
+          "src": "img/armar-palabras/5.webp",
+          "alt": "Zona de adultos (se abre manteniendo presionado el engrane): voz, sonidos, animaciones, ayudas y letras"
+        },
+        {
+          "src": "img/armar-palabras/6.webp",
+          "alt": "Mis palabras: agrega a mamá, papá o la mascota con su foto y corta las sílabas a tu manera"
+        },
+        {
+          "src": "img/armar-palabras/7.webp",
+          "alt": "El niño arma la palabra con la foto de su familia en lugar de un dibujo"
+        }
+      ],
+      "descripcion": [
+        "Un juego para aprender a leer armando palabras con sílabas. Aparece un dibujo, se dice la palabra en voz alta y el niño coloca las sílabas en su lugar: las toca (se van al primer lugar libre) o las arrastra al lugar que quiera.",
+        "Está pensado para un ritmo tranquilo y predecible, por ejemplo para niños con autismo: no hay tiempo, no hay puntos que se pierdan, el error no hace ruido y todo se puede apagar o ajustar desde la zona de adultos. También sirve para cualquier niño que está empezando a leer."
+      ],
+      "funciones": [
+        "121 palabras con dibujo, de 2 a 5 sílabas, en 7 temas: animales, comida, casa y cosas, transporte, ropa, naturaleza y cuerpo",
+        "Tres niveles: fácil (2 sílabas sencillas), medio y difícil (4 sílabas o más), o todos",
+        "Se dice la palabra al empezar, cada sílaba al ponerla y la palabra completa al terminar, con la voz del teléfono y velocidad lenta o normal",
+        "Sin regaños: si se equivoca la sílaba solo se sacude; la pista (un borde naranja en la sílaba que sigue) se da a la 1ª, 2ª o 3ª equivocación, o nunca",
+        "Ajustes para adultos: voz, sonidos suaves, animaciones, mostrar o no la palabra escrita, colores por sílaba, sílabas en orden o mezcladas, MAYÚSCULAS o minúsculas",
+        "Mis palabras: agrega las de tu familia (mamá, papá, la mascota) con foto de la cámara o de la galería y corta las sílabas tú mismo",
+        "Estrellas y progreso: palabras de hoy, a la primera vez y cuáles le cuestan más",
+        "Se ve completa en una pantalla, vertical o acostada, sin tener que bajar",
+        "Respaldo para guardar palabras, fotos y progreso, y restaurarlos en otro teléfono",
+        "La zona de adultos se abre manteniendo presionado el engrane 1 segundo, para que el niño no cambie ajustes sin querer"
+      ],
+      "permisos": [
+        [
+          "Ninguno",
+          "La app no pide permisos y no usa internet. Las palabras, las fotos y el progreso se guardan solo en tu teléfono."
+        ],
+        [
+          "Cámara",
+          "Para “Tomar foto” se abre la cámara de tu teléfono; la app no tiene acceso permanente a ella."
+        ],
+        [
+          "Voz",
+          "Usa la voz que ya trae tu teléfono (la de “texto a voz”). No graba nada."
+        ]
+      ],
+      "notas": [
+        "Los dibujos son emojis del propio teléfono, así que pueden verse un poco distintos en cada marca. Si una palabra no tiene un buen dibujo, usa Mis palabras con una foto.",
+        "La voz depende de la que tenga tu teléfono: conviene tener instalada la voz en español en Ajustes › Texto a voz. Sin voz el juego funciona igual, solo sin audio.",
+        "Las sílabas se separan automáticamente; en Mis palabras puedes corregir el corte si alguna sale distinta a como la enseñan en la escuela.",
+        "Tus datos viven solo en este teléfono: si lo cambias o desinstalas la app, se pierden. Haz un respaldo desde la zona de adultos y guárdalo (WhatsApp, correo o Drive).",
+        "Las capturas usan un progreso de ejemplo inventado."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "7a49ee3be1ef4f150626f9126a08c53e53a9912a624134e28b71c053cfbb50e1",
+      "bytes": 93438
     }
   ]
 }
