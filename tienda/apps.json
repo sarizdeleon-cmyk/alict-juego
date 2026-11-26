@@ -595,6 +595,80 @@
       "actualizado": "2026-11-25",
       "sha256": "67d7d0d8aa1679e39082eacb8c58d1318cf2f0092a9906ffa7632045aea12a8c",
       "bytes": 59895
+    },
+    {
+      "id": "dinero-por-voz",
+      "nombre": "Dinero por Voz",
+      "categoria": "Finanzas",
+      "lema": "Dices “compré un litro de leche a 30 pesos” y queda anotado, con su categoría.",
+      "color": "#0e7c4a",
+      "fondo": "#e3f3ea",
+      "fondo_osc": "#0f1f17",
+      "oscuro": false,
+      "icono": "img/dinero-por-voz/icono.webp",
+      "apk": "apk/Dinero-por-Voz.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/dinero-por-voz/1.webp",
+          "alt": "Inicio: el micrófono, el saldo del mes y lo que viene (sueldo, renta, luz)"
+        },
+        {
+          "src": "img/dinero-por-voz/2.webp",
+          "alt": "Dices “compré un litro de leche a 30 pesos” y la app saca monto, descripción, categoría y fecha"
+        },
+        {
+          "src": "img/dinero-por-voz/3.webp",
+          "alt": "Dices “me depositaron 12000 de mi sueldo cada quincena” y queda como ingreso fijo que se anota solo"
+        },
+        {
+          "src": "img/dinero-por-voz/4.webp",
+          "alt": "Movimientos por día, con búsqueda y filtros por mes, tipo y categoría"
+        },
+        {
+          "src": "img/dinero-por-voz/5.webp",
+          "alt": "Resumen del mes: saldo, comparación con el mes anterior y en qué gastaste por categoría"
+        },
+        {
+          "src": "img/dinero-por-voz/6.webp",
+          "alt": "Fijos: sueldo, renta, luz, internet y Netflix se anotan solos cada vez que toca"
+        }
+      ],
+      "descripcion": [
+        "Para llevar tus gastos e ingresos sin teclear. Tocas el micrófono y hablas como lo dirías normal: la app saca el monto, la descripción, la categoría y la fecha, te lo muestra y tú solo confirmas (o corriges).",
+        "Lo que se repite —el sueldo cada quincena, la renta, la luz, el internet, Netflix— lo dices una vez y después se anota solo cuando toca. Al final del mes ves cuánto entró, cuánto salió y en qué se fue el dinero."
+      ],
+      "funciones": [
+        "Habla en español: “compré tacos por 85 pesos”, “ayer gasté ciento cincuenta en gasolina”, “pan a 25 y refresco a 18”",
+        "Entiende números en palabras, centavos, “ayer”, “antier”, “el lunes”, “el 5 de octubre” y varias cosas en una sola frase",
+        "Categorías automáticas (comida y súper, transporte, servicios, salud, casa, diversión…); si corriges una, la aprende",
+        "Tus propias categorías cuando las necesites",
+        "Sueldo cada quincena (días 15 y último del mes), cada 15 días, cada semana, cada mes o cada año, que se anota solo",
+        "Gastos fijos: renta, luz, agua, internet, teléfono, suscripciones; se pueden pausar, editar y borrar",
+        "Movimientos con búsqueda y filtros por mes, tipo y categoría",
+        "Resumen del mes con comparación contra el mes anterior y gráfica por categoría",
+        "Si no quieres hablar, escribes la frase o usas el micrófono de tu teclado",
+        "Respaldo para cambiar de teléfono y exportar a Excel (CSV)"
+      ],
+      "permisos": [
+        [
+          "Ninguno",
+          "La app no pide permisos y no usa internet por sí misma. Todo se guarda solo en tu teléfono."
+        ],
+        [
+          "Voz de Google",
+          "Al tocar el micrófono se abre el cuadro de voz de Google que ya trae tu teléfono (el mismo del dictado). Es Google quien convierte tu voz en texto, y puede usar internet para eso; la app solo recibe el texto."
+        ]
+      ],
+      "notas": [
+        "Viene vacía. Las capturas usan gastos de ejemplo inventados.",
+        "Necesita la app de Google (o el servicio de voz de tu teléfono) para hablar. Si tu teléfono no lo tiene, puedes escribir la frase.",
+        "La categoría y el monto se entienden por palabras clave: revisa siempre lo que te muestra antes de guardar. “2 kilos a 24 pesos” se toma como 24 en total.",
+        "Tus datos viven solo en este teléfono: si lo cambias o desinstalas la app, se pierden. Haz un respaldo desde Resumen y guárdalo (WhatsApp, correo o Drive)."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "902b997288f3ff6604c8e65f590092a8cf2abd49594572f416c384fa582467cb",
+      "bytes": 95443
     }
   ]
 }
