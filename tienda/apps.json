@@ -909,6 +909,91 @@
       "actualizado": "2026-11-26",
       "sha256": "848e258eaa9991dca31e3cc560182e80ba2879a6d594fbcce18a43473dbaf754",
       "bytes": 79683
+    },
+    {
+      "id": "gestor-de-prestamos",
+      "nombre": "Gestor de Préstamos",
+      "categoria": "Finanzas",
+      "lema": "Lleva tus préstamos, abonos y mora, y manda el recordatorio o el recibo en un toque. Sin internet.",
+      "color": "#2c3e50",
+      "fondo": "#e6edf3",
+      "fondo_osc": "#14202b",
+      "oscuro": false,
+      "icono": "img/gestor-de-prestamos/icono.webp",
+      "apk": "apk/Gestor-de-Prestamos.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/gestor-de-prestamos/1.webp",
+          "alt": "Tablero con lo prestado, lo cobrado, lo que falta por cobrar y los atrasados, con su gráfica"
+        },
+        {
+          "src": "img/gestor-de-prestamos/2.webp",
+          "alt": "Lista de clientes con estado, saldo, mora y botones de Abonar, Historial, WhatsApp y PDF"
+        },
+        {
+          "src": "img/gestor-de-prestamos/3.webp",
+          "alt": "Registrar un préstamo: monto, interés, mora y días; el total y la fecha límite se calculan al momento"
+        },
+        {
+          "src": "img/gestor-de-prestamos/4.webp",
+          "alt": "Historial de abonos del cliente, con la mora y la opción de perdonarla"
+        },
+        {
+          "src": "img/gestor-de-prestamos/5.webp",
+          "alt": "Abonar: monto, fecha y nota, o liquidar todo el saldo de un toque"
+        },
+        {
+          "src": "img/gestor-de-prestamos/6.webp",
+          "alt": "Recibo en PDF con el resumen, los abonos y el saldo pendiente"
+        },
+        {
+          "src": "img/gestor-de-prestamos/7.webp",
+          "alt": "Ajustes: modo claro u oscuro, PIN, respaldo, exportar a Excel y WhatsApp"
+        },
+        {
+          "src": "img/gestor-de-prestamos/8.webp",
+          "alt": "Modo oscuro"
+        },
+        {
+          "src": "img/gestor-de-prestamos/9.webp",
+          "alt": "Pantalla de PIN para proteger tus préstamos"
+        }
+      ],
+      "descripcion": [
+        "Registra a quién le prestaste, cuánto, con qué interés y para cuándo. Cada vez que te abonan lo anotas, y la app te dice cuánto falta, quién está atrasado y cuánto llevas cobrado. Si pasa la fecha límite, suma la mora que tú definiste.",
+        "Desde cada cliente mandas el recordatorio por WhatsApp con el saldo ya escrito, o generas un recibo en PDF con sus abonos. Todo se queda en tu teléfono: no usa internet ni cuentas, y puedes protegerlo con un PIN y guardar respaldos."
+      ],
+      "funciones": [
+        "Tablero con total prestado, total cobrado, por cobrar y atrasados, y una gráfica de cobrado contra por cobrar",
+        "Préstamos con interés %, mora % y días para pagar; se pueden editar después",
+        "Abonos con fecha y nota; \"Liquidar todo\" llena el saldo, y un abono mal puesto se puede eliminar",
+        "Mora de un solo cargo sobre lo que se debía el día del límite, ya sumada al saldo; se puede perdonar o volver a cobrar",
+        "Buscador por nombre y filtros de pendientes, atrasados y pagados; los atrasados salen primero",
+        "Recordatorio por WhatsApp con el saldo, la mora y los días de atraso (agrega solo el código de país, 52 por defecto)",
+        "Recibo en PDF por cliente, guardado en Descargas y listo para compartir",
+        "Exportar todo a Excel (CSV)",
+        "Respaldo y restauración en un archivo, con aviso si llevas un mes sin respaldar",
+        "PIN de 4 a 8 números: espera tras 5 intentos fallidos, se bloquea al salir y oculta el contenido en apps recientes",
+        "Modo claro, oscuro o automático"
+      ],
+      "permisos": [
+        [
+          "Ninguno",
+          "No pide permisos ni usa internet. Los recibos, tablas y respaldos se guardan en Descargas › Gestor de Prestamos, y WhatsApp se abre con la app que ya tengas instalada."
+        ]
+      ],
+      "notas": [
+        "Tus datos viven solo en este teléfono: si desinstalas la app o cambias de teléfono sin respaldo, se pierden. Guarda un respaldo de vez en cuando (Ajustes › Guardar respaldo) y pásalo a otro lugar.",
+        "El PIN protege la entrada a la app, pero los datos no están cifrados dentro del teléfono. Si olvidas el PIN no se puede recuperar: la única salida es borrar todo y, si tienes respaldo, restaurarlo.",
+        "La mora es un cargo único (un porcentaje de lo que se debía el día del límite); no sigue creciendo con los días. Si necesitas otra regla, dímelo.",
+        "Los recordatorios de WhatsApp los mandas tú: la app abre la conversación con el mensaje escrito y tú tocas enviar.",
+        "Es una herramienta de apoyo para llevar tus cuentas; los recibos son comprobantes informativos de lo que tú registraste.",
+        "Las capturas usan clientes y montos inventados."
+      ],
+      "actualizado": "2026-11-26",
+      "sha256": "05620ad7a34b075b19bb2425a71cf5a03c9ae7a2442021e903bea5ffe13e6d92",
+      "bytes": 91511
     }
   ]
 }
