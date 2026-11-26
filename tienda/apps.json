@@ -470,6 +470,68 @@
       "actualizado": "2026-11-25",
       "sha256": "1c4e93885d3fe2bdb42c140fe27e81f88c3514df3fc9df6ce0e389bc7bedc7fc",
       "bytes": 60967
+    },
+    {
+      "id": "celulares",
+      "nombre": "Celulares",
+      "categoria": "Negocios",
+      "lema": "Lleva tu inventario de compra y venta de celulares y ve cuánto ganas en cada uno.",
+      "color": "#0b7a66",
+      "fondo": "#e6f4f0",
+      "fondo_osc": "#10231f",
+      "oscuro": false,
+      "icono": "img/celulares/icono.webp",
+      "apk": "apk/Celulares.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/celulares/1.webp",
+          "alt": "Inventario: los celulares que tienes en existencia, con foto, días parado y lo invertido"
+        },
+        {
+          "src": "img/celulares/2.webp",
+          "alt": "Vendidos: cada equipo con su ganancia o pérdida y el total del mes"
+        },
+        {
+          "src": "img/celulares/3.webp",
+          "alt": "Detalle de un equipo vendido: ganancia, margen, fechas, precio de compra, gastos extra y costo total"
+        },
+        {
+          "src": "img/celulares/4.webp",
+          "alt": "Al marcar un equipo como vendido, la app calcula la ganancia antes de guardar"
+        },
+        {
+          "src": "img/celulares/5.webp",
+          "alt": "Resumen del mes: ganancia, vendido, margen, mejor y peor venta, y lo que llevas invertido"
+        }
+      ],
+      "descripcion": [
+        "Para quien compra y vende celulares. Registras cada equipo con su foto, el modelo, a quién se lo compraste, cuánto te costó y los gastos extra (reparación, accesorios). Cuando lo vendes, pones la fecha y el precio y la app calcula sola tu ganancia y tu margen.",
+        "Separa lo que tienes en inventario de lo que ya vendiste, te dice cuántos días lleva parado cada equipo y te arma el resumen de cada mes."
+      ],
+      "funciones": [
+        "Foto de cada equipo: tómala con la cámara o elígela de la galería",
+        "Ganancia automática = precio de venta − (compra + gastos extra), con margen",
+        "Inventario con días parado y total invertido",
+        "Vendidos filtrables por mes, con ganancia o pérdida de cada uno",
+        "Resumen del mes: ganancia, vendido, margen, mejor y peor venta",
+        "Búsqueda por modelo, color, IMEI o proveedor",
+        "Respaldo con fotos o ligero, y exportar a Excel (CSV)"
+      ],
+      "permisos": [
+        [
+          "Ninguno",
+          "No usa internet ni pide permisos. La foto la toma la app de cámara de tu teléfono y todo se guarda solo en tu teléfono."
+        ]
+      ],
+      "notas": [
+        "Viene vacía. Las capturas usan equipos y precios de ejemplo inventados.",
+        "Tus equipos y fotos viven solo en este teléfono: si lo cambias o desinstalas la app, se pierden. Haz un respaldo desde Resumen y guárdalo (WhatsApp, correo o Drive).",
+        "Las fotos se reducen de tamaño para no llenar tu teléfono."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "145d452c544eec898b28047cf3e1646ae3e9086530955ff68521b555d6ccc97e",
+      "bytes": 58371
     }
   ]
 }
