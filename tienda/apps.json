@@ -412,64 +412,6 @@
       "actualizado": "2026-11-25",
       "sha256": "83fcfee552d61966314bc828f7b1100c3ace385bc119752e73b3ccef89ff44d6",
       "bytes": 44279
-    },
-    {
-      "id": "cotizador-de-taller",
-      "nombre": "Cotizador de Taller",
-      "categoria": "Negocios",
-      "lema": "Arma cotizaciones para tus clientes, calcula materiales y ve cuánto te queda.",
-      "color": "#c62f2f",
-      "fondo": "#fdeaea",
-      "fondo_osc": "#2b1618",
-      "oscuro": false,
-      "icono": "img/cotizador-de-taller/icono.webp",
-      "apk": "apk/Cotizador-de-Taller.apk",
-      "android": "7.0",
-      "capturas": [
-        {
-          "src": "img/cotizador-de-taller/1.webp",
-          "alt": "Pantalla Cotizar: datos del cliente y vehículo, y las partidas de la cotización con su costo"
-        },
-        {
-          "src": "img/cotizador-de-taller/2.webp",
-          "alt": "Vista previa de la cotización para el cliente, con total y botones para compartir como imagen o PDF"
-        },
-        {
-          "src": "img/cotizador-de-taller/3.webp",
-          "alt": "Calculadora de materiales: cuántos ml de transparente, catalizador y reductor lleva una pieza"
-        },
-        {
-          "src": "img/cotizador-de-taller/4.webp",
-          "alt": "Costeo y rentabilidad: materiales, horas de trabajo y utilidad para sacar el precio sugerido"
-        }
-      ],
-      "descripcion": [
-        "Pensada para talleres de pintura, carrocería y detallado. Capturas al cliente y su vehículo, agregas las partidas (pintura por pieza, servicios o conceptos manuales) y la app te arma una cotización con folio, IVA, anticipo y vigencia, lista para mandar por WhatsApp.",
-        "También calcula cuánto material lleva cada pieza, cuánto te cuesta y qué utilidad te deja, para que pongas el precio con números y no a ojo."
-      ],
-      "funciones": [
-        "Cotización para el cliente con folio, IVA opcional, anticipo, vigencia y notas",
-        "Compártela como imagen, PDF o texto por WhatsApp",
-        "Pintura por pieza: toma el precio y el material de tu catálogo",
-        "Calculadora de mezcla: transparente, catalizador y reductor en ml, con su costo",
-        "Costeo: materiales, horas de mano de obra y utilidad deseada para sacar el precio",
-        "Tu nombre, teléfono, dirección, redes y logo salen en la cotización",
-        "Historial de cotizaciones y respaldo para exportar e importar tus datos"
-      ],
-      "permisos": [
-        [
-          "Ninguno",
-          "No usa internet ni pide permisos. Todo se guarda solo en tu teléfono."
-        ]
-      ],
-      "notas": [
-        "Viene vacía: captura tus propios productos, precios y consumos en las pestañas Productos, Piezas, Servicios y Gastos. Las capturas usan datos de ejemplo inventados.",
-        "Tus datos viven solo en este teléfono: si lo cambias o desinstalas la app, se pierden. Exporta un respaldo desde Historial.",
-        "Es una herramienta de cálculo orientativa; revisa siempre la ficha técnica de tus productos."
-      ],
-      "actualizado": "2026-11-25",
-      "sha256": "1c4e93885d3fe2bdb42c140fe27e81f88c3514df3fc9df6ce0e389bc7bedc7fc",
-      "bytes": 60967
     }
   ]
 }
