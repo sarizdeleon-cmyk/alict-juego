@@ -752,6 +752,86 @@
       "actualizado": "2026-11-25",
       "sha256": "7a49ee3be1ef4f150626f9126a08c53e53a9912a624134e28b71c053cfbb50e1",
       "bytes": 93438
+    },
+    {
+      "id": "reproductor-retro",
+      "nombre": "Reproductor Retro",
+      "categoria": "Videos y audio",
+      "lema": "Tu música del teléfono y YouTube, con el aspecto de un reproductor de teléfono viejito y skins de Winamp.",
+      "color": "#e0560c",
+      "fondo": "#fff1e8",
+      "fondo_osc": "#2a1206",
+      "oscuro": false,
+      "icono": "img/reproductor-retro/icono.webp",
+      "apk": "apk/Reproductor-Retro.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/reproductor-retro/1.webp",
+          "alt": "Menú de teléfono viejito: Canciones, Artistas, Álbumes, Carpetas, Listas y YouTube"
+        },
+        {
+          "src": "img/reproductor-retro/2.webp",
+          "alt": "Reproductor con pantalla de tiempo, espectro, volumen, balance y barra de avance; abajo, tus canciones"
+        },
+        {
+          "src": "img/reproductor-retro/3.webp",
+          "alt": "Ecualizador de 10 bandas con presets: Fiesta, Reggaetón, Rock, Pop, Bajos +, Voces y más"
+        },
+        {
+          "src": "img/reproductor-retro/4.webp",
+          "alt": "La skin «Retro noche»: el menú cambia de color junto con el reproductor"
+        },
+        {
+          "src": "img/reproductor-retro/5.webp",
+          "alt": "Skins: dos originales y las que importes de Winamp (archivos .wsz)"
+        },
+        {
+          "src": "img/reproductor-retro/6.webp",
+          "alt": "YouTube: busca aquí, pega un enlace o compártelo desde la app de YouTube"
+        }
+      ],
+      "descripcion": [
+        "Un reproductor de música con aspecto retro, naranja, con menú de lista y tres botones abajo, todo en español. Arriba tiene la ventana del reproductor con tiempo, espectro, volumen, balance, aleatorio y repetir.",
+        "Reproduce la música que ya tienes en el teléfono y videos de YouTube con el reproductor oficial. Además entiende las skins de Winamp: importa un archivo .wsz y toda la ventana cambia."
+      ],
+      "funciones": [
+        "Música del teléfono por Canciones, Artistas, Álbumes y Carpetas, con buscador que ignora acentos",
+        "Ecualizador de 10 bandas con presets (Plano, Fiesta, Reggaetón, Rock, Pop, Bajos +, Voces, Romántica y Audífonos) y espectro en vivo",
+        "Skins de Winamp (.wsz): viene con «Retro naranja» y «Retro noche», y puedes importar las tuyas; el menú toma los colores de la skin",
+        "YouTube con el reproductor oficial a la vista: pega un enlace, compártelo desde la app de YouTube o busca aquí mismo (con una clave gratis de Google)",
+        "Importa listas de reproducción de YouTube (con la clave gratis)",
+        "Cola de reproducción, Favoritos y tus propias listas",
+        "Aleatorio, repetir todo o una sola, balance izquierda-derecha y barra para adelantar o atrasar",
+        "La música del teléfono sigue sonando con la pantalla apagada",
+        "Funciona vertical y acostado",
+        "Recuerda tu cola, listas, volumen, skin y ecualizador al volver a abrirla"
+      ],
+      "permisos": [
+        [
+          "Música y audio",
+          "Para ver y reproducir las canciones guardadas en tu teléfono. La música nunca sale del teléfono."
+        ],
+        [
+          "Internet",
+          "Solo para YouTube: el reproductor, la búsqueda y los títulos de los videos."
+        ],
+        [
+          "Avisos y segundo plano",
+          "Para mostrar “Reproductor Retro” en la barra de avisos y que la música no se corte con la pantalla apagada."
+        ]
+      ],
+      "notas": [
+        "El video de YouTube siempre se ve en pantalla con el reproductor oficial y sus reglas: la app no descarga ni guarda videos ni audio de YouTube, solo guarda los enlaces de tus listas.",
+        "YouTube no deja que su audio suene con la pantalla apagada ni se cambie por otro: ese modo es solo para la música del teléfono. El ecualizador y el espectro también son solo para la música del teléfono.",
+        "Algunos videos no se pueden ver fuera de YouTube porque su dueño no lo permite; en ese caso la app avisa y ofrece abrirlos en YouTube.",
+        "Para buscar dentro de la app se necesita una clave gratis de YouTube (Ajustes explica cómo). Sin la clave puedes buscar en YouTube y compartir el video a esta app.",
+        "Las skins de Winamp deben ser archivos .wsz; si una skin trae imágenes dañadas, la app usa las originales en esa parte.",
+        "Las capturas usan canciones de ejemplo."
+      ],
+      "actualizado": "2026-11-25",
+      "sha256": "b39d4f1cc089fc3d0548420aee9f23fb353eee0ed38b224aba7e124044110352",
+      "bytes": 109284
     }
   ]
 }
