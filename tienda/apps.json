@@ -832,6 +832,83 @@
       "actualizado": "2026-11-25",
       "sha256": "b39d4f1cc089fc3d0548420aee9f23fb353eee0ed38b224aba7e124044110352",
       "bytes": 109284
+    },
+    {
+      "id": "estudio-de-video",
+      "nombre": "Estudio de Video",
+      "categoria": "Videos y audio",
+      "lema": "Haz videos cortos con tus fotos, texto, voz y música, listos para compartir. Sin internet.",
+      "color": "#ffc02e",
+      "fondo": "#fff4d6",
+      "fondo_osc": "#2a2108",
+      "oscuro": false,
+      "texto_boton": "#1a1400",
+      "icono": "img/estudio-de-video/icono.webp",
+      "apk": "apk/Estudio-de-Video.apk",
+      "android": "7.0",
+      "capturas": [
+        {
+          "src": "img/estudio-de-video/1.webp",
+          "alt": "Editor: vista previa, escenas abajo y pestañas Foto, Texto, Escena, Video y Guion"
+        },
+        {
+          "src": "img/estudio-de-video/2.webp",
+          "alt": "Texto con estilos (Clásico, Caja, Neón, Impacto, Subtítulo), colores, posición y animación"
+        },
+        {
+          "src": "img/estudio-de-video/3.webp",
+          "alt": "Voz del teléfono en español, duración automática y transición de cada escena"
+        },
+        {
+          "src": "img/estudio-de-video/4.webp",
+          "alt": "Música del teléfono, firma en una esquina y formato vertical, horizontal o cuadrado"
+        },
+        {
+          "src": "img/estudio-de-video/5.webp",
+          "alt": "La app graba tu video mientras se reproduce"
+        },
+        {
+          "src": "img/estudio-de-video/6.webp",
+          "alt": "Listo: se guarda en Películas y lo compartes desde la app"
+        },
+        {
+          "src": "img/estudio-de-video/7.webp",
+          "alt": "Tus videos guardados en el teléfono"
+        }
+      ],
+      "descripcion": [
+        "Arma un video por escenas: cada escena lleva una foto (o un color), un texto con estilo, una duración y, si quieres, una voz que lee el texto. Pones música de tu teléfono, tocas «Crear video» y queda guardado en Películas para compartirlo.",
+        "Sirve para videos cortos de redes (vertical 9:16), YouTube (horizontal 16:9) o Facebook e Instagram (cuadrado 1:1). Viene con plantillas y puedes pegar un guion para que cada párrafo se vuelva una escena. Todo en español y sin internet."
+      ],
+      "funciones": [
+        "Escenas con foto de tu galería o color de fondo, y movimiento suave de la foto (acercar, alejar o paneo)",
+        "Texto con cinco estilos, colores, posición, tamaño y animación (aparece, sube, se escribe o rebota)",
+        "Voz en español: lee el texto de cada escena con la voz de tu teléfono; la duración se ajusta sola a lo que dura la voz",
+        "Música de tu teléfono que baja sola cuando alguien habla y se apaga suave al final",
+        "Pega un guion y cada párrafo se vuelve una escena; plantillas: gancho + 3 ideas + cierre, anuncio y felicitación",
+        "Transiciones (fundido, deslizar o corte), duración automática o manual, y firma opcional en una esquina",
+        "Formatos vertical, horizontal y cuadrado; calidad 720p o 1080p",
+        "Guarda el video en Películas › Estudio de Video y lo compartes desde la misma app",
+        "Tus proyectos se guardan en el teléfono para seguir editando después",
+        "No usa internet ni pide permisos"
+      ],
+      "permisos": [
+        [
+          "Ninguno",
+          "No pide permisos ni usa internet. Las fotos y la música las eliges tú con el selector de archivos de Android, y el video terminado se guarda en Películas."
+        ]
+      ],
+      "notas": [
+        "El video se graba mientras se reproduce, así que tarda lo mismo que dura. Deja la app abierta y la pantalla encendida: si sales de la app, se cancela para no guardar un video dañado.",
+        "La voz es la del «texto a voz» de tu teléfono; para que funcione necesita tener una voz en español instalada (Ajustes › Texto a voz). Si no la tiene, el video sale sin voz.",
+        "Si tu teléfono puede, el video se guarda en MP4 (el que piden las redes); si no, lo guarda en WebM, que se ve bien en la galería pero algunas apps piden MP4.",
+        "Usa solo fotos y música que sean tuyas o que tengas derecho a publicar: las redes pueden bloquear videos con música con derechos de autor.",
+        "Límites: hasta 60 escenas, música de hasta 80 MB y 40 fotos a la vez.",
+        "Las capturas usan fotos y música de ejemplo."
+      ],
+      "actualizado": "2026-11-26",
+      "sha256": "848e258eaa9991dca31e3cc560182e80ba2879a6d594fbcce18a43473dbaf754",
+      "bytes": 79683
     }
   ]
 }
